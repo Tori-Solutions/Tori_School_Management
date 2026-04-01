@@ -1,0 +1,347 @@
+/* Tori School Management - UI Polish */
+
+/* Dashboard stat cards */
+.o_tori_dashboard {
+  --tori-surface: rgba(25, 31, 52, 0.72);
+  --tori-surface-2: rgba(35, 43, 68, 0.72);
+  --tori-border: rgba(137, 157, 209, 0.22);
+  --tori-text-soft: #9fb1d7;
+}
+
+.tori-dash-scroll {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 1.25rem;
+}
+
+.o_tori_dashboard .card {
+  background: var(--tori-surface);
+  border: 1px solid var(--tori-border) !important;
+  border-radius: 14px;
+  transition: box-shadow 0.18s ease, transform 0.18s ease;
+}
+.o_tori_dashboard .card:hover {
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.26) !important;
+  transform: translateY(-1px);
+}
+
+.o_tori_dashboard .card-header {
+  color: #f6f8ff;
+}
+
+.tori-dash-hero {
+  background:
+    radial-gradient(circle at 0% 0%, rgba(25, 185, 222, 0.24), transparent 48%),
+    linear-gradient(140deg, #132038 0%, #1d2f4f 52%, #1f3a4b 100%);
+  border: 1px solid var(--tori-border);
+  border-radius: 16px;
+  padding: 1rem 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.tori-dash-title {
+  color: #f7f9ff;
+  font-size: 1.3rem;
+}
+
+.tori-dash-subtitle {
+  color: var(--tori-text-soft);
+  font-size: 0.9rem;
+}
+
+.tori-dash-qa-btn {
+  border: 1px solid var(--tori-border);
+  border-radius: 11px;
+  background: var(--tori-surface-2);
+  color: #e7eeff;
+  padding: 0.45rem 0.65rem;
+  font-size: 0.82rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  transition: border-color 0.15s ease, transform 0.15s ease, background-color 0.15s ease;
+}
+
+.tori-dash-qa-btn:hover {
+  border-color: rgba(135, 209, 255, 0.52);
+  background: rgba(49, 65, 102, 0.85);
+  transform: translateY(-1px);
+}
+
+.tori-dash-loading-card {
+  background: var(--tori-surface-2);
+}
+
+.tori-stat-card {
+  border: 1px solid var(--tori-border);
+  border-radius: 13px;
+  background: var(--tori-surface-2);
+  color: #f5f8ff;
+  padding: 0.75rem;
+  min-height: 92px;
+  transition: transform 0.16s ease, border-color 0.16s ease;
+}
+
+.tori-stat-card:hover {
+  transform: translateY(-1px);
+  border-color: rgba(165, 198, 255, 0.45);
+}
+
+.tori-stat-label {
+  color: var(--tori-text-soft);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.tori-stat-value {
+  font-size: 1.55rem;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-top: 0.25rem;
+}
+
+.tori-stat-card--students { border-left: 4px solid #3ca7ff; }
+.tori-stat-card--faculty { border-left: 4px solid #34c48a; }
+.tori-stat-card--enrollments { border-left: 4px solid #5cc6ff; }
+.tori-stat-card--pending { border-left: 4px solid #f3bb35; }
+.tori-stat-card--fees { border-left: 4px solid #f56c6c; }
+
+.tori-pipe-track {
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(132, 152, 196, 0.2);
+  overflow: hidden;
+}
+
+.tori-pipe-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #2cb0ff 0%, #49d8ca 100%);
+}
+
+.tori-app-row {
+  border: 0;
+  border-bottom: 1px solid rgba(134, 153, 194, 0.18);
+  background: transparent;
+  color: inherit;
+  padding: 0.62rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.tori-app-row:last-child {
+  border-bottom: 0;
+}
+
+.tori-app-row:hover {
+  background: rgba(122, 156, 231, 0.1);
+}
+
+.tori-app-row-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(85, 106, 160, 0.4);
+  border: 1px solid rgba(144, 166, 214, 0.35);
+  color: #d6e3ff;
+  font-size: 0.74rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.03em;
+}
+
+.tori-notice-item {
+  background: rgba(123, 148, 205, 0.14);
+  border: 1px solid rgba(141, 169, 224, 0.24);
+  border-radius: 10px;
+  padding: 0.55rem 0.6rem;
+}
+
+@media (max-width: 991.98px) {
+  .tori-dash-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Kanban pipeline columns */
+.o_kanban_small_column .o_kanban_header .o_column_title {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Enrollment form stat buttons */
+.o_form_view .oe_stat_button {
+  min-width: 100px;
+}
+
+/* Portal welcome banner gradient */
+.o_portal_wrap .bg-primary {
+  background: linear-gradient(135deg, #4158D0 0%, #C850C0 100%) !important;
+}
+
+/* Portal schedule time pill */
+.o_portal_wrap .text-primary {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Badge overrides for Education states */
+.badge.o_field_badge[data-value="enrolled"]  { background-color: #198754; }
+.badge.o_field_badge[data-value="overdue"]   { background-color: #dc3545; }
+.badge.o_field_badge[data-value="present"]   { background-color: #198754; }
+.badge.o_field_badge[data-value="absent"]    { background-color: #dc3545; }
+.badge.o_field_badge[data-value="late"]      { background-color: #fd7e14; }
+
+/* Admissions pipeline avatar placeholder */
+.tori-app-kanban-avatar {
+  width: 36px;
+  height: 36px;
+}
+
+.tori-app-kanban-avatar-img,
+.tori-app-kanban-avatar-placeholder {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.tori-app-kanban-avatar-img {
+  object-fit: cover;
+  display: block;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.tori-app-kanban-avatar-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+  color: #98a2b3;
+  font-size: 14px;
+}
+
+/* Portal section navigation */
+.tori-portal-nav {
+  margin-bottom: 0.75rem;
+}
+
+.tori-portal-nav-scroll {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.25rem;
+}
+
+.tori-portal-tab {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  border-radius: 999px;
+}
+
+@media (min-width: 992px) {
+  .tori-portal-nav-scroll {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+}
+
+/* Website admission form styling */
+.tori-admission-page {
+  max-width: 1140px;
+}
+
+.tori-adm-section {
+  border: 1px solid #d9dee5;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.tori-adm-section-title {
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.92rem;
+}
+
+.tori-adm-section-body {
+  padding: 0.9rem;
+}
+
+.tori-adm-section .form-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  color: #3f4752;
+}
+
+.tori-adm-section .form-control,
+.tori-adm-section .form-select {
+  min-height: 38px;
+  border-radius: 8px;
+}
+
+.tori-adm-choice-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  border: 1px solid #d9dee5;
+  border-radius: 8px;
+  padding: 0.45rem 0.6rem;
+  min-height: 38px;
+  background: #f8fafc;
+}
+
+.tori-adm-choice-row .form-check {
+  margin-bottom: 0;
+  font-size: 0.86rem;
+}
+
+.tori-adm-photo-upload-box {
+  width: 124px;
+  height: 124px;
+  margin-left: auto;
+  border: 1px dashed #c6cdd8;
+  border-radius: 10px;
+  background: #f4f7fb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.tori-adm-photo-upload-box::before {
+  content: "+";
+  font-size: 2rem;
+  line-height: 1;
+  color: #9ca8b8;
+}
+
+.tori-adm-photo-upload-box:hover {
+  border-color: #7fa9d9;
+  background: #edf3fb;
+}
+
+@media (max-width: 768px) {
+  .tori-adm-section-body {
+    padding: 0.7rem;
+  }
+
+  .tori-adm-photo-upload-box {
+    margin-left: 0;
+  }
+}

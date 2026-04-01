@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="tori_school_management.Dashboard">
+        <div class="o_tori_dashboard tori-dash-scroll p-4">
+            <div class="tori-dash-hero mb-4">
+                <div>
+                    <h2 class="tori-dash-title mb-1">School Operations Dashboard</h2>
+                    <p class="tori-dash-subtitle mb-0">A connected snapshot of admissions, enrollment, finance, and attendance.</p>
+                </div>
+                <div class="d-flex gap-2 flex-wrap">
+                    <button type="button" class="btn btn-outline-light btn-sm" t-on-click="loadData">
+                        <i class="fa fa-refresh me-1"/>
+ Refresh
+                    </button>
+                    <button type="button" class="btn btn-primary btn-sm" t-on-click="openApplications">
+                        <i class="fa fa-address-book-o me-1"/>
+ Open Admissions
+                    </button>
+                </div>
+            </div>
+
+            <div class="row g-2 mb-4">
+                <div class="col-lg-2 col-md-4 col-6">
+                    <button type="button" class="tori-dash-qa-btn w-100" t-on-click="openStudents">
+                        <i class="fa fa-users"/>
+ Students
+                    </button>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6">
+                    <button type="button" class="tori-dash-qa-btn w-100" t-on-click="openEnrollments">
+                        <i class="fa fa-id-badge"/>
+ Enrollments
+                    </button>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6">
+                    <button type="button" class="tori-dash-qa-btn w-100" t-on-click="openAttendance">
+                        <i class="fa fa-check-square-o"/>
+ Attendance
+                    </button>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6">
+                    <button type="button" class="tori-dash-qa-btn w-100" t-on-click="openFees">
+                        <i class="fa fa-money"/>
+ Fee Slips
+                    </button>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6">
+                    <button type="button" class="tori-dash-qa-btn w-100" t-on-click="openTimetable">
+                        <i class="fa fa-calendar"/>
+ Timetable
+                    </button>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6">
+                    <button type="button" class="tori-dash-qa-btn w-100" t-on-click="openApplications">
+                        <i class="fa fa-filter"/>
+ Pipeline
+                    </button>
+                </div>
+            </div>
+
+            <t t-if="state.loading">
+                <div class="card border-0 shadow-sm tori-dash-loading-card">
+                    <div class="card-body text-center py-5">
+                        <i class="fa fa-circle-o-notch fa-spin me-2"/>
+ Loading dashboard data...
+                    </div>
+                </div>
+            </t>
+            <t t-else="">
+                <div class="row g-3 mb-4">
+                    <div class="col-xl col-md-6">
+                        <button type="button" class="tori-stat-card tori-stat-card--students w-100 text-start" t-on-click="openStudents">
+                            <div class="tori-stat-label">Students</div>
+                            <div class="tori-stat-value" t-esc="state.stats.total_students || 0"/>
+                        </button>
+                    </div>
+                    <div class="col-xl col-md-6">
+                        <button type="button" class="tori-stat-card tori-stat-card--faculty w-100 text-start" t-on-click="openFaculty">
+                            <div class="tori-stat-label">Faculty</div>
+                            <div class="tori-stat-value" t-esc="state.stats.total_faculty || 0"/>
+                        </button>
+                    </div>
+                    <div class="col-xl col-md-6">
+                        <button type="button" class="tori-stat-card tori-stat-card--enrollments w-100 text-start" t-on-click="openEnrollments">
+                            <div class="tori-stat-label">Active Enrollments</div>
+                            <div class="tori-stat-value" t-esc="state.stats.total_enrollments || 0"/>
+                        </button>
+                    </div>
+                    <div class="col-xl col-md-6">
+                        <button type="button" class="tori-stat-card tori-stat-card--pending w-100 text-start" t-on-click="openApplications">
+                            <div class="tori-stat-label">Pending Applications</div>
+                            <div class="tori-stat-value" t-esc="state.stats.pending_apps || 0"/>
+                        </button>
+                    </div>
+                    <div class="col-xl col-md-6">
+                        <button type="button" class="tori-stat-card tori-stat-card--fees w-100 text-start" t-on-click="openFees">
+                            <div class="tori-stat-label">Overdue Fees</div>
+                            <div class="tori-stat-value" t-esc="state.stats.overdue_fees || 0"/>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-lg-7">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-header bg-transparent border-0 fw-semibold">Admissions Pipeline Health</div>
+                            <div class="card-body">
+                                <t t-if="!state.pipeline.length">
+                                    <div class="text-muted small">No pipeline activity yet.</div>
+                                </t>
+                                <t t-foreach="state.pipeline" t-as="item" t-key="item.stage">
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between mb-1 small">
+                                            <span class="fw-semibold" t-esc="item.stage"/>
+                                            <span t-esc="item.count"/>
+                                        </div>
+                                        <div class="tori-pipe-track">
+                                            <div class="tori-pipe-fill" t-att-style="'width:' + this.stageBarWidth(item.count)"/>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-header bg-transparent border-0 fw-semibold">Today's Attendance</div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="text-muted small">Presence Rate</span>
+                                    <span class="fw-semibold" t-esc="(state.stats.attendance_pct || 0) + '%'"/>
+                                </div>
+                                <div class="progress mb-3" style="height:10px;">
+                                    <div class="progress-bar bg-success" t-att-style="'width:' + (state.stats.attendance_pct || 0) + '%'"/>
+                                </div>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <span class="badge bg-success-subtle text-success-emphasis">Present: <t t-esc="state.stats.present_today || 0"/>
+                                    </span>
+                                    <span class="badge bg-warning-subtle text-warning-emphasis">Late: <t t-esc="state.stats.late_today || 0"/>
+                                    </span>
+                                    <span class="badge bg-danger-subtle text-danger-emphasis">Absent: <t t-esc="state.stats.absent_today || 0"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-xl-6">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-header bg-transparent border-0 fw-semibold">Recent Applications</div>
+                            <div class="card-body p-0">
+                                <t t-if="!state.recentApplications.length">
+                                    <div class="text-muted text-center py-4 small">No recent applications.</div>
+                                </t>
+                                <t t-foreach="state.recentApplications" t-as="app" t-key="app.id">
+                                    <button type="button" class="tori-app-row w-100" t-on-click="() => this.openApplication(app.id)">
+                                        <div class="tori-app-row-avatar" t-esc="this.getInitials(app.student_name || app.name)"/>
+                                        <div class="flex-grow-1 text-start">
+                                            <div class="fw-semibold" t-esc="app.student_name || app.name"/>
+                                            <div class="text-muted small">
+                                                <t t-esc="app.name"/>
+                                                <t t-if="app.class_id and app.class_id[1]">
+                                                    <span> - </span>
+                                                    <t t-esc="app.class_id[1]"/>
+                                                </t>
+                                            </div>
+                                        </div>
+                                        <span t-att-class="'badge rounded-pill ' + this.stateBadgeClass(app.state)" t-esc="(app.stage_id &amp;&amp; app.stage_id[1]) || app.state"/>
+                                    </button>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-header bg-transparent border-0 fw-semibold">Fee Alerts</div>
+                            <div class="card-body p-0">
+                                <t t-if="!state.feeAlerts.length">
+                                    <div class="text-muted text-center py-4 small">No fee alerts.</div>
+                                </t>
+                                <t t-foreach="state.feeAlerts" t-as="fee" t-key="fee.id">
+                                    <div class="px-3 py-2 border-bottom">
+                                        <div class="small fw-semibold" t-esc="(fee.enrollment_id &amp;&amp; fee.enrollment_id[1]) || 'Enrollment'"/>
+                                        <div class="d-flex justify-content-between align-items-center mt-1">
+                                            <span class="small">৳                                                <t t-esc="this.formatAmount(fee.amount)"/>
+                                            </span>
+                                            <span t-att-class="'badge rounded-pill ' + (fee.state === 'overdue' ? 'bg-danger' : 'bg-warning text-dark')" t-esc="fee.state"/>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-header bg-transparent border-0 fw-semibold">Today's Notices</div>
+                            <div class="card-body">
+                                <t t-if="!state.announcements.length">
+                                    <div class="text-muted text-center small py-3">No announcements today.</div>
+                                </t>
+                                <t t-foreach="state.announcements" t-as="ann" t-key="ann.id">
+                                    <div class="tori-notice-item mb-2">
+                                        <div class="small fw-semibold" t-esc="ann.title"/>
+                                        <div class="text-muted" style="font-size:11px;" t-esc="ann.audience"/>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>

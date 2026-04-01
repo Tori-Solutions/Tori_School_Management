@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tori_subject_tree" model="ir.ui.view">
+        <field name="name">tori.subject.tree</field>
+        <field name="model">tori.subject</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="credit_value"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_tori_subject_form" model="ir.ui.view">
+        <field name="name">tori.subject.form</field>
+        <field name="model">tori.subject</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="credit_value"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tori_class_tree" model="ir.ui.view">
+        <field name="name">tori.class.tree</field>
+        <field name="model">tori.class</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="session_id"/>
+                <field name="teacher_id"/>
+                <field name="grade_scale_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_tori_class_form" model="ir.ui.view">
+        <field name="name">tori.class.form</field>
+        <field name="model">tori.class</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="session_id"/>
+                        <field name="teacher_id"/>
+                        <field name="grade_scale_id"/>
+                    </group>
+                    <group>
+                        <field name="subject_ids" widget="many2many_tags"/>
+                        <field name="student_ids" widget="many2many_tags"/>
+                    </group>
+                    <field name="section_ids">
+                        <list editable="bottom">
+                            <field name="name"/>
+                        </list>
+                    </field>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_tori_subject" model="ir.actions.act_window">
+        <field name="name">Subjects</field>
+        <field name="res_model">tori.subject</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_tori_class" model="ir.actions.act_window">
+        <field name="name">Classes</field>
+        <field name="res_model">tori.class</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_tori_room" model="ir.actions.act_window">
+        <field name="name">Rooms</field>
+        <field name="res_model">tori.room</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_tori_subject" name="Subjects" parent="tori_school_management.menu_tori_school_setup" action="action_tori_subject" sequence="50"/>
+    <menuitem id="menu_tori_class" name="Classes" parent="tori_school_management.menu_tori_school_setup" action="action_tori_class" sequence="60"/>
+    <menuitem id="menu_tori_room" name="Rooms" parent="tori_school_management.menu_tori_school_setup" action="action_tori_room" sequence="70"/>
+</odoo>
+
+

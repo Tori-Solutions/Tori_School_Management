@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mail_template_application_confirmed" model="mail.template">
+        <field name="name">Application Confirmed</field>
+        <field name="model_id" ref="model_tori_student_application"/>
+        <field name="subject">Application Confirmed - ${object.name}</field>
+        <field name="email_to">${object.email}</field>
+        <field name="body_html" type="html">
+            <p>Dear ${object.student_name},</p>
+            <p>Your application <strong>${object.name}</strong> has been confirmed.</p>
+        </field>
+    </record>
+
+    <record id="mail_template_application_enrolled" model="mail.template">
+        <field name="name">Application Enrolled</field>
+        <field name="model_id" ref="model_tori_student_application"/>
+        <field name="subject">Application Enrolled - ${object.name}</field>
+        <field name="email_to">${object.email}</field>
+        <field name="body_html" type="html">
+            <p>Dear ${object.student_name},</p>
+            <p>Your application <strong>${object.name}</strong> is now enrolled.</p>
+        </field>
+    </record>
+
+    <record id="mail_template_application_cancelled" model="mail.template">
+        <field name="name">Application Cancelled</field>
+        <field name="model_id" ref="model_tori_student_application"/>
+        <field name="subject">Application Cancelled - ${object.name}</field>
+        <field name="email_to">${object.email}</field>
+        <field name="body_html" type="html">
+            <p>Dear ${object.student_name},</p>
+            <p>Your application <strong>${object.name}</strong> has been cancelled.</p>
+        </field>
+    </record>
+
+    <record id="mail_template_fee_payment_reminder" model="mail.template">
+        <field name="name">Fee Payment Reminder</field>
+        <field name="model_id" ref="model_tori_fee_slip"/>
+        <field name="subject">Fee Payment Reminder</field>
+        <field name="email_to">${object.enrollment_id.parent_id.email or object.enrollment_id.student_id.email}</field>
+        <field name="body_html" type="html">
+            <p>Please pay fee slip for ${object.enrollment_id.student_id.name}.</p>
+        </field>
+    </record>
+
+    <record id="mail_template_fee_overdue_notice" model="mail.template">
+        <field name="name">Fee Overdue Notice</field>
+        <field name="model_id" ref="model_tori_fee_slip"/>
+        <field name="subject">Fee Overdue Notice</field>
+        <field name="email_to">${object.enrollment_id.parent_id.email or object.enrollment_id.student_id.email}</field>
+        <field name="body_html" type="html">
+            <p>Fee slip for ${object.enrollment_id.student_id.name} is overdue.</p>
+        </field>
+    </record>
+
+    <record id="mail_template_scholarship_approved" model="mail.template">
+        <field name="name">Scholarship Approved</field>
+        <field name="model_id" ref="model_tori_scholarship"/>
+        <field name="subject">Scholarship Approved</field>
+        <field name="email_to">${object.enrollment_id.student_id.email}</field>
+        <field name="body_html" type="html">
+            <p>Your scholarship ${object.name} has been approved.</p>
+        </field>
+    </record>
+
+    <record id="automation_application_state" model="base.automation">
+        <field name="name">Application State Mail</field>
+        <field name="model_id" ref="model_tori_student_application"/>
+        <field name="trigger">on_write</field>
+        <field name="filter_domain">[('state','in',('confirm','enrolled','cancel'))]</field>
+    </record>
+
+    <record id="automation_application_state_action" model="ir.actions.server">
+        <field name="name">Application State Mail Action</field>
+        <field name="model_id" ref="model_tori_student_application"/>
+        <field name="usage">base_automation</field>
+        <field name="base_automation_id" ref="automation_application_state"/>
+        <field name="state">code</field>
+        <field name="code">
+if record.state == 'confirm':
+    env.ref('tori_school_management.mail_template_application_confirmed').send_mail(record.id, force_send=True)
+elif record.state == 'enrolled':
+    env.ref('tori_school_management.mail_template_application_enrolled').send_mail(record.id, force_send=True)
+else:
+    env.ref('tori_school_management.mail_template_application_cancelled').send_mail(record.id, force_send=True)
+        </field>
+    </record>
+
+    <record id="automation_scholarship_approved" model="base.automation">
+        <field name="name">Scholarship Approved Vendor Bill</field>
+        <field name="model_id" ref="model_tori_scholarship"/>
+        <field name="trigger">on_write</field>
+        <field name="filter_domain">[('state','=','approved'), ('vendor_bill_id','=',False)]</field>
+    </record>
+
+    <record id="automation_scholarship_approved_action" model="ir.actions.server">
+        <field name="name">Scholarship Approved Vendor Bill Action</field>
+        <field name="model_id" ref="model_tori_scholarship"/>
+        <field name="usage">base_automation</field>
+        <field name="base_automation_id" ref="automation_scholarship_approved"/>
+        <field name="state">code</field>
+        <field name="code">record.action_approve()</field>
+    </record>
+
+    <record id="cron_tori_fee_overdue" model="ir.cron">
+        <field name="name">School Fee Overdue Check</field>
+        <field name="model_id" ref="model_tori_fee_slip"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_mark_overdue_and_apply_late_fee()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active">True</field>
+    </record>
+
+    <record id="cron_tori_fee_recurring" model="ir.cron">
+        <field name="name">School Recurring Fee Generation</field>
+        <field name="model_id" ref="model_tori_fee_slip"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_generate_recurring_slips()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active">True</field>
+    </record>
+</odoo>
+

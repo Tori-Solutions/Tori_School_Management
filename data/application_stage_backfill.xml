@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <function model="tori.student.application" name="_backfill_stage_ids"/>
+</odoo>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tori_enrollment_tree" model="ir.ui.view">
+        <field name="name">tori.enrollment.tree</field>
+        <field name="model">tori.enrollment</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="student_id"/>
+                <field name="class_id"/>
+                <field name="section_id"/>
+                <field name="state"/>
+                <field name="portal_access_granted"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_tori_enrollment_form" model="ir.ui.view">
+        <field name="name">tori.enrollment.form</field>
+        <field name="model">tori.enrollment</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_generate_fee_slips" type="object" string="Generate Fee Slips" class="btn-primary"/>
+                    <button name="action_grant_parent_portal_access" type="object" string="Grant Parent Portal" class="btn-primary"/>
+                    <button name="action_revoke_parent_portal_access" type="object" string="Revoke Parent Portal"/>
+                    <field name="state" widget="statusbar" statusbar_visible="active,inactive,graduated"/>
+                </header>
+                <sheet>
+                    <div class="oe_title d-flex align-items-center gap-3 mb-3">
+                        <field name="student_id" widget="many2one_avatar_user" readonly="1" options="{'no_open': True}"/>
+                        <div>
+                            <h2>
+                                <field name="student_id" readonly="1"/>
+                            </h2>
+                            <p class="text-muted mb-0">
+                                <field name="class_id" readonly="1"/>
+                                —
+                                <field name="section_id" readonly="1" invisible="not section_id"/>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="o_stat_buttons mb-4">
+                        <button type="object" name="action_view_attendance" class="oe_stat_button" icon="fa-calendar-check-o">
+                            <field name="attendance_count" widget="statinfo" string="Attendance"/>
+                        </button>
+                        <button type="object" name="action_view_fee_slips" class="oe_stat_button" icon="fa-money">
+                            <field name="fee_slip_count" widget="statinfo" string="Fee Slips"/>
+                        </button>
+                        <button type="object" name="action_view_marksheets" class="oe_stat_button" icon="fa-graduation-cap">
+                            <field name="marksheet_count" widget="statinfo" string="Marksheets"/>
+                        </button>
+                        <button type="object" name="action_view_assignments" class="oe_stat_button" icon="fa-tasks">
+                            <field name="submission_count" widget="statinfo" string="Submissions"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group string="Academic Details">
+                            <field name="session_id"/>
+                            <field name="academic_year_id"/>
+                            <field name="class_id"/>
+                            <field name="section_id"/>
+                            <field name="subject_ids" widget="many2many_tags"/>
+                            <field name="is_mid_term"/>
+                        </group>
+                        <group string="Fee &amp; Access">
+                            <field name="fee_structure_id"/>
+                            <field name="parent_id"/>
+                            <field name="portal_access_granted"/>
+                            <field name="portal_access_level" invisible="not portal_access_granted"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Attendance" name="attendance">
+                            <field name="attendance_ids">
+                                <list decoration-danger="status=='absent'" decoration-warning="status=='late'">
+                                    <field name="date"/>
+                                    <field name="status" widget="badge"/>
+                                    <field name="method"/>
+                                    <field name="marked_by"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Fee Slips" name="fees">
+                            <field name="fee_slip_ids">
+                                <list decoration-danger="state=='overdue'" decoration-success="state=='paid'">
+                                    <field name="amount"/>
+                                    <field name="due_date"/>
+                                    <field name="paid_date"/>
+                                    <field name="state" widget="badge"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Marksheets" name="marks">
+                            <field name="marksheet_ids">
+                                <list>
+                                    <field name="term_id"/>
+                                    <field name="percentage"/>
+                                    <field name="gpa"/>
+                                    <field name="grade_letter"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Transport" name="transport">
+                            <field name="transport_ids">
+                                <list>
+                                    <field name="route_id"/>
+                                    <field name="stop_id"/>
+                                    <field name="trip_type" widget="badge"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_tori_enrollment" model="ir.actions.act_window">
+        <field name="name">Enrollments</field>
+        <field name="res_model">tori.enrollment</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
+
+

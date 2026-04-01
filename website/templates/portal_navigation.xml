@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="tori_portal_breadcrumbs" inherit_id="portal.portal_breadcrumbs">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]/li[last()]" position="after">
+            <li t-if="page_name == 'dashboard'" class="breadcrumb-item active">Dashboard</li>
+            <li t-if="page_name == 'timetable'" class="breadcrumb-item active">Timetable</li>
+            <li t-if="page_name == 'attendance'" class="breadcrumb-item active">Attendance</li>
+            <li t-if="page_name == 'assignments'" class="breadcrumb-item active">Assignments</li>
+            <li t-if="page_name == 'grades'" class="breadcrumb-item active">Grades</li>
+            <li t-if="page_name == 'transcript'" class="breadcrumb-item active">Transcript</li>
+            <li t-if="page_name == 'library'" class="breadcrumb-item active">Library</li>
+            <li t-if="page_name == 'transport'" class="breadcrumb-item active">Transport</li>
+            <li t-if="page_name == 'announcements'" class="breadcrumb-item active">Announcements</li>
+            <li t-if="page_name == 'children'" class="breadcrumb-item active">My Children</li>
+            <li t-if="page_name == 'fees'" class="breadcrumb-item active">Fees</li>
+        </xpath>
+    </template>
+
+    <template id="tori_portal_layout_nav" inherit_id="portal.portal_layout">
+        <xpath expr="//div[@id='wrap'][hasclass('o_portal_wrap')]/div[hasclass('container')]" position="before">
+            <div class="container pt-3 tori-portal-nav" t-if="page_name in ['dashboard', 'timetable', 'attendance', 'assignments', 'grades', 'transcript', 'library', 'transport', 'announcements', 'children', 'fees']">
+                <nav class="tori-portal-nav-scroll" aria-label="Portal Sections">
+                    <a href="/my/dashboard" t-attf-class="tori-portal-tab btn btn-sm #{'btn-primary' if page_name == 'dashboard' else 'btn-outline-primary'}">Dashboard</a>
+                    <a href="/my/timetable" t-attf-class="tori-portal-tab btn btn-sm #{'btn-primary' if page_name == 'timetable' else 'btn-outline-primary'}">Timetable</a>
+                    <a href="/my/attendance" t-attf-class="tori-portal-tab btn btn-sm #{'btn-primary' if page_name == 'attendance' else 'btn-outline-primary'}">Attendance</a>
+                    <a href="/my/assignments" t-attf-class="tori-portal-tab btn btn-sm #{'btn-primary' if page_name == 'assignments' else 'btn-outline-primary'}">Assignments</a>
+                    <a href="/my/grades" t-attf-class="tori-portal-tab btn btn-sm #{'btn-primary' if page_name == 'grades' else 'btn-outline-primary'}">Grades</a>
+                    <a href="/my/transcript" t-attf-class="tori-portal-tab btn btn-sm #{'btn-primary' if page_name == 'transcript' else 'btn-outline-primary'}">Transcript</a>
+                    <a href="/my/library" t-attf-class="tori-portal-tab btn btn-sm #{'btn-primary' if page_name == 'library' else 'btn-outline-primary'}">Library</a>
+                    <a href="/my/transport" t-attf-class="tori-portal-tab btn btn-sm #{'btn-primary' if page_name == 'transport' else 'btn-outline-primary'}">Transport</a>
+                    <a href="/my/announcements" t-attf-class="tori-portal-tab btn btn-sm #{'btn-primary' if page_name == 'announcements' else 'btn-outline-primary'}">Announcements</a>
+                    <a href="/my/children" t-attf-class="tori-portal-tab btn btn-sm #{'btn-primary' if page_name == 'children' else 'btn-outline-primary'}">My Children</a>
+                    <a href="/my/fees" t-attf-class="tori-portal-tab btn btn-sm #{'btn-primary' if page_name == 'fees' else 'btn-outline-primary'}">Fees</a>
+                </nav>
+            </div>
+        </xpath>
+    </template>
+</odoo>

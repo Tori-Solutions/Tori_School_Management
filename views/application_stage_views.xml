@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tori_application_stage_list" model="ir.ui.view">
+        <field name="name">tori.application.stage.list</field>
+        <field name="model">tori.application.stage</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="fold"/>
+                <field name="active"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_tori_application_stage_form" model="ir.ui.view">
+        <field name="name">tori.application.stage.form</field>
+        <field name="model">tori.application.stage</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="sequence"/>
+                        <field name="fold"/>
+                        <field name="active"/>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_tori_application_stage" model="ir.actions.act_window">
+        <field name="name">Application Stages</field>
+        <field name="res_model">tori.application.stage</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_tori_application_stage" name="Application Stages" parent="tori_school_management.menu_tori_school_setup" action="action_tori_application_stage" sequence="60" groups="tori_school_management.group_education_admin" />
+</odoo>

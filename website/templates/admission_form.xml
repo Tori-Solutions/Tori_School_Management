@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="admission_form_page" name="Admission Form">
+        <t t-call="website.layout">
+            <div class="container mt-4 mb-5 tori-admission-page">
+                <t t-set="classes" t-value="request.env['tori.class'].sudo().search([], order='name', limit=200)"/>
+                <t t-set="sections" t-value="request.env['tori.section'].sudo().search([], order='name', limit=400)"/>
+                <t t-set="sessions" t-value="request.env['tori.session'].sudo().search([], order='start_date desc', limit=100)"/>
+                <t t-set="academic_years" t-value="request.env['tori.academic.year'].sudo().search([], order='title desc', limit=100)"/>
+                <t t-set="countries" t-value="request.env['res.country'].sudo().search([], order='name')"/>
+                <t t-set="country_states" t-value="request.env['res.country.state'].sudo().search([], order='name')"/>
+                <t t-set="default_country" t-value="request.env['res.country'].sudo().search([('code', '=', 'BD')], limit=1)"/>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2 class="mb-0">Student Admission Form</h2>
+                    <a href="/edu/application/status" class="btn btn-outline-secondary btn-sm">Check Application Status</a>
+                </div>
+
+                <t t-if="request.params.get('submitted')">
+                    <div class="alert alert-success" role="alert">
+                        Admission form submitted successfully.
+                        <strong t-if="request.params.get('reference')">Reference: <t t-esc="request.params.get('reference')"/>
+                        </strong>
+                    </div>
+                </t>
+                <t t-if="request.params.get('error') == 'missing_required'">
+                    <div class="alert alert-danger" role="alert">Please fill all required fields, including Date of Birth and Guardian Mobile Number.</div>
+                </t>
+                <t t-if="request.params.get('error') == 'photo_too_large'">
+                    <div class="alert alert-danger" role="alert">Student photo must be 2MB or less.</div>
+                </t>
+                <t t-if="request.params.get('error') == 'duplicate_application'">
+                    <div class="alert alert-danger" role="alert">
+                        Duplicate application blocked. A record already exists for this Date of Birth + Guardian Phone + Class + Session.
+                        <strong t-if="request.params.get('reference')">Existing Reference: <t t-esc="request.params.get('reference')"/>
+                        </strong>
+                    </div>
+                </t>
+
+                <form action="/admission/submit" method="post" enctype="multipart/form-data" class="tori-admission-form">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                    <section class="tori-adm-section mb-3">
+                        <div class="tori-adm-section-title bg-primary-subtle">Student's Primary Info</div>
+                        <div class="tori-adm-section-body">
+                            <div class="row g-3 align-items-start">
+                                <div class="col-lg-4 col-md-6">
+                                    <label class="form-label">First Name *</label>
+                                    <input type="text" name="first_name" class="form-control" required="required"/>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <label class="form-label">Date Of Birth *</label>
+                                    <input type="date" name="date_of_birth" class="form-control" required="required"/>
+                                </div>
+                                <div class="col-lg-4 col-md-6 ms-lg-auto">
+                                    <input id="student_photo_input" type="file" name="student_photo" class="d-none" accept="image/*"/>
+                                    <label for="student_photo_input" class="tori-adm-photo-upload-box" aria-label="Upload student photo"></label>
+                                </div>
+
+                                <div class="col-lg-4 col-md-6">
+                                    <label class="form-label">Last Name</label>
+                                    <input type="text" name="last_name" class="form-control"/>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <label class="form-label">Birth Certificate No</label>
+                                    <input type="text" name="birth_certificate_no" class="form-control"/>
+                                </div>
+
+                                <div class="col-lg-4 col-md-6">
+                                    <label class="form-label">Student Full Name (Bangla)</label>
+                                    <input type="text" name="student_full_name_bn" class="form-control"/>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <label class="form-label">Nationality *</label>
+                                    <input type="text" name="nationality" value="Bangladeshi" class="form-control" required="required"/>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <label class="form-label">Student Category</label>
+                                    <select name="student_category" class="form-select">
+                                        <option value="learn">Learn</option>
+                                        <option value="regular">Regular</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-lg-4 col-md-6">
+                                    <label class="form-label">Blood Group</label>
+                                    <select name="blood_group" class="form-select">
+                                        <option value="">Choose Blood Group</option>
+                                        <option value="a+">A+</option>
+                                        <option value="a-">A-</option>
+                                        <option value="b+">B+</option>
+                                        <option value="b-">B-</option>
+                                        <option value="ab+">AB+</option>
+                                        <option value="ab-">AB-</option>
+                                        <option value="o+">O+</option>
+                                        <option value="o-">O-</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <label class="form-label">Gender *</label>
+                                    <div class="tori-adm-choice-row">
+                                        <label class="form-check">
+                                            <input class="form-check-input" type="radio" name="gender" value="male" checked="checked"/>
+ Male</label>
+                                        <label class="form-check">
+                                            <input class="form-check-input" type="radio" name="gender" value="female"/>
+ Female</label>
+                                        <label class="form-check">
+                                            <input class="form-check-input" type="radio" name="gender" value="other"/>
+ Other</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <label class="form-label">Religion *</label>
+                                    <div class="tori-adm-choice-row">
+                                        <label class="form-check">
+                                            <input class="form-check-input" type="radio" name="religion" value="islam" checked="checked"/>
+ Islam</label>
+                                        <label class="form-check">
+                                            <input class="form-check-input" type="radio" name="religion" value="hindu"/>
+ Hindu</label>
+                                        <label class="form-check">
+                                            <input class="form-check-input" type="radio" name="religion" value="christian"/>
+ Christian</label>
+                                        <label class="form-check">
+                                            <input class="form-check-input" type="radio" name="religion" value="other"/>
+ Other</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-8">
+                                    <label class="form-label">Transport *</label>
+                                    <div class="tori-adm-choice-row">
+                                        <label class="form-check">
+                                            <input class="form-check-input" type="radio" name="transport_mode" value="guardian_own" checked="checked"/>
+ Guardian Own</label>
+                                        <label class="form-check">
+                                            <input class="form-check-input" type="radio" name="transport_mode" value="school_bus"/>
+ School Bus</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="tori-adm-section mb-3">
+                        <div class="tori-adm-section-title bg-success-subtle">Student's Academic Info</div>
+                        <div class="tori-adm-section-body">
+                            <div class="row g-3">
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label">Class *</label>
+                                    <select id="admission_class_id" name="class_id" class="form-select" required="required">
+                                        <option value="">Choose Class</option>
+                                        <option t-foreach="classes" t-as="cls" t-att-value="cls.id">
+                                            <t t-esc="cls.name"/>
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label">Class Roll</label>
+                                    <input type="text" name="class_roll" class="form-control"/>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label">Version *</label>
+                                    <select name="academic_version" class="form-select" required="required">
+                                        <option value="general">General</option>
+                                        <option value="madrasah">Madrasah</option>
+                                        <option value="english_medium">English Medium</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label">Session *</label>
+                                    <select id="admission_session_id" name="session_id" class="form-select" required="required">
+                                        <option value="">Choose Session</option>
+                                        <option t-foreach="sessions" t-as="sess" t-att-value="sess.id">
+                                            <t t-esc="sess.name"/>
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label">Section</label>
+                                    <select id="admission_section_id" name="section_id" class="form-select">
+                                        <option value="">Select Section</option>
+                                        <option t-foreach="sections" t-as="section" t-att-value="section.id" t-att-data-class-id="section.class_id.id">
+                                            <t t-esc="section.name"/>
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label">Shift</label>
+                                    <select name="shift" class="form-select">
+                                        <option value="">Select Shift</option>
+                                        <option value="morning">Morning</option>
+                                        <option value="day">Day</option>
+                                        <option value="evening">Evening</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label">Admission Date</label>
+                                    <input type="date" name="admission_date" class="form-control"/>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label">Academic Year</label>
+                                    <select id="admission_academic_year_id" name="academic_year_id" class="form-select">
+                                        <option value="">Select Academic Year</option>
+                                        <option t-foreach="academic_years" t-as="year" t-att-value="year.id" t-att-data-session-id="year.session_id.id">
+                                            <t t-esc="year.title"/>
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="col-lg-6 col-md-8">
+                                    <label class="form-label">Group *</label>
+                                    <div class="tori-adm-choice-row">
+                                        <label class="form-check">
+                                            <input class="form-check-input" type="radio" name="group_stream" value="general" checked="checked"/>
+ General</label>
+                                        <label class="form-check">
+                                            <input class="form-check-input" type="radio" name="group_stream" value="science"/>
+ Science</label>
+                                        <label class="form-check">
+                                            <input class="form-check-input" type="radio" name="group_stream" value="arts"/>
+ Arts</label>
+                                        <label class="form-check">
+                                            <input class="form-check-input" type="radio" name="group_stream" value="commerce"/>
+ Commerce</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12">
+                                    <label class="form-label">Previous School Information</label>
+                                    <input type="text" name="previous_school_info" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="tori-adm-section mb-3">
+                        <div class="tori-adm-section-title bg-warning-subtle">Student's Father Info</div>
+                        <div class="tori-adm-section-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Father's Name *</label>
+                                    <input type="text" name="father_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Father's Company</label>
+                                    <input type="text" name="father_company" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Father Name (Bangla)</label>
+                                    <input type="text" name="father_name_bn" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Income</label>
+                                    <input type="number" step="0.01" name="father_income" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Father's Education</label>
+                                    <input type="text" name="father_education" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Father's Phone Number</label>
+                                    <input type="text" name="father_phone" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Father's Occupation</label>
+                                    <input type="text" name="father_occupation" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Father's E-Mail</label>
+                                    <input type="email" name="father_email" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Father's Designation</label>
+                                    <input type="text" name="father_designation" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Father's NID</label>
+                                    <input type="text" name="father_nid" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="tori-adm-section mb-3">
+                        <div class="tori-adm-section-title bg-info-subtle">Student's Mother Info</div>
+                        <div class="tori-adm-section-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Mother's Name *</label>
+                                    <input type="text" name="mother_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Mother's Occupation</label>
+                                    <input type="text" name="mother_occupation" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Mother's Name (Bangla)</label>
+                                    <input type="text" name="mother_name_bn" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Mother's Designation</label>
+                                    <input type="text" name="mother_designation" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Mother's Mobile Number</label>
+                                    <input type="text" name="mother_mobile" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Mother's Company</label>
+                                    <input type="text" name="mother_company" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Mother's Education</label>
+                                    <input type="text" name="mother_education" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="tori-adm-section mb-3">
+                        <div class="tori-adm-section-title bg-primary-subtle">Student's Guardian Info</div>
+                        <div class="tori-adm-section-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Guardian Name *</label>
+                                    <input type="text" name="guardian_name" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Guardian's E-Mail</label>
+                                    <input type="email" name="guardian_email" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Relationship With Guardian *</label>
+                                    <input type="text" name="guardian_relationship" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Guardian Address</label>
+                                    <input type="text" name="guardian_address" class="form-control"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Guardian's Mobile Number *</label>
+                                    <input type="text" name="guardian_phone" class="form-control" required="required"/>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="tori-adm-section mb-4">
+                        <div class="tori-adm-section-title bg-warning-subtle">Student's Address Info</div>
+                        <div class="tori-adm-section-body">
+                            <div class="row g-3">
+                                <div class="col-lg-6 col-md-6">
+                                    <label class="form-label">Street</label>
+                                    <input type="text" name="street" class="form-control"/>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <label class="form-label">Street 2</label>
+                                    <input type="text" name="street2" class="form-control"/>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <label class="form-label">City</label>
+                                    <input type="text" name="city" class="form-control"/>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <label class="form-label">Country</label>
+                                    <select id="admission_country_id" name="country_id" class="form-select">
+                                        <option value="">Select Country</option>
+                                        <option t-foreach="countries" t-as="country" t-att-value="country.id" t-att-selected="country.id == default_country.id and 'selected' or None">
+                                            <t t-esc="country.name"/>
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <label class="form-label">State/Division</label>
+                                    <select id="admission_state_id" name="state_id" class="form-select">
+                                        <option value="">Select State/Division</option>
+                                        <option t-foreach="country_states" t-as="state" t-att-value="state.id" t-att-data-country-id="state.country_id.id">
+                                            <t t-esc="state.name"/>
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <label class="form-label">ZIP/Postal Code</label>
+                                    <input type="text" name="zip" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div class="d-flex justify-content-end gap-2">
+                        <button type="reset" class="btn btn-outline-secondary">Reset</button>
+                        <button type="submit" class="btn btn-primary">Submit Application</button>
+                    </div>
+                </form>
+
+                <script type="text/javascript">
+                    document.addEventListener('DOMContentLoaded', function () {
+                        var classSelect = document.getElementById('admission_class_id');
+                        var sectionSelect = document.getElementById('admission_section_id');
+                        var sessionSelect = document.getElementById('admission_session_id');
+                        var academicYearSelect = document.getElementById('admission_academic_year_id');
+                        var countrySelect = document.getElementById('admission_country_id');
+                        var stateSelect = document.getElementById('admission_state_id');
+
+                        function toggleOptions(selectEl, dataAttr, selectedValue) {
+                            if (!selectEl) {
+                                return;
+                            }
+                            Array.prototype.forEach.call(selectEl.options, function (option, idx) {
+                                if (idx === 0) {
+                                    option.hidden = false;
+                                    return;
+                                }
+                                option.hidden = selectedValue &amp;&amp; option.getAttribute(dataAttr) !== selectedValue;
+                            });
+                            if (selectEl.selectedOptions.length &amp;&amp; selectEl.selectedOptions[0].hidden) {
+                                selectEl.value = '';
+                            }
+                        }
+
+                        if (classSelect &amp;&amp; sectionSelect) {
+                            classSelect.addEventListener('change', function () {
+                                toggleOptions(sectionSelect, 'data-class-id', classSelect.value);
+                            });
+                            toggleOptions(sectionSelect, 'data-class-id', classSelect.value);
+                        }
+
+                        if (sessionSelect &amp;&amp; academicYearSelect) {
+                            sessionSelect.addEventListener('change', function () {
+                                toggleOptions(academicYearSelect, 'data-session-id', sessionSelect.value);
+                            });
+                            toggleOptions(academicYearSelect, 'data-session-id', sessionSelect.value);
+                        }
+
+                        if (countrySelect &amp;&amp; stateSelect) {
+                            countrySelect.addEventListener('change', function () {
+                                toggleOptions(stateSelect, 'data-country-id', countrySelect.value);
+                            });
+                            toggleOptions(stateSelect, 'data-country-id', countrySelect.value);
+                        }
+                    });
+                </script>
+            </div>
+        </t>
+    </template>
+
+    <record id="tori_admission_form_page_action" model="website.page">
+        <field name="name">Admission Form</field>
+        <field name="url">/admission</field>
+        <field name="type">qweb</field>
+        <field name="key">tori_school_management.admission_form_page</field>
+        <field name="is_published">True</field>
+    </record>
+</odoo>
+

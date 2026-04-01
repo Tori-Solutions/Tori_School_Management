@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tori_library_book_tree" model="ir.ui.view">
+        <field name="name">tori.library.book.tree</field>
+        <field name="model">tori.library.book</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="isbn"/>
+                <field name="author"/>
+                <field name="total_copies"/>
+                <field name="available_copies"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_tori_book_issue_tree" model="ir.ui.view">
+        <field name="name">tori.book.issue.tree</field>
+        <field name="model">tori.book.issue</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="book_id"/>
+                <field name="student_id"/>
+                <field name="issue_date"/>
+                <field name="due_date"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_tori_library_book" model="ir.actions.act_window">
+        <field name="name">Books</field>
+        <field name="res_model">tori.library.book</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_tori_book_issue" model="ir.actions.act_window">
+        <field name="name">Book Issues</field>
+        <field name="res_model">tori.book.issue</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_tori_library_book" name="Books" parent="tori_school_management.menu_tori_school_library" action="action_tori_library_book" sequence="10"/>
+    <menuitem id="menu_tori_book_issue" name="Book Issues" parent="tori_school_management.menu_tori_school_library" action="action_tori_book_issue" sequence="20"/>
+</odoo>
+
+

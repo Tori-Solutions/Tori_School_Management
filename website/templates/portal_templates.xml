@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_dashboard" name="Portal Dashboard">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <div class="o_portal_wrap">
+                <div class="container py-4">
+
+                    <!-- Welcome banner -->
+                    <div class="card border-0 bg-primary text-white mb-4 rounded-3">
+                        <div class="card-body py-4 px-4">
+                            <h4 class="mb-1">Welcome back, <t t-esc="student_name"/>
+!</h4>
+                            <p class="mb-0 opacity-75">
+                                <t t-esc="class_name"/>
+ | 
+                                <t t-esc="session_name"/>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Quick stat cards -->
+                    <div class="row g-3 mb-4">
+                        <div class="col-6 col-md-3">
+                            <div class="card border-0 shadow-sm text-center h-100">
+                                <div class="card-body">
+                                    <div class="fs-2 fw-bold text-primary">
+                                        <t t-esc="attendance_pct"/>
+%</div>
+                                    <div class="text-muted small">Attendance</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="card border-0 shadow-sm text-center h-100">
+                                <div class="card-body">
+                                    <div class="fs-2 fw-bold text-success">
+                                        <t t-esc="current_gpa"/>
+                                    </div>
+                                    <div class="text-muted small">Current GPA</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="card border-0 shadow-sm text-center h-100">
+                                <div class="card-body">
+                                    <div class="fs-2 fw-bold text-warning">
+                                        <t t-esc="pending_assignments"/>
+                                    </div>
+                                    <div class="text-muted small">Pending Tasks</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="card border-0 shadow-sm text-center h-100">
+                                <div class="card-body">
+                                    <div class="fs-2 fw-bold text-danger">
+                                        <t t-esc="overdue_fees"/>
+                                    </div>
+                                    <div class="text-muted small">Overdue Fees</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Today's schedule -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-header bg-transparent border-0 fw-semibold">Today's Schedule</div>
+                        <div class="card-body p-0">
+                            <t t-if="not today_slots">
+                                <div class="text-muted text-center py-4">No classes scheduled today.</div>
+                            </t>
+                            <t t-foreach="today_slots" t-as="slot">
+                                <div class="d-flex align-items-center gap-3 px-4 py-3 border-bottom">
+                                    <div class="text-center" style="min-width:52px;">
+                                        <div class="small fw-semibold text-primary">
+                                            <t t-esc="slot['time']"/>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="fw-semibold small">
+                                            <t t-esc="slot['subject']"/>
+                                        </div>
+                                        <div class="text-muted" style="font-size:11px;">
+                                            <t t-esc="slot['teacher']"/>
+ ·                                            <t t-esc="slot['room']"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+
+                    <!-- Announcements -->
+                    <t t-if="announcements">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-header bg-transparent border-0 fw-semibold">Notices</div>
+                            <div class="card-body">
+                                <t t-foreach="announcements" t-as="ann">
+                                    <div class="alert alert-info py-2 mb-2">
+                                        <strong>
+                                            <t t-esc="ann['title']"/>
+                                        </strong>
+                                        <p class="mb-0 small">
+                                            <t t-esc="ann['body']"/>
+                                        </p>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="portal_timetable" name="Portal Timetable">
+        <t t-call="portal.portal_layout">
+            <div class="container py-3">
+                <h3>Timetable</h3>
+                <ul>
+                    <li t-foreach="slots" t-as="s">
+                        <span t-esc="s.day"/>
+ -                        <span t-esc="s.subject_id.display_name"/>
+ (                        <span t-esc="s.start_time"/>
+-                        <span t-esc="s.end_time"/>
+)</li>
+                </ul>
+            </div>
+        </t>
+    </template>
+    <template id="portal_attendance" name="Portal Attendance">
+        <t t-call="portal.portal_layout">
+            <div class="container py-3">
+                <h3>Attendance</h3>
+                <ul>
+                    <li t-foreach="records" t-as="r">
+                        <span t-esc="r.date"/>
+ -                        <span t-esc="r.status"/>
+                    </li>
+                </ul>
+            </div>
+        </t>
+    </template>
+    <template id="portal_assignments" name="Portal Assignments">
+        <t t-call="portal.portal_layout">
+            <div class="container py-3">
+                <h3>Assignments</h3>
+                <ul>
+                    <li t-foreach="assignments" t-as="a">
+                        <span t-esc="a.name"/>
+ -                        <span t-esc="a.deadline"/>
+                    </li>
+                </ul>
+            </div>
+        </t>
+    </template>
+    <template id="portal_grades" name="Portal Grades">
+        <t t-call="portal.portal_layout">
+            <div class="container py-3">
+                <h3>Grades</h3>
+                <ul>
+                    <li t-foreach="marksheets" t-as="m">
+                        <span t-esc="m.term_id.display_name"/>
+ -                        <span t-esc="m.grade_letter"/>
+                    </li>
+                </ul>
+            </div>
+        </t>
+    </template>
+    <template id="portal_transcript" name="Portal Transcript">
+        <t t-call="portal.portal_layout">
+            <div class="container py-3">
+                <h3>Transcript</h3>
+                <ul>
+                    <li t-foreach="enrollments" t-as="e">
+                        <span t-esc="e.display_name"/>
+                    </li>
+                </ul>
+            </div>
+        </t>
+    </template>
+    <template id="portal_library" name="Portal Library">
+        <t t-call="portal.portal_layout">
+            <div class="container py-3">
+                <h3>Library</h3>
+                <ul>
+                    <li t-foreach="records" t-as="r">
+                        <span t-esc="r.book_id.display_name"/>
+ -                        <span t-esc="r.state"/>
+                    </li>
+                </ul>
+            </div>
+        </t>
+    </template>
+    <template id="portal_transport" name="Portal Transport">
+        <t t-call="portal.portal_layout">
+            <div class="container py-3">
+                <h3>Transport</h3>
+                <ul>
+                    <li t-foreach="records" t-as="r">
+                        <span t-esc="r.route_id.display_name"/>
+ -                        <span t-esc="r.stop_id.display_name"/>
+                    </li>
+                </ul>
+            </div>
+        </t>
+    </template>
+    <template id="portal_announcements" name="Portal Announcements">
+        <t t-call="portal.portal_layout">
+            <div class="container py-3">
+                <h3>Announcements</h3>
+                <ul>
+                    <li t-foreach="announcements" t-as="a">
+                        <span t-esc="a.date"/>
+ -                        <span t-esc="a.title"/>
+                    </li>
+                </ul>
+            </div>
+        </t>
+    </template>
+    <template id="portal_children" name="Portal Children">
+        <t t-call="portal.portal_layout">
+            <div class="container py-3">
+                <h3>My Children</h3>
+                <ul>
+                    <li t-foreach="children" t-as="c">
+                        <a t-att-href="'/my/child/%s/dashboard' % c.id">
+                            <span t-esc="c.student_id.display_name"/>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </t>
+    </template>
+    <template id="portal_fees" name="Portal Fees">
+        <t t-call="portal.portal_layout">
+            <div class="container py-3">
+                <h3>Fees</h3>
+                <ul>
+                    <li t-foreach="slips" t-as="s">
+                        <span t-esc="s.due_date"/>
+ -                        <span t-esc="s.amount"/>
+ -                        <span t-esc="s.state"/>
+                    </li>
+                </ul>
+            </div>
+        </t>
+    </template>
+    <template id="portal_child_dashboard" name="Portal Child Dashboard">
+        <t t-call="portal.portal_layout">
+            <div class="container py-3">
+                <h3>Child Dashboard</h3>
+                <p>
+                    <strong>Student:</strong>
+                    <span t-esc="enrollment.student_id.display_name"/>
+                </p>
+                <p>
+                    <strong>Class:</strong>
+                    <span t-esc="enrollment.class_id.display_name"/>
+                </p>
+            </div>
+        </t>
+    </template>
+
+    <template id="application_status_page" name="Application Status">
+        <t t-call="website.layout">
+            <div class="container py-4">
+                <h3>Application Status</h3>
+                <form method="get" action="/edu/application/status" class="mb-3">
+                    <input type="text" name="reference" t-att-value="reference" placeholder="Application Ref" class="form-control mb-2"/>
+                    <button type="submit" class="btn btn-primary">Check</button>
+                </form>
+                <t t-if="application">
+                    <p>
+                        <strong>Reference:</strong>
+                        <span t-esc="application.name"/>
+                    </p>
+                    <p>
+                        <strong>Status:</strong>
+                        <span t-esc="application.state"/>
+                    </p>
+                </t>
+                <t t-elif="reference">
+                    <p>No application found.</p>
+                </t>
+            </div>
+        </t>
+    </template>
+</odoo>

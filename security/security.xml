@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_education_admin" model="res.groups">
+        <field name="name">Education Administrator</field>
+    </record>
+
+    <!-- Database Administrators should automatically have full Education access. -->
+    <record id="base.group_system" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('tori_school_management.group_education_admin'))]"/>
+    </record>
+
+    <record id="group_education_teacher" model="res.groups">
+        <field name="name">Education Teacher</field>
+    </record>
+
+    <record id="group_education_student" model="res.groups">
+        <field name="name">Education Student</field>
+    </record>
+
+    <record id="seq_student_application" model="ir.sequence">
+        <field name="name">Student Application</field>
+        <field name="code">tori.student.application</field>
+        <field name="prefix">APP/%(year)s/</field>
+        <field name="padding">4</field>
+    </record>
+</odoo>
+

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_transcript_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <h2>Transcript</h2>
+                <p>
+                    <strong>Student:</strong>
+                    <span t-field="doc.student_id"/>
+                </p>
+                <p>
+                    <strong>Class:</strong>
+                    <span t-field="doc.class_id"/>
+                </p>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Term</th>
+                            <th>Percentage</th>
+                            <th>GPA</th>
+                            <th>Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="doc.marksheet_ids" t-as="mk">
+                            <td>
+                                <span t-field="mk.term_id"/>
+                            </td>
+                            <td>
+                                <span t-field="mk.percentage"/>
+                            </td>
+                            <td>
+                                <span t-field="mk.gpa"/>
+                            </td>
+                            <td>
+                                <span t-field="mk.grade_letter"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <record id="action_report_transcript" model="ir.actions.report">
+        <field name="name">Transcript</field>
+        <field name="model">tori.enrollment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tori_school_management.report_transcript_document</field>
+        <field name="report_file">tori_school_management.report_transcript_document</field>
+    </record>
+</odoo>
+

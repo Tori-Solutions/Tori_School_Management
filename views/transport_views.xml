@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tori_transport_route_tree" model="ir.ui.view">
+        <field name="name">tori.transport.route.tree</field>
+        <field name="model">tori.transport.route</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="vehicle_id"/>
+                <field name="driver_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_tori_student_transport_tree" model="ir.ui.view">
+        <field name="name">tori.student.transport.tree</field>
+        <field name="model">tori.student.transport</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="enrollment_id"/>
+                <field name="route_id"/>
+                <field name="stop_id"/>
+                <field name="trip_type"/>
+                <field name="trip_attendance"/>
+                <field name="trip_date"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_tori_transport_route" model="ir.actions.act_window">
+        <field name="name">Routes</field>
+        <field name="res_model">tori.transport.route</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_tori_student_transport" model="ir.actions.act_window">
+        <field name="name">Student Transport</field>
+        <field name="res_model">tori.student.transport</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_tori_transport_route" name="Routes" parent="tori_school_management.menu_tori_school_transport" action="action_tori_transport_route" sequence="10"/>
+    <menuitem id="menu_tori_student_transport" name="Student Transport" parent="tori_school_management.menu_tori_school_transport" action="action_tori_student_transport" sequence="20"/>
+</odoo>
+
+

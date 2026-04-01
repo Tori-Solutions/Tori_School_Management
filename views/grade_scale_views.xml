@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tori_grade_scale_tree" model="ir.ui.view">
+        <field name="name">tori.grade.scale.tree</field>
+        <field name="model">tori.grade.scale</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="is_gpa_based"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_tori_grade_scale_form" model="ir.ui.view">
+        <field name="name">tori.grade.scale.form</field>
+        <field name="model">tori.grade.scale</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="is_gpa_based"/>
+                    </group>
+                    <field name="grade_line_ids">
+                        <list editable="bottom">
+                            <field name="grade_letter"/>
+                            <field name="min_percent"/>
+                            <field name="max_percent"/>
+                            <field name="gpa_points"/>
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_tori_grade_scale" model="ir.actions.act_window">
+        <field name="name">Grade Scales</field>
+        <field name="res_model">tori.grade.scale</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_tori_grade_scale" name="Grade Scales" parent="tori_school_management.menu_tori_school_setup" action="action_tori_grade_scale" sequence="40"/>
+</odoo>
+
+

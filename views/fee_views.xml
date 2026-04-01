@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tori_fee_structure_tree" model="ir.ui.view">
+        <field name="name">tori.fee.structure.tree</field>
+        <field name="model">tori.fee.structure</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="class_id"/>
+                <field name="session_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_tori_fee_structure_form" model="ir.ui.view">
+        <field name="name">tori.fee.structure.form</field>
+        <field name="model">tori.fee.structure</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="class_id"/>
+                        <field name="session_id"/>
+                    </group>
+                    <field name="fee_element_ids">
+                        <list editable="bottom">
+                            <field name="name"/>
+                            <field name="amount"/>
+                            <field name="fee_type"/>
+                            <field name="recurring_interval"/>
+                            <field name="late_fee_amount"/>
+                            <field name="grace_days"/>
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tori_fee_slip_tree" model="ir.ui.view">
+        <field name="name">tori.fee.slip.tree</field>
+        <field name="model">tori.fee.slip</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="enrollment_id"/>
+                <field name="fee_element_id"/>
+                <field name="amount"/>
+                <field name="due_date"/>
+                <field name="late_fee_applied"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_tori_fee_slip_form" model="ir.ui.view">
+        <field name="name">tori.fee.slip.form</field>
+        <field name="model">tori.fee.slip</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_send" string="Send to Parent" type="object" class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_create_invoice" type="object" string="Create Invoice" class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_mark_paid" string="Mark as Paid" type="object" class="btn-success" invisible="state not in ('sent','overdue')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,sent,paid,overdue"/>
+                </header>
+                <sheet>
+                    <div class="alert alert-warning" role="alert" invisible="state != 'overdue'">
+                        This fee slip is overdue. Late fee has been applied.
+                    </div>
+                    <group>
+                        <group string="Student">
+                            <field name="enrollment_id"/>
+                            <field name="fee_structure_id" readonly="1"/>
+                            <field name="fee_element_id" readonly="state not in ('draft','sent')"/>
+                        </group>
+                        <group string="Payment Details">
+                            <!-- Admin can edit amount and due_date after generation -->
+                            <field name="amount" readonly="state not in ('draft','sent')" groups="tori_school_management.group_education_admin"/>
+                            <field name="due_date" readonly="state not in ('draft','sent')" groups="tori_school_management.group_education_admin"/>
+                            <field name="late_fee_applied" readonly="1"/>
+                            <field name="paid_date" readonly="state != 'sent'"/>
+                        </group>
+                    </group>
+                    <group string="Invoice">
+                        <field name="invoice_id" widget="many2one" readonly="1"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tori_fee_slip_pivot" model="ir.ui.view">
+        <field name="name">tori.fee.slip.pivot</field>
+        <field name="model">tori.fee.slip</field>
+        <field name="arch" type="xml">
+            <pivot string="Fee Analysis">
+                <field name="state" type="row"/>
+                <field name="amount" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_tori_fee_slip_graph" model="ir.ui.view">
+        <field name="name">tori.fee.slip.graph</field>
+        <field name="model">tori.fee.slip</field>
+        <field name="arch" type="xml">
+            <graph string="Fee Graph" type="bar">
+                <field name="state" type="row"/>
+                <field name="amount" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_tori_fee_structure" model="ir.actions.act_window">
+        <field name="name">Fee Structures</field>
+        <field name="res_model">tori.fee.structure</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_tori_fee_slip" model="ir.actions.act_window">
+        <field name="name">Fee Slips</field>
+        <field name="res_model">tori.fee.slip</field>
+        <field name="view_mode">list,form,pivot,graph</field>
+    </record>
+
+    <menuitem id="menu_tori_fee_structure" name="Fee Structures" parent="tori_school_management.menu_tori_school_finance" action="action_tori_fee_structure" sequence="10"/>
+    <menuitem id="menu_tori_fee_slip" name="Fee Slips" parent="tori_school_management.menu_tori_school_finance" action="action_tori_fee_slip" sequence="20"/>
+</odoo>
+
+

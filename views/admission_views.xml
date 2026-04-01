@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tori_admission_enquiry_tree" model="ir.ui.view">
+        <field name="name">tori.admission.enquiry.tree</field>
+        <field name="model">tori.admission.enquiry</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="class_id"/>
+                <field name="session_id"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_tori_admission_enquiry_form" model="ir.ui.view">
+        <field name="name">tori.admission.enquiry.form</field>
+        <field name="model">tori.admission.enquiry</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_create_application" type="object" string="Create Application" class="btn-primary"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,in_progress,done,cancel"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="email"/>
+                        <field name="phone"/>
+                        <field name="class_id"/>
+                        <field name="session_id"/>
+                        <field name="application_id"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tori_application_kanban" model="ir.ui.view">
+        <field name="name">tori.student.application.kanban</field>
+        <field name="model">tori.student.application</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="stage_id" class="o_kanban_small_column" records_draggable="1" group_create="1" group_edit="1" group_delete="1">
+                <field name="stage_id"/>
+                <field name="state"/>
+                <field name="name"/>
+                <field name="student_name"/>
+                <field name="student_photo"/>
+                <field name="class_id"/>
+                <field name="session_id"/>
+                <field name="guardian_phone"/>
+                <field name="write_date"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex align-items-start gap-2 mb-2">
+                            <div class="tori-app-kanban-avatar flex-shrink-0">
+                                <t t-if="record.student_photo.raw_value">
+                                    <img t-att-src="kanban_image('tori.student.application', 'student_photo', record.id.raw_value)" alt="Student Photo" class="tori-app-kanban-avatar-img"/>
+                                </t>
+                                <t t-else="">
+                                    <div class="tori-app-kanban-avatar-placeholder" aria-label="No Photo">
+                                        <i class="fa fa-user"/>
+                                    </div>
+                                </t>
+                            </div>
+                            <div class="flex-grow-1 min-w-0">
+                                <div class="fw-semibold text-truncate">
+                                    <field name="student_name"/>
+                                </div>
+                                <div class="text-muted small text-truncate">
+                                    <field name="name"/>
+                                    <t t-if="record.class_id.value">
+                                        <span> - </span>
+                                        <field name="class_id"/>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                            <small class="text-muted text-truncate">
+                                <field name="session_id"/>
+                                <t t-if="record.guardian_phone.value">
+                                    <span> | </span>
+                                    <field name="guardian_phone"/>
+                                </t>
+                            </small>
+                            <field name="state" widget="badge" decoration-success="state == 'enrolled'" decoration-warning="state == 'confirm'" decoration-danger="state == 'cancel'" decoration-info="state == 'draft'"/>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_tori_application_list" model="ir.ui.view">
+        <field name="name">tori.student.application.list</field>
+        <field name="model">tori.student.application</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="student_name"/>
+                <field name="stage_id"/>
+                <field name="class_id"/>
+                <field name="session_id"/>
+                <field name="guardian_phone"/>
+                <field name="admission_date"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_tori_application_form" model="ir.ui.view">
+        <field name="name">tori.student.application.form</field>
+        <field name="model">tori.student.application</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_confirm" type="object" string="Confirm" class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_enroll" type="object" string="Enroll" class="btn-primary" invisible="state != 'confirm'"/>
+                    <button name="action_cancel" type="object" string="Cancel" invisible="state == 'cancel'"/>
+                    <field name="stage_id" widget="statusbar" options="{'clickable': 1}"/>
+                    <field name="state" invisible="1"/>
+                </header>
+                <sheet>
+                    <group col="4">
+                        <field name="name" readonly="1"/>
+                        <field name="student_name" readonly="1"/>
+                        <field name="stage_id"/>
+                        <field name="state" readonly="1"/>
+                        <field name="student_partner_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Student Primary Info">
+                            <group>
+                                <group col="4">
+                                    <field name="first_name"/>
+                                    <field name="last_name"/>
+                                    <field name="student_full_name_bn"/>
+                                    <field name="student_category"/>
+                                    <field name="date_of_birth"/>
+                                    <field name="nationality"/>
+                                    <field name="blood_group"/>
+                                    <field name="gender"/>
+                                    <field name="religion"/>
+                                    <field name="transport_mode"/>
+                                    <field name="birth_certificate_no"/>
+                                </group>
+                                <group class="oe_right">
+                                    <field name="student_photo" widget="image" class="oe_avatar" filename="student_photo_filename" nolabel="1"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Academic Info">
+                            <group col="4">
+                                <field name="session_id"/>
+                                <field name="academic_year_id" domain="[('session_id', '=', session_id)]"/>
+                                <field name="class_id"/>
+                                <field name="section_id" domain="[('class_id', '=', class_id)]"/>
+                                <field name="class_roll"/>
+                                <field name="academic_version"/>
+                                <field name="group_stream"/>
+                                <field name="shift"/>
+                                <field name="admission_date"/>
+                                <field name="previous_school_info"/>
+                            </group>
+                        </page>
+                        <page string="Father Info">
+                            <group col="4">
+                                <field name="father_name"/>
+                                <field name="father_name_bn"/>
+                                <field name="father_company"/>
+                                <field name="father_income"/>
+                                <field name="father_education"/>
+                                <field name="father_occupation"/>
+                                <field name="father_designation"/>
+                                <field name="father_phone"/>
+                                <field name="father_email"/>
+                                <field name="father_nid"/>
+                            </group>
+                        </page>
+                        <page string="Mother Info">
+                            <group col="4">
+                                <field name="mother_name"/>
+                                <field name="mother_name_bn"/>
+                                <field name="mother_mobile"/>
+                                <field name="mother_education"/>
+                                <field name="mother_occupation"/>
+                                <field name="mother_designation"/>
+                                <field name="mother_company"/>
+                            </group>
+                        </page>
+                        <page string="Guardian Info">
+                            <group col="4">
+                                <field name="guardian_name"/>
+                                <field name="guardian_email"/>
+                                <field name="guardian_phone"/>
+                                <field name="guardian_relationship"/>
+                                <field name="guardian_address"/>
+                                <field name="email"/>
+                                <field name="phone"/>
+                            </group>
+                        </page>
+                        <page string="Address Info">
+                            <group col="4">
+                                <field name="street"/>
+                                <field name="street2"/>
+                                <field name="city"/>
+                                <field name="zip"/>
+                                <field name="country_id"/>
+                                <field name="state_id" domain="[('country_id', '=', country_id)]"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_tori_admission_enquiry" model="ir.actions.act_window">
+        <field name="name">Enquiries</field>
+        <field name="res_model">tori.admission.enquiry</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_tori_student_application" model="ir.actions.act_window">
+        <field name="name">Applications</field>
+        <field name="res_model">tori.student.application</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+
+    <menuitem id="menu_tori_admission_enquiry" name="Enquiries" parent="tori_school_management.menu_tori_school_admission" action="action_tori_admission_enquiry" sequence="10"/>
+    <menuitem id="menu_tori_admission_application" name="Applications" parent="tori_school_management.menu_tori_school_admission" action="action_tori_student_application" sequence="20"/>
+</odoo>
+
+

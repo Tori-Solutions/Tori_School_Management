@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="tori_application_stage_draft" model="tori.application.stage">
+        <field name="name">Draft</field>
+        <field name="sequence">10</field>
+        <field name="code">draft</field>
+        <field name="fold">False</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_application_stage_confirm" model="tori.application.stage">
+        <field name="name">Confirmed</field>
+        <field name="sequence">20</field>
+        <field name="code">confirm</field>
+        <field name="fold">False</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_application_stage_enrolled" model="tori.application.stage">
+        <field name="name">Enrolled</field>
+        <field name="sequence">30</field>
+        <field name="code">enrolled</field>
+        <field name="fold">False</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_application_stage_cancel" model="tori.application.stage">
+        <field name="name">Cancelled</field>
+        <field name="sequence">100</field>
+        <field name="code">cancel</field>
+        <field name="fold">True</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+</odoo>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_application_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <h2>Application</h2>
+                <p>
+                    <strong>Reference:</strong>
+                    <span t-field="doc.name"/>
+                </p>
+                <p>
+                    <strong>Student:</strong>
+                    <span t-field="doc.student_name"/>
+                </p>
+                <p>
+                    <strong>Class:</strong>
+                    <span t-field="doc.class_id"/>
+                </p>
+                <p>
+                    <strong>Status:</strong>
+                    <span t-field="doc.state"/>
+                </p>
+                <p>
+                    <strong>Date:</strong>
+                    <span t-field="doc.create_date"/>
+                </p>
+            </div>
+        </t>
+    </template>
+
+    <record id="action_report_application" model="ir.actions.report">
+        <field name="name">Application</field>
+        <field name="model">tori.student.application</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tori_school_management.report_application_document</field>
+        <field name="report_file">tori_school_management.report_application_document</field>
+    </record>
+</odoo>
+

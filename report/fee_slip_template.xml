@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_fee_slip_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <h2>Fee Slip</h2>
+                <p>
+                    <strong>Student:</strong>
+                    <span t-field="doc.enrollment_id.student_id"/>
+                </p>
+                <p>
+                    <strong>Class:</strong>
+                    <span t-field="doc.enrollment_id.class_id"/>
+                </p>
+                <p>
+                    <strong>Element:</strong>
+                    <span t-field="doc.fee_element_id"/>
+                </p>
+                <p>
+                    <strong>Amount:</strong>
+                    <span t-field="doc.amount"/>
+                </p>
+                <p>
+                    <strong>Due Date:</strong>
+                    <span t-field="doc.due_date"/>
+                </p>
+                <p>
+                    <strong>Status:</strong>
+                    <span t-field="doc.state"/>
+                </p>
+            </div>
+        </t>
+    </template>
+
+    <record id="action_report_fee_slip" model="ir.actions.report">
+        <field name="name">Fee Slip</field>
+        <field name="model">tori.fee.slip</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tori_school_management.report_fee_slip_document</field>
+        <field name="report_file">tori_school_management.report_fee_slip_document</field>
+    </record>
+</odoo>
+

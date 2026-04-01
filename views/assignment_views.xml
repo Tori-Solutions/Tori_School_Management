@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tori_assignment_tree" model="ir.ui.view">
+        <field name="name">tori.assignment.tree</field>
+        <field name="model">tori.assignment</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="assignment_type"/>
+                <field name="class_id"/>
+                <field name="subject_id"/>
+                <field name="teacher_id"/>
+                <field name="deadline"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_tori_assignment_form" model="ir.ui.view">
+        <field name="name">tori.assignment.form</field>
+        <field name="model">tori.assignment</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="assignment_type"/>
+                        <field name="class_id"/>
+                        <field name="section_id"/>
+                        <field name="subject_id"/>
+                        <field name="teacher_id"/>
+                        <field name="term_id"/>
+                        <field name="deadline"/>
+                        <field name="total_marks"/>
+                    </group>
+                    <field name="instructions"/>
+                    <field name="submission_ids">
+                        <list>
+                            <field name="enrollment_id"/>
+                            <field name="submission_date"/>
+                            <field name="marks"/>
+                            <field name="grade"/>
+                            <field name="state"/>
+                        </list>
+                    </field>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tori_assignment_kanban" model="ir.ui.view">
+        <field name="name">tori.assignment.kanban</field>
+        <field name="model">tori.assignment</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="deadline"/>
+                <field name="class_id"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click">
+                            <strong>
+                                <field name="name"/>
+                            </strong>
+                            <div>
+                                <field name="class_id"/>
+                            </div>
+                            <div>
+                                <field name="deadline"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_tori_assignment_calendar" model="ir.ui.view">
+        <field name="name">tori.assignment.calendar</field>
+        <field name="model">tori.assignment</field>
+        <field name="arch" type="xml">
+            <calendar string="Assignment Deadlines" date_start="deadline" color="class_id">
+                <field name="name"/>
+                <field name="subject_id"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="action_tori_assignment" model="ir.actions.act_window">
+        <field name="name">Assignments</field>
+        <field name="res_model">tori.assignment</field>
+        <field name="view_mode">kanban,list,form,calendar</field>
+    </record>
+
+    <record id="action_tori_submission" model="ir.actions.act_window">
+        <field name="name">Submissions</field>
+        <field name="res_model">tori.submission</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_tori_marksheet" model="ir.actions.act_window">
+        <field name="name">Marksheets</field>
+        <field name="res_model">tori.marksheet</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_tori_assignment" name="Assignments" parent="tori_school_management.menu_tori_school_academics" action="action_tori_assignment" sequence="30"/>
+    <menuitem id="menu_tori_submission" name="Submissions" parent="tori_school_management.menu_tori_school_academics" action="action_tori_submission" sequence="40"/>
+    <menuitem id="menu_tori_marksheet" name="Marksheets" parent="tori_school_management.menu_tori_school_reports" action="action_tori_marksheet" sequence="10"/>
+</odoo>
+
+

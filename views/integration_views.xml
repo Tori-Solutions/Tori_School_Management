@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Inherit Partner Form View to add Smart Buttons for Students -->
+    <record id="view_partner_form_tori" model="ir.ui.view">
+        <field name="name">res.partner.form.tori</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <!-- Admissions Smart Button -->
+                <button name="action_view_tori_applications"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-graduation-cap"
+                        invisible="not is_student">
+                    <field name="tori_application_count" widget="statinfo" string="Admissions"/>
+                </button>
+                <!-- Enrollments Smart Button -->
+                <button name="action_view_tori_enrollments"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-book"
+                        invisible="not is_student">
+                    <field name="tori_enrollment_count" widget="statinfo" string="Enrollments"/>
+                </button>
+            </div>
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="is_student"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit Employee Form View to add Smart Buttons for Teachers -->
+    <record id="view_employee_form_tori" model="ir.ui.view">
+        <field name="name">hr.employee.form.tori</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <!-- Classes Smart Button -->
+                <button name="action_view_tori_classes"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-users"
+                        invisible="not is_teacher">
+                    <field name="tori_class_count" widget="statinfo" string="Classes"/>
+                </button>
+            </div>
+            <!-- Add Is Teacher Checkbox -->
+            <xpath expr="//field[@name='job_id']" position="after">
+                <field name="is_teacher" widget="boolean_toggle"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit Account Move Form to show Fee Slip reference -->
+    <record id="view_move_form_tori" model="ir.ui.view">
+        <field name="name">account.move.form.tori</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='ref']" position="after">
+                <field name="tori_fee_slip_id" invisible="not tori_fee_slip_id"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

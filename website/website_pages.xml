@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tori_menu_admission" model="website.menu">
+        <field name="name">Admission</field>
+        <field name="url">/admission</field>
+        <field name="sequence">30</field>
+        <field name="website_id" ref="website.default_website"/>
+    </record>
+
+    <record id="tori_menu_application_status" model="website.menu">
+        <field name="name">Application Status</field>
+        <field name="url">/edu/application/status</field>
+        <field name="sequence">31</field>
+        <field name="website_id" ref="website.default_website"/>
+    </record>
+
+    <record id="tori_application_status_page_action" model="website.page">
+        <field name="name">Application Status</field>
+        <field name="url">/edu/application/status</field>
+        <field name="type">qweb</field>
+        <field name="key">tori_school_management.application_status_page</field>
+        <field name="is_published">True</field>
+    </record>
+</odoo>

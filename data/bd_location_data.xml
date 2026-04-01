@@ -1,0 +1,3287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="bd_district_1" model="tori.bd.district">
+        <field name="name">Comilla</field>
+        <field name="code">D001</field>
+        <field name="source_id">1</field>
+    </record>
+    <record id="bd_district_2" model="tori.bd.district">
+        <field name="name">Feni</field>
+        <field name="code">D002</field>
+        <field name="source_id">2</field>
+    </record>
+    <record id="bd_district_3" model="tori.bd.district">
+        <field name="name">Brahmanbaria</field>
+        <field name="code">D003</field>
+        <field name="source_id">3</field>
+    </record>
+    <record id="bd_district_4" model="tori.bd.district">
+        <field name="name">Rangamati</field>
+        <field name="code">D004</field>
+        <field name="source_id">4</field>
+    </record>
+    <record id="bd_district_5" model="tori.bd.district">
+        <field name="name">Noakhali</field>
+        <field name="code">D005</field>
+        <field name="source_id">5</field>
+    </record>
+    <record id="bd_district_6" model="tori.bd.district">
+        <field name="name">Chandpur</field>
+        <field name="code">D006</field>
+        <field name="source_id">6</field>
+    </record>
+    <record id="bd_district_7" model="tori.bd.district">
+        <field name="name">Lakshmipur</field>
+        <field name="code">D007</field>
+        <field name="source_id">7</field>
+    </record>
+    <record id="bd_district_8" model="tori.bd.district">
+        <field name="name">Chattogram</field>
+        <field name="code">D008</field>
+        <field name="source_id">8</field>
+    </record>
+    <record id="bd_district_9" model="tori.bd.district">
+        <field name="name">Coxsbazar</field>
+        <field name="code">D009</field>
+        <field name="source_id">9</field>
+    </record>
+    <record id="bd_district_10" model="tori.bd.district">
+        <field name="name">Khagrachhari</field>
+        <field name="code">D010</field>
+        <field name="source_id">10</field>
+    </record>
+    <record id="bd_district_11" model="tori.bd.district">
+        <field name="name">Bandarban</field>
+        <field name="code">D011</field>
+        <field name="source_id">11</field>
+    </record>
+    <record id="bd_district_12" model="tori.bd.district">
+        <field name="name">Sirajganj</field>
+        <field name="code">D012</field>
+        <field name="source_id">12</field>
+    </record>
+    <record id="bd_district_13" model="tori.bd.district">
+        <field name="name">Pabna</field>
+        <field name="code">D013</field>
+        <field name="source_id">13</field>
+    </record>
+    <record id="bd_district_14" model="tori.bd.district">
+        <field name="name">Bogura</field>
+        <field name="code">D014</field>
+        <field name="source_id">14</field>
+    </record>
+    <record id="bd_district_15" model="tori.bd.district">
+        <field name="name">Rajshahi</field>
+        <field name="code">D015</field>
+        <field name="source_id">15</field>
+    </record>
+    <record id="bd_district_16" model="tori.bd.district">
+        <field name="name">Natore</field>
+        <field name="code">D016</field>
+        <field name="source_id">16</field>
+    </record>
+    <record id="bd_district_17" model="tori.bd.district">
+        <field name="name">Joypurhat</field>
+        <field name="code">D017</field>
+        <field name="source_id">17</field>
+    </record>
+    <record id="bd_district_18" model="tori.bd.district">
+        <field name="name">Chapainawabganj</field>
+        <field name="code">D018</field>
+        <field name="source_id">18</field>
+    </record>
+    <record id="bd_district_19" model="tori.bd.district">
+        <field name="name">Naogaon</field>
+        <field name="code">D019</field>
+        <field name="source_id">19</field>
+    </record>
+    <record id="bd_district_20" model="tori.bd.district">
+        <field name="name">Jashore</field>
+        <field name="code">D020</field>
+        <field name="source_id">20</field>
+    </record>
+    <record id="bd_district_21" model="tori.bd.district">
+        <field name="name">Satkhira</field>
+        <field name="code">D021</field>
+        <field name="source_id">21</field>
+    </record>
+    <record id="bd_district_22" model="tori.bd.district">
+        <field name="name">Meherpur</field>
+        <field name="code">D022</field>
+        <field name="source_id">22</field>
+    </record>
+    <record id="bd_district_23" model="tori.bd.district">
+        <field name="name">Narail</field>
+        <field name="code">D023</field>
+        <field name="source_id">23</field>
+    </record>
+    <record id="bd_district_24" model="tori.bd.district">
+        <field name="name">Chuadanga</field>
+        <field name="code">D024</field>
+        <field name="source_id">24</field>
+    </record>
+    <record id="bd_district_25" model="tori.bd.district">
+        <field name="name">Kushtia</field>
+        <field name="code">D025</field>
+        <field name="source_id">25</field>
+    </record>
+    <record id="bd_district_26" model="tori.bd.district">
+        <field name="name">Magura</field>
+        <field name="code">D026</field>
+        <field name="source_id">26</field>
+    </record>
+    <record id="bd_district_27" model="tori.bd.district">
+        <field name="name">Khulna</field>
+        <field name="code">D027</field>
+        <field name="source_id">27</field>
+    </record>
+    <record id="bd_district_28" model="tori.bd.district">
+        <field name="name">Bagerhat</field>
+        <field name="code">D028</field>
+        <field name="source_id">28</field>
+    </record>
+    <record id="bd_district_29" model="tori.bd.district">
+        <field name="name">Jhenaidah</field>
+        <field name="code">D029</field>
+        <field name="source_id">29</field>
+    </record>
+    <record id="bd_district_30" model="tori.bd.district">
+        <field name="name">Jhalakathi</field>
+        <field name="code">D030</field>
+        <field name="source_id">30</field>
+    </record>
+    <record id="bd_district_31" model="tori.bd.district">
+        <field name="name">Patuakhali</field>
+        <field name="code">D031</field>
+        <field name="source_id">31</field>
+    </record>
+    <record id="bd_district_32" model="tori.bd.district">
+        <field name="name">Pirojpur</field>
+        <field name="code">D032</field>
+        <field name="source_id">32</field>
+    </record>
+    <record id="bd_district_33" model="tori.bd.district">
+        <field name="name">Barisal</field>
+        <field name="code">D033</field>
+        <field name="source_id">33</field>
+    </record>
+    <record id="bd_district_34" model="tori.bd.district">
+        <field name="name">Bhola</field>
+        <field name="code">D034</field>
+        <field name="source_id">34</field>
+    </record>
+    <record id="bd_district_35" model="tori.bd.district">
+        <field name="name">Barguna</field>
+        <field name="code">D035</field>
+        <field name="source_id">35</field>
+    </record>
+    <record id="bd_district_36" model="tori.bd.district">
+        <field name="name">Sylhet</field>
+        <field name="code">D036</field>
+        <field name="source_id">36</field>
+    </record>
+    <record id="bd_district_37" model="tori.bd.district">
+        <field name="name">Moulvibazar</field>
+        <field name="code">D037</field>
+        <field name="source_id">37</field>
+    </record>
+    <record id="bd_district_38" model="tori.bd.district">
+        <field name="name">Habiganj</field>
+        <field name="code">D038</field>
+        <field name="source_id">38</field>
+    </record>
+    <record id="bd_district_39" model="tori.bd.district">
+        <field name="name">Sunamganj</field>
+        <field name="code">D039</field>
+        <field name="source_id">39</field>
+    </record>
+    <record id="bd_district_40" model="tori.bd.district">
+        <field name="name">Narsingdi</field>
+        <field name="code">D040</field>
+        <field name="source_id">40</field>
+    </record>
+    <record id="bd_district_41" model="tori.bd.district">
+        <field name="name">Gazipur</field>
+        <field name="code">D041</field>
+        <field name="source_id">41</field>
+    </record>
+    <record id="bd_district_42" model="tori.bd.district">
+        <field name="name">Shariatpur</field>
+        <field name="code">D042</field>
+        <field name="source_id">42</field>
+    </record>
+    <record id="bd_district_43" model="tori.bd.district">
+        <field name="name">Narayanganj</field>
+        <field name="code">D043</field>
+        <field name="source_id">43</field>
+    </record>
+    <record id="bd_district_44" model="tori.bd.district">
+        <field name="name">Tangail</field>
+        <field name="code">D044</field>
+        <field name="source_id">44</field>
+    </record>
+    <record id="bd_district_45" model="tori.bd.district">
+        <field name="name">Kishoreganj</field>
+        <field name="code">D045</field>
+        <field name="source_id">45</field>
+    </record>
+    <record id="bd_district_46" model="tori.bd.district">
+        <field name="name">Manikganj</field>
+        <field name="code">D046</field>
+        <field name="source_id">46</field>
+    </record>
+    <record id="bd_district_47" model="tori.bd.district">
+        <field name="name">Dhaka</field>
+        <field name="code">D047</field>
+        <field name="source_id">47</field>
+    </record>
+    <record id="bd_district_48" model="tori.bd.district">
+        <field name="name">Munshiganj</field>
+        <field name="code">D048</field>
+        <field name="source_id">48</field>
+    </record>
+    <record id="bd_district_49" model="tori.bd.district">
+        <field name="name">Rajbari</field>
+        <field name="code">D049</field>
+        <field name="source_id">49</field>
+    </record>
+    <record id="bd_district_50" model="tori.bd.district">
+        <field name="name">Madaripur</field>
+        <field name="code">D050</field>
+        <field name="source_id">50</field>
+    </record>
+    <record id="bd_district_51" model="tori.bd.district">
+        <field name="name">Gopalganj</field>
+        <field name="code">D051</field>
+        <field name="source_id">51</field>
+    </record>
+    <record id="bd_district_52" model="tori.bd.district">
+        <field name="name">Faridpur</field>
+        <field name="code">D052</field>
+        <field name="source_id">52</field>
+    </record>
+    <record id="bd_district_53" model="tori.bd.district">
+        <field name="name">Panchagarh</field>
+        <field name="code">D053</field>
+        <field name="source_id">53</field>
+    </record>
+    <record id="bd_district_54" model="tori.bd.district">
+        <field name="name">Dinajpur</field>
+        <field name="code">D054</field>
+        <field name="source_id">54</field>
+    </record>
+    <record id="bd_district_55" model="tori.bd.district">
+        <field name="name">Lalmonirhat</field>
+        <field name="code">D055</field>
+        <field name="source_id">55</field>
+    </record>
+    <record id="bd_district_56" model="tori.bd.district">
+        <field name="name">Nilphamari</field>
+        <field name="code">D056</field>
+        <field name="source_id">56</field>
+    </record>
+    <record id="bd_district_57" model="tori.bd.district">
+        <field name="name">Gaibandha</field>
+        <field name="code">D057</field>
+        <field name="source_id">57</field>
+    </record>
+    <record id="bd_district_58" model="tori.bd.district">
+        <field name="name">Thakurgaon</field>
+        <field name="code">D058</field>
+        <field name="source_id">58</field>
+    </record>
+    <record id="bd_district_59" model="tori.bd.district">
+        <field name="name">Rangpur</field>
+        <field name="code">D059</field>
+        <field name="source_id">59</field>
+    </record>
+    <record id="bd_district_60" model="tori.bd.district">
+        <field name="name">Kurigram</field>
+        <field name="code">D060</field>
+        <field name="source_id">60</field>
+    </record>
+    <record id="bd_district_61" model="tori.bd.district">
+        <field name="name">Sherpur</field>
+        <field name="code">D061</field>
+        <field name="source_id">61</field>
+    </record>
+    <record id="bd_district_62" model="tori.bd.district">
+        <field name="name">Mymensingh</field>
+        <field name="code">D062</field>
+        <field name="source_id">62</field>
+    </record>
+    <record id="bd_district_63" model="tori.bd.district">
+        <field name="name">Jamalpur</field>
+        <field name="code">D063</field>
+        <field name="source_id">63</field>
+    </record>
+    <record id="bd_district_64" model="tori.bd.district">
+        <field name="name">Netrokona</field>
+        <field name="code">D064</field>
+        <field name="source_id">64</field>
+    </record>
+    <record id="bd_upazila_1" model="tori.bd.upazila">
+        <field name="name">Debidwar</field>
+        <field name="code">U0001</field>
+        <field name="source_id">1</field>
+        <field name="district_id" ref="bd_district_1"/>
+    </record>
+    <record id="bd_upazila_2" model="tori.bd.upazila">
+        <field name="name">Barura</field>
+        <field name="code">U0002</field>
+        <field name="source_id">2</field>
+        <field name="district_id" ref="bd_district_1"/>
+    </record>
+    <record id="bd_upazila_3" model="tori.bd.upazila">
+        <field name="name">Brahmanpara</field>
+        <field name="code">U0003</field>
+        <field name="source_id">3</field>
+        <field name="district_id" ref="bd_district_1"/>
+    </record>
+    <record id="bd_upazila_4" model="tori.bd.upazila">
+        <field name="name">Chandina</field>
+        <field name="code">U0004</field>
+        <field name="source_id">4</field>
+        <field name="district_id" ref="bd_district_1"/>
+    </record>
+    <record id="bd_upazila_5" model="tori.bd.upazila">
+        <field name="name">Chauddagram</field>
+        <field name="code">U0005</field>
+        <field name="source_id">5</field>
+        <field name="district_id" ref="bd_district_1"/>
+    </record>
+    <record id="bd_upazila_6" model="tori.bd.upazila">
+        <field name="name">Daudkandi</field>
+        <field name="code">U0006</field>
+        <field name="source_id">6</field>
+        <field name="district_id" ref="bd_district_1"/>
+    </record>
+    <record id="bd_upazila_7" model="tori.bd.upazila">
+        <field name="name">Homna</field>
+        <field name="code">U0007</field>
+        <field name="source_id">7</field>
+        <field name="district_id" ref="bd_district_1"/>
+    </record>
+    <record id="bd_upazila_8" model="tori.bd.upazila">
+        <field name="name">Laksam</field>
+        <field name="code">U0008</field>
+        <field name="source_id">8</field>
+        <field name="district_id" ref="bd_district_1"/>
+    </record>
+    <record id="bd_upazila_9" model="tori.bd.upazila">
+        <field name="name">Muradnagar</field>
+        <field name="code">U0009</field>
+        <field name="source_id">9</field>
+        <field name="district_id" ref="bd_district_1"/>
+    </record>
+    <record id="bd_upazila_10" model="tori.bd.upazila">
+        <field name="name">Nangalkot</field>
+        <field name="code">U0010</field>
+        <field name="source_id">10</field>
+        <field name="district_id" ref="bd_district_1"/>
+    </record>
+    <record id="bd_upazila_11" model="tori.bd.upazila">
+        <field name="name">Comilla Sadar</field>
+        <field name="code">U0011</field>
+        <field name="source_id">11</field>
+        <field name="district_id" ref="bd_district_1"/>
+    </record>
+    <record id="bd_upazila_12" model="tori.bd.upazila">
+        <field name="name">Meghna</field>
+        <field name="code">U0012</field>
+        <field name="source_id">12</field>
+        <field name="district_id" ref="bd_district_1"/>
+    </record>
+    <record id="bd_upazila_13" model="tori.bd.upazila">
+        <field name="name">Monohargonj</field>
+        <field name="code">U0013</field>
+        <field name="source_id">13</field>
+        <field name="district_id" ref="bd_district_1"/>
+    </record>
+    <record id="bd_upazila_14" model="tori.bd.upazila">
+        <field name="name">Sadarsouth</field>
+        <field name="code">U0014</field>
+        <field name="source_id">14</field>
+        <field name="district_id" ref="bd_district_1"/>
+    </record>
+    <record id="bd_upazila_15" model="tori.bd.upazila">
+        <field name="name">Titas</field>
+        <field name="code">U0015</field>
+        <field name="source_id">15</field>
+        <field name="district_id" ref="bd_district_1"/>
+    </record>
+    <record id="bd_upazila_16" model="tori.bd.upazila">
+        <field name="name">Burichang</field>
+        <field name="code">U0016</field>
+        <field name="source_id">16</field>
+        <field name="district_id" ref="bd_district_1"/>
+    </record>
+    <record id="bd_upazila_17" model="tori.bd.upazila">
+        <field name="name">Lalmai</field>
+        <field name="code">U0017</field>
+        <field name="source_id">17</field>
+        <field name="district_id" ref="bd_district_1"/>
+    </record>
+    <record id="bd_upazila_18" model="tori.bd.upazila">
+        <field name="name">Chhagalnaiya</field>
+        <field name="code">U0018</field>
+        <field name="source_id">18</field>
+        <field name="district_id" ref="bd_district_2"/>
+    </record>
+    <record id="bd_upazila_19" model="tori.bd.upazila">
+        <field name="name">Feni Sadar</field>
+        <field name="code">U0019</field>
+        <field name="source_id">19</field>
+        <field name="district_id" ref="bd_district_2"/>
+    </record>
+    <record id="bd_upazila_20" model="tori.bd.upazila">
+        <field name="name">Sonagazi</field>
+        <field name="code">U0020</field>
+        <field name="source_id">20</field>
+        <field name="district_id" ref="bd_district_2"/>
+    </record>
+    <record id="bd_upazila_21" model="tori.bd.upazila">
+        <field name="name">Fulgazi</field>
+        <field name="code">U0021</field>
+        <field name="source_id">21</field>
+        <field name="district_id" ref="bd_district_2"/>
+    </record>
+    <record id="bd_upazila_22" model="tori.bd.upazila">
+        <field name="name">Parshuram</field>
+        <field name="code">U0022</field>
+        <field name="source_id">22</field>
+        <field name="district_id" ref="bd_district_2"/>
+    </record>
+    <record id="bd_upazila_23" model="tori.bd.upazila">
+        <field name="name">Daganbhuiyan</field>
+        <field name="code">U0023</field>
+        <field name="source_id">23</field>
+        <field name="district_id" ref="bd_district_2"/>
+    </record>
+    <record id="bd_upazila_24" model="tori.bd.upazila">
+        <field name="name">Brahmanbaria Sadar</field>
+        <field name="code">U0024</field>
+        <field name="source_id">24</field>
+        <field name="district_id" ref="bd_district_3"/>
+    </record>
+    <record id="bd_upazila_25" model="tori.bd.upazila">
+        <field name="name">Kasba</field>
+        <field name="code">U0025</field>
+        <field name="source_id">25</field>
+        <field name="district_id" ref="bd_district_3"/>
+    </record>
+    <record id="bd_upazila_26" model="tori.bd.upazila">
+        <field name="name">Nasirnagar</field>
+        <field name="code">U0026</field>
+        <field name="source_id">26</field>
+        <field name="district_id" ref="bd_district_3"/>
+    </record>
+    <record id="bd_upazila_27" model="tori.bd.upazila">
+        <field name="name">Sarail</field>
+        <field name="code">U0027</field>
+        <field name="source_id">27</field>
+        <field name="district_id" ref="bd_district_3"/>
+    </record>
+    <record id="bd_upazila_28" model="tori.bd.upazila">
+        <field name="name">Ashuganj</field>
+        <field name="code">U0028</field>
+        <field name="source_id">28</field>
+        <field name="district_id" ref="bd_district_3"/>
+    </record>
+    <record id="bd_upazila_29" model="tori.bd.upazila">
+        <field name="name">Akhaura</field>
+        <field name="code">U0029</field>
+        <field name="source_id">29</field>
+        <field name="district_id" ref="bd_district_3"/>
+    </record>
+    <record id="bd_upazila_30" model="tori.bd.upazila">
+        <field name="name">Nabinagar</field>
+        <field name="code">U0030</field>
+        <field name="source_id">30</field>
+        <field name="district_id" ref="bd_district_3"/>
+    </record>
+    <record id="bd_upazila_31" model="tori.bd.upazila">
+        <field name="name">Bancharampur</field>
+        <field name="code">U0031</field>
+        <field name="source_id">31</field>
+        <field name="district_id" ref="bd_district_3"/>
+    </record>
+    <record id="bd_upazila_32" model="tori.bd.upazila">
+        <field name="name">Bijoynagar</field>
+        <field name="code">U0032</field>
+        <field name="source_id">32</field>
+        <field name="district_id" ref="bd_district_3"/>
+    </record>
+    <record id="bd_upazila_33" model="tori.bd.upazila">
+        <field name="name">Rangamati Sadar</field>
+        <field name="code">U0033</field>
+        <field name="source_id">33</field>
+        <field name="district_id" ref="bd_district_4"/>
+    </record>
+    <record id="bd_upazila_34" model="tori.bd.upazila">
+        <field name="name">Kaptai</field>
+        <field name="code">U0034</field>
+        <field name="source_id">34</field>
+        <field name="district_id" ref="bd_district_4"/>
+    </record>
+    <record id="bd_upazila_35" model="tori.bd.upazila">
+        <field name="name">Kawkhali</field>
+        <field name="code">U0035</field>
+        <field name="source_id">35</field>
+        <field name="district_id" ref="bd_district_4"/>
+    </record>
+    <record id="bd_upazila_36" model="tori.bd.upazila">
+        <field name="name">Baghaichari</field>
+        <field name="code">U0036</field>
+        <field name="source_id">36</field>
+        <field name="district_id" ref="bd_district_4"/>
+    </record>
+    <record id="bd_upazila_37" model="tori.bd.upazila">
+        <field name="name">Barkal</field>
+        <field name="code">U0037</field>
+        <field name="source_id">37</field>
+        <field name="district_id" ref="bd_district_4"/>
+    </record>
+    <record id="bd_upazila_38" model="tori.bd.upazila">
+        <field name="name">Langadu</field>
+        <field name="code">U0038</field>
+        <field name="source_id">38</field>
+        <field name="district_id" ref="bd_district_4"/>
+    </record>
+    <record id="bd_upazila_39" model="tori.bd.upazila">
+        <field name="name">Rajasthali</field>
+        <field name="code">U0039</field>
+        <field name="source_id">39</field>
+        <field name="district_id" ref="bd_district_4"/>
+    </record>
+    <record id="bd_upazila_40" model="tori.bd.upazila">
+        <field name="name">Belaichari</field>
+        <field name="code">U0040</field>
+        <field name="source_id">40</field>
+        <field name="district_id" ref="bd_district_4"/>
+    </record>
+    <record id="bd_upazila_41" model="tori.bd.upazila">
+        <field name="name">Juraichari</field>
+        <field name="code">U0041</field>
+        <field name="source_id">41</field>
+        <field name="district_id" ref="bd_district_4"/>
+    </record>
+    <record id="bd_upazila_42" model="tori.bd.upazila">
+        <field name="name">Naniarchar</field>
+        <field name="code">U0042</field>
+        <field name="source_id">42</field>
+        <field name="district_id" ref="bd_district_4"/>
+    </record>
+    <record id="bd_upazila_43" model="tori.bd.upazila">
+        <field name="name">Noakhali Sadar</field>
+        <field name="code">U0043</field>
+        <field name="source_id">43</field>
+        <field name="district_id" ref="bd_district_5"/>
+    </record>
+    <record id="bd_upazila_44" model="tori.bd.upazila">
+        <field name="name">Companiganj</field>
+        <field name="code">U0044</field>
+        <field name="source_id">44</field>
+        <field name="district_id" ref="bd_district_5"/>
+    </record>
+    <record id="bd_upazila_45" model="tori.bd.upazila">
+        <field name="name">Begumganj</field>
+        <field name="code">U0045</field>
+        <field name="source_id">45</field>
+        <field name="district_id" ref="bd_district_5"/>
+    </record>
+    <record id="bd_upazila_46" model="tori.bd.upazila">
+        <field name="name">Hatia</field>
+        <field name="code">U0046</field>
+        <field name="source_id">46</field>
+        <field name="district_id" ref="bd_district_5"/>
+    </record>
+    <record id="bd_upazila_47" model="tori.bd.upazila">
+        <field name="name">Subarnachar</field>
+        <field name="code">U0047</field>
+        <field name="source_id">47</field>
+        <field name="district_id" ref="bd_district_5"/>
+    </record>
+    <record id="bd_upazila_48" model="tori.bd.upazila">
+        <field name="name">Kabirhat</field>
+        <field name="code">U0048</field>
+        <field name="source_id">48</field>
+        <field name="district_id" ref="bd_district_5"/>
+    </record>
+    <record id="bd_upazila_49" model="tori.bd.upazila">
+        <field name="name">Senbug</field>
+        <field name="code">U0049</field>
+        <field name="source_id">49</field>
+        <field name="district_id" ref="bd_district_5"/>
+    </record>
+    <record id="bd_upazila_50" model="tori.bd.upazila">
+        <field name="name">Chatkhil</field>
+        <field name="code">U0050</field>
+        <field name="source_id">50</field>
+        <field name="district_id" ref="bd_district_5"/>
+    </record>
+    <record id="bd_upazila_51" model="tori.bd.upazila">
+        <field name="name">Sonaimori</field>
+        <field name="code">U0051</field>
+        <field name="source_id">51</field>
+        <field name="district_id" ref="bd_district_5"/>
+    </record>
+    <record id="bd_upazila_52" model="tori.bd.upazila">
+        <field name="name">Haimchar</field>
+        <field name="code">U0052</field>
+        <field name="source_id">52</field>
+        <field name="district_id" ref="bd_district_6"/>
+    </record>
+    <record id="bd_upazila_53" model="tori.bd.upazila">
+        <field name="name">Kachua</field>
+        <field name="code">U0053</field>
+        <field name="source_id">53</field>
+        <field name="district_id" ref="bd_district_6"/>
+    </record>
+    <record id="bd_upazila_54" model="tori.bd.upazila">
+        <field name="name">Shahrasti</field>
+        <field name="code">U0054</field>
+        <field name="source_id">54</field>
+        <field name="district_id" ref="bd_district_6"/>
+    </record>
+    <record id="bd_upazila_55" model="tori.bd.upazila">
+        <field name="name">Chandpur Sadar</field>
+        <field name="code">U0055</field>
+        <field name="source_id">55</field>
+        <field name="district_id" ref="bd_district_6"/>
+    </record>
+    <record id="bd_upazila_56" model="tori.bd.upazila">
+        <field name="name">Matlab South</field>
+        <field name="code">U0056</field>
+        <field name="source_id">56</field>
+        <field name="district_id" ref="bd_district_6"/>
+    </record>
+    <record id="bd_upazila_57" model="tori.bd.upazila">
+        <field name="name">Hajiganj</field>
+        <field name="code">U0057</field>
+        <field name="source_id">57</field>
+        <field name="district_id" ref="bd_district_6"/>
+    </record>
+    <record id="bd_upazila_58" model="tori.bd.upazila">
+        <field name="name">Matlab North</field>
+        <field name="code">U0058</field>
+        <field name="source_id">58</field>
+        <field name="district_id" ref="bd_district_6"/>
+    </record>
+    <record id="bd_upazila_59" model="tori.bd.upazila">
+        <field name="name">Faridgonj</field>
+        <field name="code">U0059</field>
+        <field name="source_id">59</field>
+        <field name="district_id" ref="bd_district_6"/>
+    </record>
+    <record id="bd_upazila_60" model="tori.bd.upazila">
+        <field name="name">Lakshmipur Sadar</field>
+        <field name="code">U0060</field>
+        <field name="source_id">60</field>
+        <field name="district_id" ref="bd_district_7"/>
+    </record>
+    <record id="bd_upazila_61" model="tori.bd.upazila">
+        <field name="name">Kamalnagar</field>
+        <field name="code">U0061</field>
+        <field name="source_id">61</field>
+        <field name="district_id" ref="bd_district_7"/>
+    </record>
+    <record id="bd_upazila_62" model="tori.bd.upazila">
+        <field name="name">Raipur</field>
+        <field name="code">U0062</field>
+        <field name="source_id">62</field>
+        <field name="district_id" ref="bd_district_7"/>
+    </record>
+    <record id="bd_upazila_63" model="tori.bd.upazila">
+        <field name="name">Ramgati</field>
+        <field name="code">U0063</field>
+        <field name="source_id">63</field>
+        <field name="district_id" ref="bd_district_7"/>
+    </record>
+    <record id="bd_upazila_64" model="tori.bd.upazila">
+        <field name="name">Ramganj</field>
+        <field name="code">U0064</field>
+        <field name="source_id">64</field>
+        <field name="district_id" ref="bd_district_7"/>
+    </record>
+    <record id="bd_upazila_65" model="tori.bd.upazila">
+        <field name="name">Rangunia</field>
+        <field name="code">U0065</field>
+        <field name="source_id">65</field>
+        <field name="district_id" ref="bd_district_8"/>
+    </record>
+    <record id="bd_upazila_66" model="tori.bd.upazila">
+        <field name="name">Sitakunda</field>
+        <field name="code">U0066</field>
+        <field name="source_id">66</field>
+        <field name="district_id" ref="bd_district_8"/>
+    </record>
+    <record id="bd_upazila_67" model="tori.bd.upazila">
+        <field name="name">Mirsharai</field>
+        <field name="code">U0067</field>
+        <field name="source_id">67</field>
+        <field name="district_id" ref="bd_district_8"/>
+    </record>
+    <record id="bd_upazila_68" model="tori.bd.upazila">
+        <field name="name">Patiya</field>
+        <field name="code">U0068</field>
+        <field name="source_id">68</field>
+        <field name="district_id" ref="bd_district_8"/>
+    </record>
+    <record id="bd_upazila_69" model="tori.bd.upazila">
+        <field name="name">Sandwip</field>
+        <field name="code">U0069</field>
+        <field name="source_id">69</field>
+        <field name="district_id" ref="bd_district_8"/>
+    </record>
+    <record id="bd_upazila_70" model="tori.bd.upazila">
+        <field name="name">Banshkhali</field>
+        <field name="code">U0070</field>
+        <field name="source_id">70</field>
+        <field name="district_id" ref="bd_district_8"/>
+    </record>
+    <record id="bd_upazila_71" model="tori.bd.upazila">
+        <field name="name">Boalkhali</field>
+        <field name="code">U0071</field>
+        <field name="source_id">71</field>
+        <field name="district_id" ref="bd_district_8"/>
+    </record>
+    <record id="bd_upazila_72" model="tori.bd.upazila">
+        <field name="name">Anwara</field>
+        <field name="code">U0072</field>
+        <field name="source_id">72</field>
+        <field name="district_id" ref="bd_district_8"/>
+    </record>
+    <record id="bd_upazila_73" model="tori.bd.upazila">
+        <field name="name">Chandanaish</field>
+        <field name="code">U0073</field>
+        <field name="source_id">73</field>
+        <field name="district_id" ref="bd_district_8"/>
+    </record>
+    <record id="bd_upazila_74" model="tori.bd.upazila">
+        <field name="name">Satkania</field>
+        <field name="code">U0074</field>
+        <field name="source_id">74</field>
+        <field name="district_id" ref="bd_district_8"/>
+    </record>
+    <record id="bd_upazila_75" model="tori.bd.upazila">
+        <field name="name">Lohagara</field>
+        <field name="code">U0075</field>
+        <field name="source_id">75</field>
+        <field name="district_id" ref="bd_district_8"/>
+    </record>
+    <record id="bd_upazila_76" model="tori.bd.upazila">
+        <field name="name">Hathazari</field>
+        <field name="code">U0076</field>
+        <field name="source_id">76</field>
+        <field name="district_id" ref="bd_district_8"/>
+    </record>
+    <record id="bd_upazila_77" model="tori.bd.upazila">
+        <field name="name">Fatikchhari</field>
+        <field name="code">U0077</field>
+        <field name="source_id">77</field>
+        <field name="district_id" ref="bd_district_8"/>
+    </record>
+    <record id="bd_upazila_78" model="tori.bd.upazila">
+        <field name="name">Raozan</field>
+        <field name="code">U0078</field>
+        <field name="source_id">78</field>
+        <field name="district_id" ref="bd_district_8"/>
+    </record>
+    <record id="bd_upazila_79" model="tori.bd.upazila">
+        <field name="name">Karnafuli</field>
+        <field name="code">U0079</field>
+        <field name="source_id">79</field>
+        <field name="district_id" ref="bd_district_8"/>
+    </record>
+    <record id="bd_upazila_80" model="tori.bd.upazila">
+        <field name="name">Coxsbazar Sadar</field>
+        <field name="code">U0080</field>
+        <field name="source_id">80</field>
+        <field name="district_id" ref="bd_district_9"/>
+    </record>
+    <record id="bd_upazila_81" model="tori.bd.upazila">
+        <field name="name">Chakaria</field>
+        <field name="code">U0081</field>
+        <field name="source_id">81</field>
+        <field name="district_id" ref="bd_district_9"/>
+    </record>
+    <record id="bd_upazila_82" model="tori.bd.upazila">
+        <field name="name">Kutubdia</field>
+        <field name="code">U0082</field>
+        <field name="source_id">82</field>
+        <field name="district_id" ref="bd_district_9"/>
+    </record>
+    <record id="bd_upazila_83" model="tori.bd.upazila">
+        <field name="name">Ukhiya</field>
+        <field name="code">U0083</field>
+        <field name="source_id">83</field>
+        <field name="district_id" ref="bd_district_9"/>
+    </record>
+    <record id="bd_upazila_84" model="tori.bd.upazila">
+        <field name="name">Moheshkhali</field>
+        <field name="code">U0084</field>
+        <field name="source_id">84</field>
+        <field name="district_id" ref="bd_district_9"/>
+    </record>
+    <record id="bd_upazila_85" model="tori.bd.upazila">
+        <field name="name">Pekua</field>
+        <field name="code">U0085</field>
+        <field name="source_id">85</field>
+        <field name="district_id" ref="bd_district_9"/>
+    </record>
+    <record id="bd_upazila_86" model="tori.bd.upazila">
+        <field name="name">Ramu</field>
+        <field name="code">U0086</field>
+        <field name="source_id">86</field>
+        <field name="district_id" ref="bd_district_9"/>
+    </record>
+    <record id="bd_upazila_87" model="tori.bd.upazila">
+        <field name="name">Teknaf</field>
+        <field name="code">U0087</field>
+        <field name="source_id">87</field>
+        <field name="district_id" ref="bd_district_9"/>
+    </record>
+    <record id="bd_upazila_88" model="tori.bd.upazila">
+        <field name="name">Khagrachhari Sadar</field>
+        <field name="code">U0088</field>
+        <field name="source_id">88</field>
+        <field name="district_id" ref="bd_district_10"/>
+    </record>
+    <record id="bd_upazila_89" model="tori.bd.upazila">
+        <field name="name">Dighinala</field>
+        <field name="code">U0089</field>
+        <field name="source_id">89</field>
+        <field name="district_id" ref="bd_district_10"/>
+    </record>
+    <record id="bd_upazila_90" model="tori.bd.upazila">
+        <field name="name">Panchari</field>
+        <field name="code">U0090</field>
+        <field name="source_id">90</field>
+        <field name="district_id" ref="bd_district_10"/>
+    </record>
+    <record id="bd_upazila_91" model="tori.bd.upazila">
+        <field name="name">Laxmichhari</field>
+        <field name="code">U0091</field>
+        <field name="source_id">91</field>
+        <field name="district_id" ref="bd_district_10"/>
+    </record>
+    <record id="bd_upazila_92" model="tori.bd.upazila">
+        <field name="name">Mohalchari</field>
+        <field name="code">U0092</field>
+        <field name="source_id">92</field>
+        <field name="district_id" ref="bd_district_10"/>
+    </record>
+    <record id="bd_upazila_93" model="tori.bd.upazila">
+        <field name="name">Manikchari</field>
+        <field name="code">U0093</field>
+        <field name="source_id">93</field>
+        <field name="district_id" ref="bd_district_10"/>
+    </record>
+    <record id="bd_upazila_94" model="tori.bd.upazila">
+        <field name="name">Ramgarh</field>
+        <field name="code">U0094</field>
+        <field name="source_id">94</field>
+        <field name="district_id" ref="bd_district_10"/>
+    </record>
+    <record id="bd_upazila_95" model="tori.bd.upazila">
+        <field name="name">Matiranga</field>
+        <field name="code">U0095</field>
+        <field name="source_id">95</field>
+        <field name="district_id" ref="bd_district_10"/>
+    </record>
+    <record id="bd_upazila_96" model="tori.bd.upazila">
+        <field name="name">Guimara</field>
+        <field name="code">U0096</field>
+        <field name="source_id">96</field>
+        <field name="district_id" ref="bd_district_10"/>
+    </record>
+    <record id="bd_upazila_97" model="tori.bd.upazila">
+        <field name="name">Bandarban Sadar</field>
+        <field name="code">U0097</field>
+        <field name="source_id">97</field>
+        <field name="district_id" ref="bd_district_11"/>
+    </record>
+    <record id="bd_upazila_98" model="tori.bd.upazila">
+        <field name="name">Alikadam</field>
+        <field name="code">U0098</field>
+        <field name="source_id">98</field>
+        <field name="district_id" ref="bd_district_11"/>
+    </record>
+    <record id="bd_upazila_99" model="tori.bd.upazila">
+        <field name="name">Naikhongchhari</field>
+        <field name="code">U0099</field>
+        <field name="source_id">99</field>
+        <field name="district_id" ref="bd_district_11"/>
+    </record>
+    <record id="bd_upazila_100" model="tori.bd.upazila">
+        <field name="name">Rowangchhari</field>
+        <field name="code">U0100</field>
+        <field name="source_id">100</field>
+        <field name="district_id" ref="bd_district_11"/>
+    </record>
+    <record id="bd_upazila_101" model="tori.bd.upazila">
+        <field name="name">Lama</field>
+        <field name="code">U0101</field>
+        <field name="source_id">101</field>
+        <field name="district_id" ref="bd_district_11"/>
+    </record>
+    <record id="bd_upazila_102" model="tori.bd.upazila">
+        <field name="name">Ruma</field>
+        <field name="code">U0102</field>
+        <field name="source_id">102</field>
+        <field name="district_id" ref="bd_district_11"/>
+    </record>
+    <record id="bd_upazila_103" model="tori.bd.upazila">
+        <field name="name">Thanchi</field>
+        <field name="code">U0103</field>
+        <field name="source_id">103</field>
+        <field name="district_id" ref="bd_district_11"/>
+    </record>
+    <record id="bd_upazila_104" model="tori.bd.upazila">
+        <field name="name">Belkuchi</field>
+        <field name="code">U0104</field>
+        <field name="source_id">104</field>
+        <field name="district_id" ref="bd_district_12"/>
+    </record>
+    <record id="bd_upazila_105" model="tori.bd.upazila">
+        <field name="name">Chauhali</field>
+        <field name="code">U0105</field>
+        <field name="source_id">105</field>
+        <field name="district_id" ref="bd_district_12"/>
+    </record>
+    <record id="bd_upazila_106" model="tori.bd.upazila">
+        <field name="name">Kamarkhand</field>
+        <field name="code">U0106</field>
+        <field name="source_id">106</field>
+        <field name="district_id" ref="bd_district_12"/>
+    </record>
+    <record id="bd_upazila_107" model="tori.bd.upazila">
+        <field name="name">Kazipur</field>
+        <field name="code">U0107</field>
+        <field name="source_id">107</field>
+        <field name="district_id" ref="bd_district_12"/>
+    </record>
+    <record id="bd_upazila_108" model="tori.bd.upazila">
+        <field name="name">Raigonj</field>
+        <field name="code">U0108</field>
+        <field name="source_id">108</field>
+        <field name="district_id" ref="bd_district_12"/>
+    </record>
+    <record id="bd_upazila_109" model="tori.bd.upazila">
+        <field name="name">Shahjadpur</field>
+        <field name="code">U0109</field>
+        <field name="source_id">109</field>
+        <field name="district_id" ref="bd_district_12"/>
+    </record>
+    <record id="bd_upazila_110" model="tori.bd.upazila">
+        <field name="name">Sirajganj Sadar</field>
+        <field name="code">U0110</field>
+        <field name="source_id">110</field>
+        <field name="district_id" ref="bd_district_12"/>
+    </record>
+    <record id="bd_upazila_111" model="tori.bd.upazila">
+        <field name="name">Tarash</field>
+        <field name="code">U0111</field>
+        <field name="source_id">111</field>
+        <field name="district_id" ref="bd_district_12"/>
+    </record>
+    <record id="bd_upazila_112" model="tori.bd.upazila">
+        <field name="name">Ullapara</field>
+        <field name="code">U0112</field>
+        <field name="source_id">112</field>
+        <field name="district_id" ref="bd_district_12"/>
+    </record>
+    <record id="bd_upazila_113" model="tori.bd.upazila">
+        <field name="name">Sujanagar</field>
+        <field name="code">U0113</field>
+        <field name="source_id">113</field>
+        <field name="district_id" ref="bd_district_13"/>
+    </record>
+    <record id="bd_upazila_114" model="tori.bd.upazila">
+        <field name="name">Ishurdi</field>
+        <field name="code">U0114</field>
+        <field name="source_id">114</field>
+        <field name="district_id" ref="bd_district_13"/>
+    </record>
+    <record id="bd_upazila_115" model="tori.bd.upazila">
+        <field name="name">Bhangura</field>
+        <field name="code">U0115</field>
+        <field name="source_id">115</field>
+        <field name="district_id" ref="bd_district_13"/>
+    </record>
+    <record id="bd_upazila_116" model="tori.bd.upazila">
+        <field name="name">Pabna Sadar</field>
+        <field name="code">U0116</field>
+        <field name="source_id">116</field>
+        <field name="district_id" ref="bd_district_13"/>
+    </record>
+    <record id="bd_upazila_117" model="tori.bd.upazila">
+        <field name="name">Bera</field>
+        <field name="code">U0117</field>
+        <field name="source_id">117</field>
+        <field name="district_id" ref="bd_district_13"/>
+    </record>
+    <record id="bd_upazila_118" model="tori.bd.upazila">
+        <field name="name">Atghoria</field>
+        <field name="code">U0118</field>
+        <field name="source_id">118</field>
+        <field name="district_id" ref="bd_district_13"/>
+    </record>
+    <record id="bd_upazila_119" model="tori.bd.upazila">
+        <field name="name">Chatmohar</field>
+        <field name="code">U0119</field>
+        <field name="source_id">119</field>
+        <field name="district_id" ref="bd_district_13"/>
+    </record>
+    <record id="bd_upazila_120" model="tori.bd.upazila">
+        <field name="name">Santhia</field>
+        <field name="code">U0120</field>
+        <field name="source_id">120</field>
+        <field name="district_id" ref="bd_district_13"/>
+    </record>
+    <record id="bd_upazila_121" model="tori.bd.upazila">
+        <field name="name">Faridpur</field>
+        <field name="code">U0121</field>
+        <field name="source_id">121</field>
+        <field name="district_id" ref="bd_district_13"/>
+    </record>
+    <record id="bd_upazila_122" model="tori.bd.upazila">
+        <field name="name">Kahaloo</field>
+        <field name="code">U0122</field>
+        <field name="source_id">122</field>
+        <field name="district_id" ref="bd_district_14"/>
+    </record>
+    <record id="bd_upazila_123" model="tori.bd.upazila">
+        <field name="name">Bogra Sadar</field>
+        <field name="code">U0123</field>
+        <field name="source_id">123</field>
+        <field name="district_id" ref="bd_district_14"/>
+    </record>
+    <record id="bd_upazila_124" model="tori.bd.upazila">
+        <field name="name">Shariakandi</field>
+        <field name="code">U0124</field>
+        <field name="source_id">124</field>
+        <field name="district_id" ref="bd_district_14"/>
+    </record>
+    <record id="bd_upazila_125" model="tori.bd.upazila">
+        <field name="name">Shajahanpur</field>
+        <field name="code">U0125</field>
+        <field name="source_id">125</field>
+        <field name="district_id" ref="bd_district_14"/>
+    </record>
+    <record id="bd_upazila_126" model="tori.bd.upazila">
+        <field name="name">Dupchanchia</field>
+        <field name="code">U0126</field>
+        <field name="source_id">126</field>
+        <field name="district_id" ref="bd_district_14"/>
+    </record>
+    <record id="bd_upazila_127" model="tori.bd.upazila">
+        <field name="name">Adamdighi</field>
+        <field name="code">U0127</field>
+        <field name="source_id">127</field>
+        <field name="district_id" ref="bd_district_14"/>
+    </record>
+    <record id="bd_upazila_128" model="tori.bd.upazila">
+        <field name="name">Nondigram</field>
+        <field name="code">U0128</field>
+        <field name="source_id">128</field>
+        <field name="district_id" ref="bd_district_14"/>
+    </record>
+    <record id="bd_upazila_129" model="tori.bd.upazila">
+        <field name="name">Sonatala</field>
+        <field name="code">U0129</field>
+        <field name="source_id">129</field>
+        <field name="district_id" ref="bd_district_14"/>
+    </record>
+    <record id="bd_upazila_130" model="tori.bd.upazila">
+        <field name="name">Dhunot</field>
+        <field name="code">U0130</field>
+        <field name="source_id">130</field>
+        <field name="district_id" ref="bd_district_14"/>
+    </record>
+    <record id="bd_upazila_131" model="tori.bd.upazila">
+        <field name="name">Gabtali</field>
+        <field name="code">U0131</field>
+        <field name="source_id">131</field>
+        <field name="district_id" ref="bd_district_14"/>
+    </record>
+    <record id="bd_upazila_132" model="tori.bd.upazila">
+        <field name="name">Sherpur</field>
+        <field name="code">U0132</field>
+        <field name="source_id">132</field>
+        <field name="district_id" ref="bd_district_14"/>
+    </record>
+    <record id="bd_upazila_133" model="tori.bd.upazila">
+        <field name="name">Shibganj</field>
+        <field name="code">U0133</field>
+        <field name="source_id">133</field>
+        <field name="district_id" ref="bd_district_14"/>
+    </record>
+    <record id="bd_upazila_134" model="tori.bd.upazila">
+        <field name="name">Paba</field>
+        <field name="code">U0134</field>
+        <field name="source_id">134</field>
+        <field name="district_id" ref="bd_district_15"/>
+    </record>
+    <record id="bd_upazila_135" model="tori.bd.upazila">
+        <field name="name">Durgapur</field>
+        <field name="code">U0135</field>
+        <field name="source_id">135</field>
+        <field name="district_id" ref="bd_district_15"/>
+    </record>
+    <record id="bd_upazila_136" model="tori.bd.upazila">
+        <field name="name">Mohonpur</field>
+        <field name="code">U0136</field>
+        <field name="source_id">136</field>
+        <field name="district_id" ref="bd_district_15"/>
+    </record>
+    <record id="bd_upazila_137" model="tori.bd.upazila">
+        <field name="name">Charghat</field>
+        <field name="code">U0137</field>
+        <field name="source_id">137</field>
+        <field name="district_id" ref="bd_district_15"/>
+    </record>
+    <record id="bd_upazila_138" model="tori.bd.upazila">
+        <field name="name">Puthia</field>
+        <field name="code">U0138</field>
+        <field name="source_id">138</field>
+        <field name="district_id" ref="bd_district_15"/>
+    </record>
+    <record id="bd_upazila_139" model="tori.bd.upazila">
+        <field name="name">Bagha</field>
+        <field name="code">U0139</field>
+        <field name="source_id">139</field>
+        <field name="district_id" ref="bd_district_15"/>
+    </record>
+    <record id="bd_upazila_140" model="tori.bd.upazila">
+        <field name="name">Godagari</field>
+        <field name="code">U0140</field>
+        <field name="source_id">140</field>
+        <field name="district_id" ref="bd_district_15"/>
+    </record>
+    <record id="bd_upazila_141" model="tori.bd.upazila">
+        <field name="name">Tanore</field>
+        <field name="code">U0141</field>
+        <field name="source_id">141</field>
+        <field name="district_id" ref="bd_district_15"/>
+    </record>
+    <record id="bd_upazila_142" model="tori.bd.upazila">
+        <field name="name">Bagmara</field>
+        <field name="code">U0142</field>
+        <field name="source_id">142</field>
+        <field name="district_id" ref="bd_district_15"/>
+    </record>
+    <record id="bd_upazila_143" model="tori.bd.upazila">
+        <field name="name">Natore Sadar</field>
+        <field name="code">U0143</field>
+        <field name="source_id">143</field>
+        <field name="district_id" ref="bd_district_16"/>
+    </record>
+    <record id="bd_upazila_144" model="tori.bd.upazila">
+        <field name="name">Singra</field>
+        <field name="code">U0144</field>
+        <field name="source_id">144</field>
+        <field name="district_id" ref="bd_district_16"/>
+    </record>
+    <record id="bd_upazila_145" model="tori.bd.upazila">
+        <field name="name">Baraigram</field>
+        <field name="code">U0145</field>
+        <field name="source_id">145</field>
+        <field name="district_id" ref="bd_district_16"/>
+    </record>
+    <record id="bd_upazila_146" model="tori.bd.upazila">
+        <field name="name">Bagatipara</field>
+        <field name="code">U0146</field>
+        <field name="source_id">146</field>
+        <field name="district_id" ref="bd_district_16"/>
+    </record>
+    <record id="bd_upazila_147" model="tori.bd.upazila">
+        <field name="name">Lalpur</field>
+        <field name="code">U0147</field>
+        <field name="source_id">147</field>
+        <field name="district_id" ref="bd_district_16"/>
+    </record>
+    <record id="bd_upazila_148" model="tori.bd.upazila">
+        <field name="name">Gurudaspur</field>
+        <field name="code">U0148</field>
+        <field name="source_id">148</field>
+        <field name="district_id" ref="bd_district_16"/>
+    </record>
+    <record id="bd_upazila_149" model="tori.bd.upazila">
+        <field name="name">Naldanga</field>
+        <field name="code">U0149</field>
+        <field name="source_id">149</field>
+        <field name="district_id" ref="bd_district_16"/>
+    </record>
+    <record id="bd_upazila_150" model="tori.bd.upazila">
+        <field name="name">Akkelpur</field>
+        <field name="code">U0150</field>
+        <field name="source_id">150</field>
+        <field name="district_id" ref="bd_district_17"/>
+    </record>
+    <record id="bd_upazila_151" model="tori.bd.upazila">
+        <field name="name">Kalai</field>
+        <field name="code">U0151</field>
+        <field name="source_id">151</field>
+        <field name="district_id" ref="bd_district_17"/>
+    </record>
+    <record id="bd_upazila_152" model="tori.bd.upazila">
+        <field name="name">Khetlal</field>
+        <field name="code">U0152</field>
+        <field name="source_id">152</field>
+        <field name="district_id" ref="bd_district_17"/>
+    </record>
+    <record id="bd_upazila_153" model="tori.bd.upazila">
+        <field name="name">Panchbibi</field>
+        <field name="code">U0153</field>
+        <field name="source_id">153</field>
+        <field name="district_id" ref="bd_district_17"/>
+    </record>
+    <record id="bd_upazila_154" model="tori.bd.upazila">
+        <field name="name">Joypurhat Sadar</field>
+        <field name="code">U0154</field>
+        <field name="source_id">154</field>
+        <field name="district_id" ref="bd_district_17"/>
+    </record>
+    <record id="bd_upazila_155" model="tori.bd.upazila">
+        <field name="name">Chapainawabganj Sadar</field>
+        <field name="code">U0155</field>
+        <field name="source_id">155</field>
+        <field name="district_id" ref="bd_district_18"/>
+    </record>
+    <record id="bd_upazila_156" model="tori.bd.upazila">
+        <field name="name">Gomostapur</field>
+        <field name="code">U0156</field>
+        <field name="source_id">156</field>
+        <field name="district_id" ref="bd_district_18"/>
+    </record>
+    <record id="bd_upazila_157" model="tori.bd.upazila">
+        <field name="name">Nachol</field>
+        <field name="code">U0157</field>
+        <field name="source_id">157</field>
+        <field name="district_id" ref="bd_district_18"/>
+    </record>
+    <record id="bd_upazila_158" model="tori.bd.upazila">
+        <field name="name">Bholahat</field>
+        <field name="code">U0158</field>
+        <field name="source_id">158</field>
+        <field name="district_id" ref="bd_district_18"/>
+    </record>
+    <record id="bd_upazila_159" model="tori.bd.upazila">
+        <field name="name">Shibganj</field>
+        <field name="code">U0159</field>
+        <field name="source_id">159</field>
+        <field name="district_id" ref="bd_district_18"/>
+    </record>
+    <record id="bd_upazila_160" model="tori.bd.upazila">
+        <field name="name">Mohadevpur</field>
+        <field name="code">U0160</field>
+        <field name="source_id">160</field>
+        <field name="district_id" ref="bd_district_19"/>
+    </record>
+    <record id="bd_upazila_161" model="tori.bd.upazila">
+        <field name="name">Badalgachi</field>
+        <field name="code">U0161</field>
+        <field name="source_id">161</field>
+        <field name="district_id" ref="bd_district_19"/>
+    </record>
+    <record id="bd_upazila_162" model="tori.bd.upazila">
+        <field name="name">Patnitala</field>
+        <field name="code">U0162</field>
+        <field name="source_id">162</field>
+        <field name="district_id" ref="bd_district_19"/>
+    </record>
+    <record id="bd_upazila_163" model="tori.bd.upazila">
+        <field name="name">Dhamoirhat</field>
+        <field name="code">U0163</field>
+        <field name="source_id">163</field>
+        <field name="district_id" ref="bd_district_19"/>
+    </record>
+    <record id="bd_upazila_164" model="tori.bd.upazila">
+        <field name="name">Niamatpur</field>
+        <field name="code">U0164</field>
+        <field name="source_id">164</field>
+        <field name="district_id" ref="bd_district_19"/>
+    </record>
+    <record id="bd_upazila_165" model="tori.bd.upazila">
+        <field name="name">Manda</field>
+        <field name="code">U0165</field>
+        <field name="source_id">165</field>
+        <field name="district_id" ref="bd_district_19"/>
+    </record>
+    <record id="bd_upazila_166" model="tori.bd.upazila">
+        <field name="name">Atrai</field>
+        <field name="code">U0166</field>
+        <field name="source_id">166</field>
+        <field name="district_id" ref="bd_district_19"/>
+    </record>
+    <record id="bd_upazila_167" model="tori.bd.upazila">
+        <field name="name">Raninagar</field>
+        <field name="code">U0167</field>
+        <field name="source_id">167</field>
+        <field name="district_id" ref="bd_district_19"/>
+    </record>
+    <record id="bd_upazila_168" model="tori.bd.upazila">
+        <field name="name">Naogaon Sadar</field>
+        <field name="code">U0168</field>
+        <field name="source_id">168</field>
+        <field name="district_id" ref="bd_district_19"/>
+    </record>
+    <record id="bd_upazila_169" model="tori.bd.upazila">
+        <field name="name">Porsha</field>
+        <field name="code">U0169</field>
+        <field name="source_id">169</field>
+        <field name="district_id" ref="bd_district_19"/>
+    </record>
+    <record id="bd_upazila_170" model="tori.bd.upazila">
+        <field name="name">Sapahar</field>
+        <field name="code">U0170</field>
+        <field name="source_id">170</field>
+        <field name="district_id" ref="bd_district_19"/>
+    </record>
+    <record id="bd_upazila_171" model="tori.bd.upazila">
+        <field name="name">Manirampur</field>
+        <field name="code">U0171</field>
+        <field name="source_id">171</field>
+        <field name="district_id" ref="bd_district_20"/>
+    </record>
+    <record id="bd_upazila_172" model="tori.bd.upazila">
+        <field name="name">Abhaynagar</field>
+        <field name="code">U0172</field>
+        <field name="source_id">172</field>
+        <field name="district_id" ref="bd_district_20"/>
+    </record>
+    <record id="bd_upazila_173" model="tori.bd.upazila">
+        <field name="name">Bagherpara</field>
+        <field name="code">U0173</field>
+        <field name="source_id">173</field>
+        <field name="district_id" ref="bd_district_20"/>
+    </record>
+    <record id="bd_upazila_174" model="tori.bd.upazila">
+        <field name="name">Chougachha</field>
+        <field name="code">U0174</field>
+        <field name="source_id">174</field>
+        <field name="district_id" ref="bd_district_20"/>
+    </record>
+    <record id="bd_upazila_175" model="tori.bd.upazila">
+        <field name="name">Jhikargacha</field>
+        <field name="code">U0175</field>
+        <field name="source_id">175</field>
+        <field name="district_id" ref="bd_district_20"/>
+    </record>
+    <record id="bd_upazila_176" model="tori.bd.upazila">
+        <field name="name">Keshabpur</field>
+        <field name="code">U0176</field>
+        <field name="source_id">176</field>
+        <field name="district_id" ref="bd_district_20"/>
+    </record>
+    <record id="bd_upazila_177" model="tori.bd.upazila">
+        <field name="name">Jessore Sadar</field>
+        <field name="code">U0177</field>
+        <field name="source_id">177</field>
+        <field name="district_id" ref="bd_district_20"/>
+    </record>
+    <record id="bd_upazila_178" model="tori.bd.upazila">
+        <field name="name">Sharsha</field>
+        <field name="code">U0178</field>
+        <field name="source_id">178</field>
+        <field name="district_id" ref="bd_district_20"/>
+    </record>
+    <record id="bd_upazila_179" model="tori.bd.upazila">
+        <field name="name">Assasuni</field>
+        <field name="code">U0179</field>
+        <field name="source_id">179</field>
+        <field name="district_id" ref="bd_district_21"/>
+    </record>
+    <record id="bd_upazila_180" model="tori.bd.upazila">
+        <field name="name">Debhata</field>
+        <field name="code">U0180</field>
+        <field name="source_id">180</field>
+        <field name="district_id" ref="bd_district_21"/>
+    </record>
+    <record id="bd_upazila_181" model="tori.bd.upazila">
+        <field name="name">Kalaroa</field>
+        <field name="code">U0181</field>
+        <field name="source_id">181</field>
+        <field name="district_id" ref="bd_district_21"/>
+    </record>
+    <record id="bd_upazila_182" model="tori.bd.upazila">
+        <field name="name">Satkhira Sadar</field>
+        <field name="code">U0182</field>
+        <field name="source_id">182</field>
+        <field name="district_id" ref="bd_district_21"/>
+    </record>
+    <record id="bd_upazila_183" model="tori.bd.upazila">
+        <field name="name">Shyamnagar</field>
+        <field name="code">U0183</field>
+        <field name="source_id">183</field>
+        <field name="district_id" ref="bd_district_21"/>
+    </record>
+    <record id="bd_upazila_184" model="tori.bd.upazila">
+        <field name="name">Tala</field>
+        <field name="code">U0184</field>
+        <field name="source_id">184</field>
+        <field name="district_id" ref="bd_district_21"/>
+    </record>
+    <record id="bd_upazila_185" model="tori.bd.upazila">
+        <field name="name">Kaliganj</field>
+        <field name="code">U0185</field>
+        <field name="source_id">185</field>
+        <field name="district_id" ref="bd_district_21"/>
+    </record>
+    <record id="bd_upazila_186" model="tori.bd.upazila">
+        <field name="name">Mujibnagar</field>
+        <field name="code">U0186</field>
+        <field name="source_id">186</field>
+        <field name="district_id" ref="bd_district_22"/>
+    </record>
+    <record id="bd_upazila_187" model="tori.bd.upazila">
+        <field name="name">Meherpur Sadar</field>
+        <field name="code">U0187</field>
+        <field name="source_id">187</field>
+        <field name="district_id" ref="bd_district_22"/>
+    </record>
+    <record id="bd_upazila_188" model="tori.bd.upazila">
+        <field name="name">Gangni</field>
+        <field name="code">U0188</field>
+        <field name="source_id">188</field>
+        <field name="district_id" ref="bd_district_22"/>
+    </record>
+    <record id="bd_upazila_189" model="tori.bd.upazila">
+        <field name="name">Narail Sadar</field>
+        <field name="code">U0189</field>
+        <field name="source_id">189</field>
+        <field name="district_id" ref="bd_district_23"/>
+    </record>
+    <record id="bd_upazila_190" model="tori.bd.upazila">
+        <field name="name">Lohagara</field>
+        <field name="code">U0190</field>
+        <field name="source_id">190</field>
+        <field name="district_id" ref="bd_district_23"/>
+    </record>
+    <record id="bd_upazila_191" model="tori.bd.upazila">
+        <field name="name">Kalia</field>
+        <field name="code">U0191</field>
+        <field name="source_id">191</field>
+        <field name="district_id" ref="bd_district_23"/>
+    </record>
+    <record id="bd_upazila_192" model="tori.bd.upazila">
+        <field name="name">Chuadanga Sadar</field>
+        <field name="code">U0192</field>
+        <field name="source_id">192</field>
+        <field name="district_id" ref="bd_district_24"/>
+    </record>
+    <record id="bd_upazila_193" model="tori.bd.upazila">
+        <field name="name">Alamdanga</field>
+        <field name="code">U0193</field>
+        <field name="source_id">193</field>
+        <field name="district_id" ref="bd_district_24"/>
+    </record>
+    <record id="bd_upazila_194" model="tori.bd.upazila">
+        <field name="name">Damurhuda</field>
+        <field name="code">U0194</field>
+        <field name="source_id">194</field>
+        <field name="district_id" ref="bd_district_24"/>
+    </record>
+    <record id="bd_upazila_195" model="tori.bd.upazila">
+        <field name="name">Jibannagar</field>
+        <field name="code">U0195</field>
+        <field name="source_id">195</field>
+        <field name="district_id" ref="bd_district_24"/>
+    </record>
+    <record id="bd_upazila_196" model="tori.bd.upazila">
+        <field name="name">Kushtia Sadar</field>
+        <field name="code">U0196</field>
+        <field name="source_id">196</field>
+        <field name="district_id" ref="bd_district_25"/>
+    </record>
+    <record id="bd_upazila_197" model="tori.bd.upazila">
+        <field name="name">Kumarkhali</field>
+        <field name="code">U0197</field>
+        <field name="source_id">197</field>
+        <field name="district_id" ref="bd_district_25"/>
+    </record>
+    <record id="bd_upazila_198" model="tori.bd.upazila">
+        <field name="name">Khoksa</field>
+        <field name="code">U0198</field>
+        <field name="source_id">198</field>
+        <field name="district_id" ref="bd_district_25"/>
+    </record>
+    <record id="bd_upazila_199" model="tori.bd.upazila">
+        <field name="name">Mirpur</field>
+        <field name="code">U0199</field>
+        <field name="source_id">199</field>
+        <field name="district_id" ref="bd_district_25"/>
+    </record>
+    <record id="bd_upazila_200" model="tori.bd.upazila">
+        <field name="name">Daulatpur</field>
+        <field name="code">U0200</field>
+        <field name="source_id">200</field>
+        <field name="district_id" ref="bd_district_25"/>
+    </record>
+    <record id="bd_upazila_201" model="tori.bd.upazila">
+        <field name="name">Bheramara</field>
+        <field name="code">U0201</field>
+        <field name="source_id">201</field>
+        <field name="district_id" ref="bd_district_25"/>
+    </record>
+    <record id="bd_upazila_202" model="tori.bd.upazila">
+        <field name="name">Shalikha</field>
+        <field name="code">U0202</field>
+        <field name="source_id">202</field>
+        <field name="district_id" ref="bd_district_26"/>
+    </record>
+    <record id="bd_upazila_203" model="tori.bd.upazila">
+        <field name="name">Sreepur</field>
+        <field name="code">U0203</field>
+        <field name="source_id">203</field>
+        <field name="district_id" ref="bd_district_26"/>
+    </record>
+    <record id="bd_upazila_204" model="tori.bd.upazila">
+        <field name="name">Magura Sadar</field>
+        <field name="code">U0204</field>
+        <field name="source_id">204</field>
+        <field name="district_id" ref="bd_district_26"/>
+    </record>
+    <record id="bd_upazila_205" model="tori.bd.upazila">
+        <field name="name">Mohammadpur</field>
+        <field name="code">U0205</field>
+        <field name="source_id">205</field>
+        <field name="district_id" ref="bd_district_26"/>
+    </record>
+    <record id="bd_upazila_206" model="tori.bd.upazila">
+        <field name="name">Paikgasa</field>
+        <field name="code">U0206</field>
+        <field name="source_id">206</field>
+        <field name="district_id" ref="bd_district_27"/>
+    </record>
+    <record id="bd_upazila_207" model="tori.bd.upazila">
+        <field name="name">Fultola</field>
+        <field name="code">U0207</field>
+        <field name="source_id">207</field>
+        <field name="district_id" ref="bd_district_27"/>
+    </record>
+    <record id="bd_upazila_208" model="tori.bd.upazila">
+        <field name="name">Digholia</field>
+        <field name="code">U0208</field>
+        <field name="source_id">208</field>
+        <field name="district_id" ref="bd_district_27"/>
+    </record>
+    <record id="bd_upazila_209" model="tori.bd.upazila">
+        <field name="name">Rupsha</field>
+        <field name="code">U0209</field>
+        <field name="source_id">209</field>
+        <field name="district_id" ref="bd_district_27"/>
+    </record>
+    <record id="bd_upazila_210" model="tori.bd.upazila">
+        <field name="name">Terokhada</field>
+        <field name="code">U0210</field>
+        <field name="source_id">210</field>
+        <field name="district_id" ref="bd_district_27"/>
+    </record>
+    <record id="bd_upazila_211" model="tori.bd.upazila">
+        <field name="name">Dumuria</field>
+        <field name="code">U0211</field>
+        <field name="source_id">211</field>
+        <field name="district_id" ref="bd_district_27"/>
+    </record>
+    <record id="bd_upazila_212" model="tori.bd.upazila">
+        <field name="name">Botiaghata</field>
+        <field name="code">U0212</field>
+        <field name="source_id">212</field>
+        <field name="district_id" ref="bd_district_27"/>
+    </record>
+    <record id="bd_upazila_213" model="tori.bd.upazila">
+        <field name="name">Dakop</field>
+        <field name="code">U0213</field>
+        <field name="source_id">213</field>
+        <field name="district_id" ref="bd_district_27"/>
+    </record>
+    <record id="bd_upazila_214" model="tori.bd.upazila">
+        <field name="name">Koyra</field>
+        <field name="code">U0214</field>
+        <field name="source_id">214</field>
+        <field name="district_id" ref="bd_district_27"/>
+    </record>
+    <record id="bd_upazila_215" model="tori.bd.upazila">
+        <field name="name">Fakirhat</field>
+        <field name="code">U0215</field>
+        <field name="source_id">215</field>
+        <field name="district_id" ref="bd_district_28"/>
+    </record>
+    <record id="bd_upazila_216" model="tori.bd.upazila">
+        <field name="name">Bagerhat Sadar</field>
+        <field name="code">U0216</field>
+        <field name="source_id">216</field>
+        <field name="district_id" ref="bd_district_28"/>
+    </record>
+    <record id="bd_upazila_217" model="tori.bd.upazila">
+        <field name="name">Mollahat</field>
+        <field name="code">U0217</field>
+        <field name="source_id">217</field>
+        <field name="district_id" ref="bd_district_28"/>
+    </record>
+    <record id="bd_upazila_218" model="tori.bd.upazila">
+        <field name="name">Sarankhola</field>
+        <field name="code">U0218</field>
+        <field name="source_id">218</field>
+        <field name="district_id" ref="bd_district_28"/>
+    </record>
+    <record id="bd_upazila_219" model="tori.bd.upazila">
+        <field name="name">Rampal</field>
+        <field name="code">U0219</field>
+        <field name="source_id">219</field>
+        <field name="district_id" ref="bd_district_28"/>
+    </record>
+    <record id="bd_upazila_220" model="tori.bd.upazila">
+        <field name="name">Morrelganj</field>
+        <field name="code">U0220</field>
+        <field name="source_id">220</field>
+        <field name="district_id" ref="bd_district_28"/>
+    </record>
+    <record id="bd_upazila_221" model="tori.bd.upazila">
+        <field name="name">Kachua</field>
+        <field name="code">U0221</field>
+        <field name="source_id">221</field>
+        <field name="district_id" ref="bd_district_28"/>
+    </record>
+    <record id="bd_upazila_222" model="tori.bd.upazila">
+        <field name="name">Mongla</field>
+        <field name="code">U0222</field>
+        <field name="source_id">222</field>
+        <field name="district_id" ref="bd_district_28"/>
+    </record>
+    <record id="bd_upazila_223" model="tori.bd.upazila">
+        <field name="name">Chitalmari</field>
+        <field name="code">U0223</field>
+        <field name="source_id">223</field>
+        <field name="district_id" ref="bd_district_28"/>
+    </record>
+    <record id="bd_upazila_224" model="tori.bd.upazila">
+        <field name="name">Jhenaidah Sadar</field>
+        <field name="code">U0224</field>
+        <field name="source_id">224</field>
+        <field name="district_id" ref="bd_district_29"/>
+    </record>
+    <record id="bd_upazila_225" model="tori.bd.upazila">
+        <field name="name">Shailkupa</field>
+        <field name="code">U0225</field>
+        <field name="source_id">225</field>
+        <field name="district_id" ref="bd_district_29"/>
+    </record>
+    <record id="bd_upazila_226" model="tori.bd.upazila">
+        <field name="name">Harinakundu</field>
+        <field name="code">U0226</field>
+        <field name="source_id">226</field>
+        <field name="district_id" ref="bd_district_29"/>
+    </record>
+    <record id="bd_upazila_227" model="tori.bd.upazila">
+        <field name="name">Kaliganj</field>
+        <field name="code">U0227</field>
+        <field name="source_id">227</field>
+        <field name="district_id" ref="bd_district_29"/>
+    </record>
+    <record id="bd_upazila_228" model="tori.bd.upazila">
+        <field name="name">Kotchandpur</field>
+        <field name="code">U0228</field>
+        <field name="source_id">228</field>
+        <field name="district_id" ref="bd_district_29"/>
+    </record>
+    <record id="bd_upazila_229" model="tori.bd.upazila">
+        <field name="name">Moheshpur</field>
+        <field name="code">U0229</field>
+        <field name="source_id">229</field>
+        <field name="district_id" ref="bd_district_29"/>
+    </record>
+    <record id="bd_upazila_230" model="tori.bd.upazila">
+        <field name="name">Jhalakathi Sadar</field>
+        <field name="code">U0230</field>
+        <field name="source_id">230</field>
+        <field name="district_id" ref="bd_district_30"/>
+    </record>
+    <record id="bd_upazila_231" model="tori.bd.upazila">
+        <field name="name">Kathalia</field>
+        <field name="code">U0231</field>
+        <field name="source_id">231</field>
+        <field name="district_id" ref="bd_district_30"/>
+    </record>
+    <record id="bd_upazila_232" model="tori.bd.upazila">
+        <field name="name">Nalchity</field>
+        <field name="code">U0232</field>
+        <field name="source_id">232</field>
+        <field name="district_id" ref="bd_district_30"/>
+    </record>
+    <record id="bd_upazila_233" model="tori.bd.upazila">
+        <field name="name">Rajapur</field>
+        <field name="code">U0233</field>
+        <field name="source_id">233</field>
+        <field name="district_id" ref="bd_district_30"/>
+    </record>
+    <record id="bd_upazila_234" model="tori.bd.upazila">
+        <field name="name">Bauphal</field>
+        <field name="code">U0234</field>
+        <field name="source_id">234</field>
+        <field name="district_id" ref="bd_district_31"/>
+    </record>
+    <record id="bd_upazila_235" model="tori.bd.upazila">
+        <field name="name">Patuakhali Sadar</field>
+        <field name="code">U0235</field>
+        <field name="source_id">235</field>
+        <field name="district_id" ref="bd_district_31"/>
+    </record>
+    <record id="bd_upazila_236" model="tori.bd.upazila">
+        <field name="name">Dumki</field>
+        <field name="code">U0236</field>
+        <field name="source_id">236</field>
+        <field name="district_id" ref="bd_district_31"/>
+    </record>
+    <record id="bd_upazila_237" model="tori.bd.upazila">
+        <field name="name">Dashmina</field>
+        <field name="code">U0237</field>
+        <field name="source_id">237</field>
+        <field name="district_id" ref="bd_district_31"/>
+    </record>
+    <record id="bd_upazila_238" model="tori.bd.upazila">
+        <field name="name">Kalapara</field>
+        <field name="code">U0238</field>
+        <field name="source_id">238</field>
+        <field name="district_id" ref="bd_district_31"/>
+    </record>
+    <record id="bd_upazila_239" model="tori.bd.upazila">
+        <field name="name">Mirzaganj</field>
+        <field name="code">U0239</field>
+        <field name="source_id">239</field>
+        <field name="district_id" ref="bd_district_31"/>
+    </record>
+    <record id="bd_upazila_240" model="tori.bd.upazila">
+        <field name="name">Galachipa</field>
+        <field name="code">U0240</field>
+        <field name="source_id">240</field>
+        <field name="district_id" ref="bd_district_31"/>
+    </record>
+    <record id="bd_upazila_241" model="tori.bd.upazila">
+        <field name="name">Rangabali</field>
+        <field name="code">U0241</field>
+        <field name="source_id">241</field>
+        <field name="district_id" ref="bd_district_31"/>
+    </record>
+    <record id="bd_upazila_242" model="tori.bd.upazila">
+        <field name="name">Pirojpur Sadar</field>
+        <field name="code">U0242</field>
+        <field name="source_id">242</field>
+        <field name="district_id" ref="bd_district_32"/>
+    </record>
+    <record id="bd_upazila_243" model="tori.bd.upazila">
+        <field name="name">Nazirpur</field>
+        <field name="code">U0243</field>
+        <field name="source_id">243</field>
+        <field name="district_id" ref="bd_district_32"/>
+    </record>
+    <record id="bd_upazila_244" model="tori.bd.upazila">
+        <field name="name">Kawkhali</field>
+        <field name="code">U0244</field>
+        <field name="source_id">244</field>
+        <field name="district_id" ref="bd_district_32"/>
+    </record>
+    <record id="bd_upazila_245" model="tori.bd.upazila">
+        <field name="name">Zianagar</field>
+        <field name="code">U0245</field>
+        <field name="source_id">245</field>
+        <field name="district_id" ref="bd_district_32"/>
+    </record>
+    <record id="bd_upazila_246" model="tori.bd.upazila">
+        <field name="name">Bhandaria</field>
+        <field name="code">U0246</field>
+        <field name="source_id">246</field>
+        <field name="district_id" ref="bd_district_32"/>
+    </record>
+    <record id="bd_upazila_247" model="tori.bd.upazila">
+        <field name="name">Mathbaria</field>
+        <field name="code">U0247</field>
+        <field name="source_id">247</field>
+        <field name="district_id" ref="bd_district_32"/>
+    </record>
+    <record id="bd_upazila_248" model="tori.bd.upazila">
+        <field name="name">Nesarabad</field>
+        <field name="code">U0248</field>
+        <field name="source_id">248</field>
+        <field name="district_id" ref="bd_district_32"/>
+    </record>
+    <record id="bd_upazila_249" model="tori.bd.upazila">
+        <field name="name">Barisal Sadar</field>
+        <field name="code">U0249</field>
+        <field name="source_id">249</field>
+        <field name="district_id" ref="bd_district_33"/>
+    </record>
+    <record id="bd_upazila_250" model="tori.bd.upazila">
+        <field name="name">Bakerganj</field>
+        <field name="code">U0250</field>
+        <field name="source_id">250</field>
+        <field name="district_id" ref="bd_district_33"/>
+    </record>
+    <record id="bd_upazila_251" model="tori.bd.upazila">
+        <field name="name">Babuganj</field>
+        <field name="code">U0251</field>
+        <field name="source_id">251</field>
+        <field name="district_id" ref="bd_district_33"/>
+    </record>
+    <record id="bd_upazila_252" model="tori.bd.upazila">
+        <field name="name">Wazirpur</field>
+        <field name="code">U0252</field>
+        <field name="source_id">252</field>
+        <field name="district_id" ref="bd_district_33"/>
+    </record>
+    <record id="bd_upazila_253" model="tori.bd.upazila">
+        <field name="name">Banaripara</field>
+        <field name="code">U0253</field>
+        <field name="source_id">253</field>
+        <field name="district_id" ref="bd_district_33"/>
+    </record>
+    <record id="bd_upazila_254" model="tori.bd.upazila">
+        <field name="name">Gournadi</field>
+        <field name="code">U0254</field>
+        <field name="source_id">254</field>
+        <field name="district_id" ref="bd_district_33"/>
+    </record>
+    <record id="bd_upazila_255" model="tori.bd.upazila">
+        <field name="name">Agailjhara</field>
+        <field name="code">U0255</field>
+        <field name="source_id">255</field>
+        <field name="district_id" ref="bd_district_33"/>
+    </record>
+    <record id="bd_upazila_256" model="tori.bd.upazila">
+        <field name="name">Mehendiganj</field>
+        <field name="code">U0256</field>
+        <field name="source_id">256</field>
+        <field name="district_id" ref="bd_district_33"/>
+    </record>
+    <record id="bd_upazila_257" model="tori.bd.upazila">
+        <field name="name">Muladi</field>
+        <field name="code">U0257</field>
+        <field name="source_id">257</field>
+        <field name="district_id" ref="bd_district_33"/>
+    </record>
+    <record id="bd_upazila_258" model="tori.bd.upazila">
+        <field name="name">Hizla</field>
+        <field name="code">U0258</field>
+        <field name="source_id">258</field>
+        <field name="district_id" ref="bd_district_33"/>
+    </record>
+    <record id="bd_upazila_259" model="tori.bd.upazila">
+        <field name="name">Bhola Sadar</field>
+        <field name="code">U0259</field>
+        <field name="source_id">259</field>
+        <field name="district_id" ref="bd_district_34"/>
+    </record>
+    <record id="bd_upazila_260" model="tori.bd.upazila">
+        <field name="name">Borhan Sddin</field>
+        <field name="code">U0260</field>
+        <field name="source_id">260</field>
+        <field name="district_id" ref="bd_district_34"/>
+    </record>
+    <record id="bd_upazila_261" model="tori.bd.upazila">
+        <field name="name">Charfesson</field>
+        <field name="code">U0261</field>
+        <field name="source_id">261</field>
+        <field name="district_id" ref="bd_district_34"/>
+    </record>
+    <record id="bd_upazila_262" model="tori.bd.upazila">
+        <field name="name">Doulatkhan</field>
+        <field name="code">U0262</field>
+        <field name="source_id">262</field>
+        <field name="district_id" ref="bd_district_34"/>
+    </record>
+    <record id="bd_upazila_263" model="tori.bd.upazila">
+        <field name="name">Monpura</field>
+        <field name="code">U0263</field>
+        <field name="source_id">263</field>
+        <field name="district_id" ref="bd_district_34"/>
+    </record>
+    <record id="bd_upazila_264" model="tori.bd.upazila">
+        <field name="name">Tazumuddin</field>
+        <field name="code">U0264</field>
+        <field name="source_id">264</field>
+        <field name="district_id" ref="bd_district_34"/>
+    </record>
+    <record id="bd_upazila_265" model="tori.bd.upazila">
+        <field name="name">Lalmohan</field>
+        <field name="code">U0265</field>
+        <field name="source_id">265</field>
+        <field name="district_id" ref="bd_district_34"/>
+    </record>
+    <record id="bd_upazila_266" model="tori.bd.upazila">
+        <field name="name">Amtali</field>
+        <field name="code">U0266</field>
+        <field name="source_id">266</field>
+        <field name="district_id" ref="bd_district_35"/>
+    </record>
+    <record id="bd_upazila_267" model="tori.bd.upazila">
+        <field name="name">Barguna Sadar</field>
+        <field name="code">U0267</field>
+        <field name="source_id">267</field>
+        <field name="district_id" ref="bd_district_35"/>
+    </record>
+    <record id="bd_upazila_268" model="tori.bd.upazila">
+        <field name="name">Betagi</field>
+        <field name="code">U0268</field>
+        <field name="source_id">268</field>
+        <field name="district_id" ref="bd_district_35"/>
+    </record>
+    <record id="bd_upazila_269" model="tori.bd.upazila">
+        <field name="name">Bamna</field>
+        <field name="code">U0269</field>
+        <field name="source_id">269</field>
+        <field name="district_id" ref="bd_district_35"/>
+    </record>
+    <record id="bd_upazila_270" model="tori.bd.upazila">
+        <field name="name">Pathorghata</field>
+        <field name="code">U0270</field>
+        <field name="source_id">270</field>
+        <field name="district_id" ref="bd_district_35"/>
+    </record>
+    <record id="bd_upazila_271" model="tori.bd.upazila">
+        <field name="name">Taltali</field>
+        <field name="code">U0271</field>
+        <field name="source_id">271</field>
+        <field name="district_id" ref="bd_district_35"/>
+    </record>
+    <record id="bd_upazila_272" model="tori.bd.upazila">
+        <field name="name">Balaganj</field>
+        <field name="code">U0272</field>
+        <field name="source_id">272</field>
+        <field name="district_id" ref="bd_district_36"/>
+    </record>
+    <record id="bd_upazila_273" model="tori.bd.upazila">
+        <field name="name">Beanibazar</field>
+        <field name="code">U0273</field>
+        <field name="source_id">273</field>
+        <field name="district_id" ref="bd_district_36"/>
+    </record>
+    <record id="bd_upazila_274" model="tori.bd.upazila">
+        <field name="name">Bishwanath</field>
+        <field name="code">U0274</field>
+        <field name="source_id">274</field>
+        <field name="district_id" ref="bd_district_36"/>
+    </record>
+    <record id="bd_upazila_275" model="tori.bd.upazila">
+        <field name="name">Companiganj</field>
+        <field name="code">U0275</field>
+        <field name="source_id">275</field>
+        <field name="district_id" ref="bd_district_36"/>
+    </record>
+    <record id="bd_upazila_276" model="tori.bd.upazila">
+        <field name="name">Fenchuganj</field>
+        <field name="code">U0276</field>
+        <field name="source_id">276</field>
+        <field name="district_id" ref="bd_district_36"/>
+    </record>
+    <record id="bd_upazila_277" model="tori.bd.upazila">
+        <field name="name">Golapganj</field>
+        <field name="code">U0277</field>
+        <field name="source_id">277</field>
+        <field name="district_id" ref="bd_district_36"/>
+    </record>
+    <record id="bd_upazila_278" model="tori.bd.upazila">
+        <field name="name">Gowainghat</field>
+        <field name="code">U0278</field>
+        <field name="source_id">278</field>
+        <field name="district_id" ref="bd_district_36"/>
+    </record>
+    <record id="bd_upazila_279" model="tori.bd.upazila">
+        <field name="name">Jaintiapur</field>
+        <field name="code">U0279</field>
+        <field name="source_id">279</field>
+        <field name="district_id" ref="bd_district_36"/>
+    </record>
+    <record id="bd_upazila_280" model="tori.bd.upazila">
+        <field name="name">Kanaighat</field>
+        <field name="code">U0280</field>
+        <field name="source_id">280</field>
+        <field name="district_id" ref="bd_district_36"/>
+    </record>
+    <record id="bd_upazila_281" model="tori.bd.upazila">
+        <field name="name">Sylhet Sadar</field>
+        <field name="code">U0281</field>
+        <field name="source_id">281</field>
+        <field name="district_id" ref="bd_district_36"/>
+    </record>
+    <record id="bd_upazila_282" model="tori.bd.upazila">
+        <field name="name">Zakiganj</field>
+        <field name="code">U0282</field>
+        <field name="source_id">282</field>
+        <field name="district_id" ref="bd_district_36"/>
+    </record>
+    <record id="bd_upazila_283" model="tori.bd.upazila">
+        <field name="name">Dakshinsurma</field>
+        <field name="code">U0283</field>
+        <field name="source_id">283</field>
+        <field name="district_id" ref="bd_district_36"/>
+    </record>
+    <record id="bd_upazila_284" model="tori.bd.upazila">
+        <field name="name">Osmaninagar</field>
+        <field name="code">U0284</field>
+        <field name="source_id">284</field>
+        <field name="district_id" ref="bd_district_36"/>
+    </record>
+    <record id="bd_upazila_285" model="tori.bd.upazila">
+        <field name="name">Barlekha</field>
+        <field name="code">U0285</field>
+        <field name="source_id">285</field>
+        <field name="district_id" ref="bd_district_37"/>
+    </record>
+    <record id="bd_upazila_286" model="tori.bd.upazila">
+        <field name="name">Kamolganj</field>
+        <field name="code">U0286</field>
+        <field name="source_id">286</field>
+        <field name="district_id" ref="bd_district_37"/>
+    </record>
+    <record id="bd_upazila_287" model="tori.bd.upazila">
+        <field name="name">Kulaura</field>
+        <field name="code">U0287</field>
+        <field name="source_id">287</field>
+        <field name="district_id" ref="bd_district_37"/>
+    </record>
+    <record id="bd_upazila_288" model="tori.bd.upazila">
+        <field name="name">Moulvibazar Sadar</field>
+        <field name="code">U0288</field>
+        <field name="source_id">288</field>
+        <field name="district_id" ref="bd_district_37"/>
+    </record>
+    <record id="bd_upazila_289" model="tori.bd.upazila">
+        <field name="name">Rajnagar</field>
+        <field name="code">U0289</field>
+        <field name="source_id">289</field>
+        <field name="district_id" ref="bd_district_37"/>
+    </record>
+    <record id="bd_upazila_290" model="tori.bd.upazila">
+        <field name="name">Sreemangal</field>
+        <field name="code">U0290</field>
+        <field name="source_id">290</field>
+        <field name="district_id" ref="bd_district_37"/>
+    </record>
+    <record id="bd_upazila_291" model="tori.bd.upazila">
+        <field name="name">Juri</field>
+        <field name="code">U0291</field>
+        <field name="source_id">291</field>
+        <field name="district_id" ref="bd_district_37"/>
+    </record>
+    <record id="bd_upazila_292" model="tori.bd.upazila">
+        <field name="name">Nabiganj</field>
+        <field name="code">U0292</field>
+        <field name="source_id">292</field>
+        <field name="district_id" ref="bd_district_38"/>
+    </record>
+    <record id="bd_upazila_293" model="tori.bd.upazila">
+        <field name="name">Bahubal</field>
+        <field name="code">U0293</field>
+        <field name="source_id">293</field>
+        <field name="district_id" ref="bd_district_38"/>
+    </record>
+    <record id="bd_upazila_294" model="tori.bd.upazila">
+        <field name="name">Ajmiriganj</field>
+        <field name="code">U0294</field>
+        <field name="source_id">294</field>
+        <field name="district_id" ref="bd_district_38"/>
+    </record>
+    <record id="bd_upazila_295" model="tori.bd.upazila">
+        <field name="name">Baniachong</field>
+        <field name="code">U0295</field>
+        <field name="source_id">295</field>
+        <field name="district_id" ref="bd_district_38"/>
+    </record>
+    <record id="bd_upazila_296" model="tori.bd.upazila">
+        <field name="name">Lakhai</field>
+        <field name="code">U0296</field>
+        <field name="source_id">296</field>
+        <field name="district_id" ref="bd_district_38"/>
+    </record>
+    <record id="bd_upazila_297" model="tori.bd.upazila">
+        <field name="name">Chunarughat</field>
+        <field name="code">U0297</field>
+        <field name="source_id">297</field>
+        <field name="district_id" ref="bd_district_38"/>
+    </record>
+    <record id="bd_upazila_298" model="tori.bd.upazila">
+        <field name="name">Habiganj Sadar</field>
+        <field name="code">U0298</field>
+        <field name="source_id">298</field>
+        <field name="district_id" ref="bd_district_38"/>
+    </record>
+    <record id="bd_upazila_299" model="tori.bd.upazila">
+        <field name="name">Madhabpur</field>
+        <field name="code">U0299</field>
+        <field name="source_id">299</field>
+        <field name="district_id" ref="bd_district_38"/>
+    </record>
+    <record id="bd_upazila_300" model="tori.bd.upazila">
+        <field name="name">Sunamganj Sadar</field>
+        <field name="code">U0300</field>
+        <field name="source_id">300</field>
+        <field name="district_id" ref="bd_district_39"/>
+    </record>
+    <record id="bd_upazila_301" model="tori.bd.upazila">
+        <field name="name">South Sunamganj</field>
+        <field name="code">U0301</field>
+        <field name="source_id">301</field>
+        <field name="district_id" ref="bd_district_39"/>
+    </record>
+    <record id="bd_upazila_302" model="tori.bd.upazila">
+        <field name="name">Bishwambarpur</field>
+        <field name="code">U0302</field>
+        <field name="source_id">302</field>
+        <field name="district_id" ref="bd_district_39"/>
+    </record>
+    <record id="bd_upazila_303" model="tori.bd.upazila">
+        <field name="name">Chhatak</field>
+        <field name="code">U0303</field>
+        <field name="source_id">303</field>
+        <field name="district_id" ref="bd_district_39"/>
+    </record>
+    <record id="bd_upazila_304" model="tori.bd.upazila">
+        <field name="name">Jagannathpur</field>
+        <field name="code">U0304</field>
+        <field name="source_id">304</field>
+        <field name="district_id" ref="bd_district_39"/>
+    </record>
+    <record id="bd_upazila_305" model="tori.bd.upazila">
+        <field name="name">Dowarabazar</field>
+        <field name="code">U0305</field>
+        <field name="source_id">305</field>
+        <field name="district_id" ref="bd_district_39"/>
+    </record>
+    <record id="bd_upazila_306" model="tori.bd.upazila">
+        <field name="name">Tahirpur</field>
+        <field name="code">U0306</field>
+        <field name="source_id">306</field>
+        <field name="district_id" ref="bd_district_39"/>
+    </record>
+    <record id="bd_upazila_307" model="tori.bd.upazila">
+        <field name="name">Dharmapasha</field>
+        <field name="code">U0307</field>
+        <field name="source_id">307</field>
+        <field name="district_id" ref="bd_district_39"/>
+    </record>
+    <record id="bd_upazila_308" model="tori.bd.upazila">
+        <field name="name">Jamalganj</field>
+        <field name="code">U0308</field>
+        <field name="source_id">308</field>
+        <field name="district_id" ref="bd_district_39"/>
+    </record>
+    <record id="bd_upazila_309" model="tori.bd.upazila">
+        <field name="name">Shalla</field>
+        <field name="code">U0309</field>
+        <field name="source_id">309</field>
+        <field name="district_id" ref="bd_district_39"/>
+    </record>
+    <record id="bd_upazila_310" model="tori.bd.upazila">
+        <field name="name">Derai</field>
+        <field name="code">U0310</field>
+        <field name="source_id">310</field>
+        <field name="district_id" ref="bd_district_39"/>
+    </record>
+    <record id="bd_upazila_311" model="tori.bd.upazila">
+        <field name="name">Belabo</field>
+        <field name="code">U0311</field>
+        <field name="source_id">311</field>
+        <field name="district_id" ref="bd_district_40"/>
+    </record>
+    <record id="bd_upazila_312" model="tori.bd.upazila">
+        <field name="name">Monohardi</field>
+        <field name="code">U0312</field>
+        <field name="source_id">312</field>
+        <field name="district_id" ref="bd_district_40"/>
+    </record>
+    <record id="bd_upazila_313" model="tori.bd.upazila">
+        <field name="name">Narsingdi Sadar</field>
+        <field name="code">U0313</field>
+        <field name="source_id">313</field>
+        <field name="district_id" ref="bd_district_40"/>
+    </record>
+    <record id="bd_upazila_314" model="tori.bd.upazila">
+        <field name="name">Palash</field>
+        <field name="code">U0314</field>
+        <field name="source_id">314</field>
+        <field name="district_id" ref="bd_district_40"/>
+    </record>
+    <record id="bd_upazila_315" model="tori.bd.upazila">
+        <field name="name">Raipura</field>
+        <field name="code">U0315</field>
+        <field name="source_id">315</field>
+        <field name="district_id" ref="bd_district_40"/>
+    </record>
+    <record id="bd_upazila_316" model="tori.bd.upazila">
+        <field name="name">Shibpur</field>
+        <field name="code">U0316</field>
+        <field name="source_id">316</field>
+        <field name="district_id" ref="bd_district_40"/>
+    </record>
+    <record id="bd_upazila_317" model="tori.bd.upazila">
+        <field name="name">Kaliganj</field>
+        <field name="code">U0317</field>
+        <field name="source_id">317</field>
+        <field name="district_id" ref="bd_district_41"/>
+    </record>
+    <record id="bd_upazila_318" model="tori.bd.upazila">
+        <field name="name">Kaliakair</field>
+        <field name="code">U0318</field>
+        <field name="source_id">318</field>
+        <field name="district_id" ref="bd_district_41"/>
+    </record>
+    <record id="bd_upazila_319" model="tori.bd.upazila">
+        <field name="name">Kapasia</field>
+        <field name="code">U0319</field>
+        <field name="source_id">319</field>
+        <field name="district_id" ref="bd_district_41"/>
+    </record>
+    <record id="bd_upazila_320" model="tori.bd.upazila">
+        <field name="name">Gazipur Sadar</field>
+        <field name="code">U0320</field>
+        <field name="source_id">320</field>
+        <field name="district_id" ref="bd_district_41"/>
+    </record>
+    <record id="bd_upazila_321" model="tori.bd.upazila">
+        <field name="name">Sreepur</field>
+        <field name="code">U0321</field>
+        <field name="source_id">321</field>
+        <field name="district_id" ref="bd_district_41"/>
+    </record>
+    <record id="bd_upazila_322" model="tori.bd.upazila">
+        <field name="name">Shariatpur Sadar</field>
+        <field name="code">U0322</field>
+        <field name="source_id">322</field>
+        <field name="district_id" ref="bd_district_42"/>
+    </record>
+    <record id="bd_upazila_323" model="tori.bd.upazila">
+        <field name="name">Naria</field>
+        <field name="code">U0323</field>
+        <field name="source_id">323</field>
+        <field name="district_id" ref="bd_district_42"/>
+    </record>
+    <record id="bd_upazila_324" model="tori.bd.upazila">
+        <field name="name">Zajira</field>
+        <field name="code">U0324</field>
+        <field name="source_id">324</field>
+        <field name="district_id" ref="bd_district_42"/>
+    </record>
+    <record id="bd_upazila_325" model="tori.bd.upazila">
+        <field name="name">Gosairhat</field>
+        <field name="code">U0325</field>
+        <field name="source_id">325</field>
+        <field name="district_id" ref="bd_district_42"/>
+    </record>
+    <record id="bd_upazila_326" model="tori.bd.upazila">
+        <field name="name">Bhedarganj</field>
+        <field name="code">U0326</field>
+        <field name="source_id">326</field>
+        <field name="district_id" ref="bd_district_42"/>
+    </record>
+    <record id="bd_upazila_327" model="tori.bd.upazila">
+        <field name="name">Damudya</field>
+        <field name="code">U0327</field>
+        <field name="source_id">327</field>
+        <field name="district_id" ref="bd_district_42"/>
+    </record>
+    <record id="bd_upazila_328" model="tori.bd.upazila">
+        <field name="name">Araihazar</field>
+        <field name="code">U0328</field>
+        <field name="source_id">328</field>
+        <field name="district_id" ref="bd_district_43"/>
+    </record>
+    <record id="bd_upazila_329" model="tori.bd.upazila">
+        <field name="name">Bandar</field>
+        <field name="code">U0329</field>
+        <field name="source_id">329</field>
+        <field name="district_id" ref="bd_district_43"/>
+    </record>
+    <record id="bd_upazila_330" model="tori.bd.upazila">
+        <field name="name">Narayanganj Sadar</field>
+        <field name="code">U0330</field>
+        <field name="source_id">330</field>
+        <field name="district_id" ref="bd_district_43"/>
+    </record>
+    <record id="bd_upazila_331" model="tori.bd.upazila">
+        <field name="name">Rupganj</field>
+        <field name="code">U0331</field>
+        <field name="source_id">331</field>
+        <field name="district_id" ref="bd_district_43"/>
+    </record>
+    <record id="bd_upazila_332" model="tori.bd.upazila">
+        <field name="name">Sonargaon</field>
+        <field name="code">U0332</field>
+        <field name="source_id">332</field>
+        <field name="district_id" ref="bd_district_43"/>
+    </record>
+    <record id="bd_upazila_333" model="tori.bd.upazila">
+        <field name="name">Basail</field>
+        <field name="code">U0333</field>
+        <field name="source_id">333</field>
+        <field name="district_id" ref="bd_district_44"/>
+    </record>
+    <record id="bd_upazila_334" model="tori.bd.upazila">
+        <field name="name">Bhuapur</field>
+        <field name="code">U0334</field>
+        <field name="source_id">334</field>
+        <field name="district_id" ref="bd_district_44"/>
+    </record>
+    <record id="bd_upazila_335" model="tori.bd.upazila">
+        <field name="name">Delduar</field>
+        <field name="code">U0335</field>
+        <field name="source_id">335</field>
+        <field name="district_id" ref="bd_district_44"/>
+    </record>
+    <record id="bd_upazila_336" model="tori.bd.upazila">
+        <field name="name">Ghatail</field>
+        <field name="code">U0336</field>
+        <field name="source_id">336</field>
+        <field name="district_id" ref="bd_district_44"/>
+    </record>
+    <record id="bd_upazila_337" model="tori.bd.upazila">
+        <field name="name">Gopalpur</field>
+        <field name="code">U0337</field>
+        <field name="source_id">337</field>
+        <field name="district_id" ref="bd_district_44"/>
+    </record>
+    <record id="bd_upazila_338" model="tori.bd.upazila">
+        <field name="name">Madhupur</field>
+        <field name="code">U0338</field>
+        <field name="source_id">338</field>
+        <field name="district_id" ref="bd_district_44"/>
+    </record>
+    <record id="bd_upazila_339" model="tori.bd.upazila">
+        <field name="name">Mirzapur</field>
+        <field name="code">U0339</field>
+        <field name="source_id">339</field>
+        <field name="district_id" ref="bd_district_44"/>
+    </record>
+    <record id="bd_upazila_340" model="tori.bd.upazila">
+        <field name="name">Nagarpur</field>
+        <field name="code">U0340</field>
+        <field name="source_id">340</field>
+        <field name="district_id" ref="bd_district_44"/>
+    </record>
+    <record id="bd_upazila_341" model="tori.bd.upazila">
+        <field name="name">Sakhipur</field>
+        <field name="code">U0341</field>
+        <field name="source_id">341</field>
+        <field name="district_id" ref="bd_district_44"/>
+    </record>
+    <record id="bd_upazila_342" model="tori.bd.upazila">
+        <field name="name">Tangail Sadar</field>
+        <field name="code">U0342</field>
+        <field name="source_id">342</field>
+        <field name="district_id" ref="bd_district_44"/>
+    </record>
+    <record id="bd_upazila_343" model="tori.bd.upazila">
+        <field name="name">Kalihati</field>
+        <field name="code">U0343</field>
+        <field name="source_id">343</field>
+        <field name="district_id" ref="bd_district_44"/>
+    </record>
+    <record id="bd_upazila_344" model="tori.bd.upazila">
+        <field name="name">Dhanbari</field>
+        <field name="code">U0344</field>
+        <field name="source_id">344</field>
+        <field name="district_id" ref="bd_district_44"/>
+    </record>
+    <record id="bd_upazila_345" model="tori.bd.upazila">
+        <field name="name">Itna</field>
+        <field name="code">U0345</field>
+        <field name="source_id">345</field>
+        <field name="district_id" ref="bd_district_45"/>
+    </record>
+    <record id="bd_upazila_346" model="tori.bd.upazila">
+        <field name="name">Katiadi</field>
+        <field name="code">U0346</field>
+        <field name="source_id">346</field>
+        <field name="district_id" ref="bd_district_45"/>
+    </record>
+    <record id="bd_upazila_347" model="tori.bd.upazila">
+        <field name="name">Bhairab</field>
+        <field name="code">U0347</field>
+        <field name="source_id">347</field>
+        <field name="district_id" ref="bd_district_45"/>
+    </record>
+    <record id="bd_upazila_348" model="tori.bd.upazila">
+        <field name="name">Tarail</field>
+        <field name="code">U0348</field>
+        <field name="source_id">348</field>
+        <field name="district_id" ref="bd_district_45"/>
+    </record>
+    <record id="bd_upazila_349" model="tori.bd.upazila">
+        <field name="name">Hossainpur</field>
+        <field name="code">U0349</field>
+        <field name="source_id">349</field>
+        <field name="district_id" ref="bd_district_45"/>
+    </record>
+    <record id="bd_upazila_350" model="tori.bd.upazila">
+        <field name="name">Pakundia</field>
+        <field name="code">U0350</field>
+        <field name="source_id">350</field>
+        <field name="district_id" ref="bd_district_45"/>
+    </record>
+    <record id="bd_upazila_351" model="tori.bd.upazila">
+        <field name="name">Kuliarchar</field>
+        <field name="code">U0351</field>
+        <field name="source_id">351</field>
+        <field name="district_id" ref="bd_district_45"/>
+    </record>
+    <record id="bd_upazila_352" model="tori.bd.upazila">
+        <field name="name">Kishoreganj Sadar</field>
+        <field name="code">U0352</field>
+        <field name="source_id">352</field>
+        <field name="district_id" ref="bd_district_45"/>
+    </record>
+    <record id="bd_upazila_353" model="tori.bd.upazila">
+        <field name="name">Karimgonj</field>
+        <field name="code">U0353</field>
+        <field name="source_id">353</field>
+        <field name="district_id" ref="bd_district_45"/>
+    </record>
+    <record id="bd_upazila_354" model="tori.bd.upazila">
+        <field name="name">Bajitpur</field>
+        <field name="code">U0354</field>
+        <field name="source_id">354</field>
+        <field name="district_id" ref="bd_district_45"/>
+    </record>
+    <record id="bd_upazila_355" model="tori.bd.upazila">
+        <field name="name">Austagram</field>
+        <field name="code">U0355</field>
+        <field name="source_id">355</field>
+        <field name="district_id" ref="bd_district_45"/>
+    </record>
+    <record id="bd_upazila_356" model="tori.bd.upazila">
+        <field name="name">Mithamoin</field>
+        <field name="code">U0356</field>
+        <field name="source_id">356</field>
+        <field name="district_id" ref="bd_district_45"/>
+    </record>
+    <record id="bd_upazila_357" model="tori.bd.upazila">
+        <field name="name">Nikli</field>
+        <field name="code">U0357</field>
+        <field name="source_id">357</field>
+        <field name="district_id" ref="bd_district_45"/>
+    </record>
+    <record id="bd_upazila_358" model="tori.bd.upazila">
+        <field name="name">Harirampur</field>
+        <field name="code">U0358</field>
+        <field name="source_id">358</field>
+        <field name="district_id" ref="bd_district_46"/>
+    </record>
+    <record id="bd_upazila_359" model="tori.bd.upazila">
+        <field name="name">Saturia</field>
+        <field name="code">U0359</field>
+        <field name="source_id">359</field>
+        <field name="district_id" ref="bd_district_46"/>
+    </record>
+    <record id="bd_upazila_360" model="tori.bd.upazila">
+        <field name="name">Manikganj Sadar</field>
+        <field name="code">U0360</field>
+        <field name="source_id">360</field>
+        <field name="district_id" ref="bd_district_46"/>
+    </record>
+    <record id="bd_upazila_361" model="tori.bd.upazila">
+        <field name="name">Gior</field>
+        <field name="code">U0361</field>
+        <field name="source_id">361</field>
+        <field name="district_id" ref="bd_district_46"/>
+    </record>
+    <record id="bd_upazila_362" model="tori.bd.upazila">
+        <field name="name">Shibaloy</field>
+        <field name="code">U0362</field>
+        <field name="source_id">362</field>
+        <field name="district_id" ref="bd_district_46"/>
+    </record>
+    <record id="bd_upazila_363" model="tori.bd.upazila">
+        <field name="name">Doulatpur</field>
+        <field name="code">U0363</field>
+        <field name="source_id">363</field>
+        <field name="district_id" ref="bd_district_46"/>
+    </record>
+    <record id="bd_upazila_364" model="tori.bd.upazila">
+        <field name="name">Singiar</field>
+        <field name="code">U0364</field>
+        <field name="source_id">364</field>
+        <field name="district_id" ref="bd_district_46"/>
+    </record>
+    <record id="bd_upazila_365" model="tori.bd.upazila">
+        <field name="name">Savar</field>
+        <field name="code">U0365</field>
+        <field name="source_id">365</field>
+        <field name="district_id" ref="bd_district_47"/>
+    </record>
+    <record id="bd_upazila_366" model="tori.bd.upazila">
+        <field name="name">Dhamrai</field>
+        <field name="code">U0366</field>
+        <field name="source_id">366</field>
+        <field name="district_id" ref="bd_district_47"/>
+    </record>
+    <record id="bd_upazila_367" model="tori.bd.upazila">
+        <field name="name">Keraniganj</field>
+        <field name="code">U0367</field>
+        <field name="source_id">367</field>
+        <field name="district_id" ref="bd_district_47"/>
+    </record>
+    <record id="bd_upazila_368" model="tori.bd.upazila">
+        <field name="name">Nawabganj</field>
+        <field name="code">U0368</field>
+        <field name="source_id">368</field>
+        <field name="district_id" ref="bd_district_47"/>
+    </record>
+    <record id="bd_upazila_369" model="tori.bd.upazila">
+        <field name="name">Dohar</field>
+        <field name="code">U0369</field>
+        <field name="source_id">369</field>
+        <field name="district_id" ref="bd_district_47"/>
+    </record>
+    <record id="bd_upazila_370" model="tori.bd.upazila">
+        <field name="name">Munshiganj Sadar</field>
+        <field name="code">U0370</field>
+        <field name="source_id">370</field>
+        <field name="district_id" ref="bd_district_48"/>
+    </record>
+    <record id="bd_upazila_371" model="tori.bd.upazila">
+        <field name="name">Sreenagar</field>
+        <field name="code">U0371</field>
+        <field name="source_id">371</field>
+        <field name="district_id" ref="bd_district_48"/>
+    </record>
+    <record id="bd_upazila_372" model="tori.bd.upazila">
+        <field name="name">Sirajdikhan</field>
+        <field name="code">U0372</field>
+        <field name="source_id">372</field>
+        <field name="district_id" ref="bd_district_48"/>
+    </record>
+    <record id="bd_upazila_373" model="tori.bd.upazila">
+        <field name="name">Louhajanj</field>
+        <field name="code">U0373</field>
+        <field name="source_id">373</field>
+        <field name="district_id" ref="bd_district_48"/>
+    </record>
+    <record id="bd_upazila_374" model="tori.bd.upazila">
+        <field name="name">Gajaria</field>
+        <field name="code">U0374</field>
+        <field name="source_id">374</field>
+        <field name="district_id" ref="bd_district_48"/>
+    </record>
+    <record id="bd_upazila_375" model="tori.bd.upazila">
+        <field name="name">Tongibari</field>
+        <field name="code">U0375</field>
+        <field name="source_id">375</field>
+        <field name="district_id" ref="bd_district_48"/>
+    </record>
+    <record id="bd_upazila_376" model="tori.bd.upazila">
+        <field name="name">Rajbari Sadar</field>
+        <field name="code">U0376</field>
+        <field name="source_id">376</field>
+        <field name="district_id" ref="bd_district_49"/>
+    </record>
+    <record id="bd_upazila_377" model="tori.bd.upazila">
+        <field name="name">Goalanda</field>
+        <field name="code">U0377</field>
+        <field name="source_id">377</field>
+        <field name="district_id" ref="bd_district_49"/>
+    </record>
+    <record id="bd_upazila_378" model="tori.bd.upazila">
+        <field name="name">Pangsa</field>
+        <field name="code">U0378</field>
+        <field name="source_id">378</field>
+        <field name="district_id" ref="bd_district_49"/>
+    </record>
+    <record id="bd_upazila_379" model="tori.bd.upazila">
+        <field name="name">Baliakandi</field>
+        <field name="code">U0379</field>
+        <field name="source_id">379</field>
+        <field name="district_id" ref="bd_district_49"/>
+    </record>
+    <record id="bd_upazila_380" model="tori.bd.upazila">
+        <field name="name">Kalukhali</field>
+        <field name="code">U0380</field>
+        <field name="source_id">380</field>
+        <field name="district_id" ref="bd_district_49"/>
+    </record>
+    <record id="bd_upazila_381" model="tori.bd.upazila">
+        <field name="name">Madaripur Sadar</field>
+        <field name="code">U0381</field>
+        <field name="source_id">381</field>
+        <field name="district_id" ref="bd_district_50"/>
+    </record>
+    <record id="bd_upazila_382" model="tori.bd.upazila">
+        <field name="name">Shibchar</field>
+        <field name="code">U0382</field>
+        <field name="source_id">382</field>
+        <field name="district_id" ref="bd_district_50"/>
+    </record>
+    <record id="bd_upazila_383" model="tori.bd.upazila">
+        <field name="name">Kalkini</field>
+        <field name="code">U0383</field>
+        <field name="source_id">383</field>
+        <field name="district_id" ref="bd_district_50"/>
+    </record>
+    <record id="bd_upazila_384" model="tori.bd.upazila">
+        <field name="name">Rajoir</field>
+        <field name="code">U0384</field>
+        <field name="source_id">384</field>
+        <field name="district_id" ref="bd_district_50"/>
+    </record>
+    <record id="bd_upazila_385" model="tori.bd.upazila">
+        <field name="name">Gopalganj Sadar</field>
+        <field name="code">U0385</field>
+        <field name="source_id">385</field>
+        <field name="district_id" ref="bd_district_51"/>
+    </record>
+    <record id="bd_upazila_386" model="tori.bd.upazila">
+        <field name="name">Kashiani</field>
+        <field name="code">U0386</field>
+        <field name="source_id">386</field>
+        <field name="district_id" ref="bd_district_51"/>
+    </record>
+    <record id="bd_upazila_387" model="tori.bd.upazila">
+        <field name="name">Tungipara</field>
+        <field name="code">U0387</field>
+        <field name="source_id">387</field>
+        <field name="district_id" ref="bd_district_51"/>
+    </record>
+    <record id="bd_upazila_388" model="tori.bd.upazila">
+        <field name="name">Kotalipara</field>
+        <field name="code">U0388</field>
+        <field name="source_id">388</field>
+        <field name="district_id" ref="bd_district_51"/>
+    </record>
+    <record id="bd_upazila_389" model="tori.bd.upazila">
+        <field name="name">Muksudpur</field>
+        <field name="code">U0389</field>
+        <field name="source_id">389</field>
+        <field name="district_id" ref="bd_district_51"/>
+    </record>
+    <record id="bd_upazila_390" model="tori.bd.upazila">
+        <field name="name">Faridpur Sadar</field>
+        <field name="code">U0390</field>
+        <field name="source_id">390</field>
+        <field name="district_id" ref="bd_district_52"/>
+    </record>
+    <record id="bd_upazila_391" model="tori.bd.upazila">
+        <field name="name">Alfadanga</field>
+        <field name="code">U0391</field>
+        <field name="source_id">391</field>
+        <field name="district_id" ref="bd_district_52"/>
+    </record>
+    <record id="bd_upazila_392" model="tori.bd.upazila">
+        <field name="name">Boalmari</field>
+        <field name="code">U0392</field>
+        <field name="source_id">392</field>
+        <field name="district_id" ref="bd_district_52"/>
+    </record>
+    <record id="bd_upazila_393" model="tori.bd.upazila">
+        <field name="name">Sadarpur</field>
+        <field name="code">U0393</field>
+        <field name="source_id">393</field>
+        <field name="district_id" ref="bd_district_52"/>
+    </record>
+    <record id="bd_upazila_394" model="tori.bd.upazila">
+        <field name="name">Nagarkanda</field>
+        <field name="code">U0394</field>
+        <field name="source_id">394</field>
+        <field name="district_id" ref="bd_district_52"/>
+    </record>
+    <record id="bd_upazila_395" model="tori.bd.upazila">
+        <field name="name">Bhanga</field>
+        <field name="code">U0395</field>
+        <field name="source_id">395</field>
+        <field name="district_id" ref="bd_district_52"/>
+    </record>
+    <record id="bd_upazila_396" model="tori.bd.upazila">
+        <field name="name">Charbhadrasan</field>
+        <field name="code">U0396</field>
+        <field name="source_id">396</field>
+        <field name="district_id" ref="bd_district_52"/>
+    </record>
+    <record id="bd_upazila_397" model="tori.bd.upazila">
+        <field name="name">Madhukhali</field>
+        <field name="code">U0397</field>
+        <field name="source_id">397</field>
+        <field name="district_id" ref="bd_district_52"/>
+    </record>
+    <record id="bd_upazila_398" model="tori.bd.upazila">
+        <field name="name">Saltha</field>
+        <field name="code">U0398</field>
+        <field name="source_id">398</field>
+        <field name="district_id" ref="bd_district_52"/>
+    </record>
+    <record id="bd_upazila_399" model="tori.bd.upazila">
+        <field name="name">Panchagarh Sadar</field>
+        <field name="code">U0399</field>
+        <field name="source_id">399</field>
+        <field name="district_id" ref="bd_district_53"/>
+    </record>
+    <record id="bd_upazila_400" model="tori.bd.upazila">
+        <field name="name">Debiganj</field>
+        <field name="code">U0400</field>
+        <field name="source_id">400</field>
+        <field name="district_id" ref="bd_district_53"/>
+    </record>
+    <record id="bd_upazila_401" model="tori.bd.upazila">
+        <field name="name">Boda</field>
+        <field name="code">U0401</field>
+        <field name="source_id">401</field>
+        <field name="district_id" ref="bd_district_53"/>
+    </record>
+    <record id="bd_upazila_402" model="tori.bd.upazila">
+        <field name="name">Atwari</field>
+        <field name="code">U0402</field>
+        <field name="source_id">402</field>
+        <field name="district_id" ref="bd_district_53"/>
+    </record>
+    <record id="bd_upazila_403" model="tori.bd.upazila">
+        <field name="name">Tetulia</field>
+        <field name="code">U0403</field>
+        <field name="source_id">403</field>
+        <field name="district_id" ref="bd_district_53"/>
+    </record>
+    <record id="bd_upazila_404" model="tori.bd.upazila">
+        <field name="name">Nawabganj</field>
+        <field name="code">U0404</field>
+        <field name="source_id">404</field>
+        <field name="district_id" ref="bd_district_54"/>
+    </record>
+    <record id="bd_upazila_405" model="tori.bd.upazila">
+        <field name="name">Birganj</field>
+        <field name="code">U0405</field>
+        <field name="source_id">405</field>
+        <field name="district_id" ref="bd_district_54"/>
+    </record>
+    <record id="bd_upazila_406" model="tori.bd.upazila">
+        <field name="name">Ghoraghat</field>
+        <field name="code">U0406</field>
+        <field name="source_id">406</field>
+        <field name="district_id" ref="bd_district_54"/>
+    </record>
+    <record id="bd_upazila_407" model="tori.bd.upazila">
+        <field name="name">Birampur</field>
+        <field name="code">U0407</field>
+        <field name="source_id">407</field>
+        <field name="district_id" ref="bd_district_54"/>
+    </record>
+    <record id="bd_upazila_408" model="tori.bd.upazila">
+        <field name="name">Parbatipur</field>
+        <field name="code">U0408</field>
+        <field name="source_id">408</field>
+        <field name="district_id" ref="bd_district_54"/>
+    </record>
+    <record id="bd_upazila_409" model="tori.bd.upazila">
+        <field name="name">Bochaganj</field>
+        <field name="code">U0409</field>
+        <field name="source_id">409</field>
+        <field name="district_id" ref="bd_district_54"/>
+    </record>
+    <record id="bd_upazila_410" model="tori.bd.upazila">
+        <field name="name">Kaharol</field>
+        <field name="code">U0410</field>
+        <field name="source_id">410</field>
+        <field name="district_id" ref="bd_district_54"/>
+    </record>
+    <record id="bd_upazila_411" model="tori.bd.upazila">
+        <field name="name">Fulbari</field>
+        <field name="code">U0411</field>
+        <field name="source_id">411</field>
+        <field name="district_id" ref="bd_district_54"/>
+    </record>
+    <record id="bd_upazila_412" model="tori.bd.upazila">
+        <field name="name">Dinajpur Sadar</field>
+        <field name="code">U0412</field>
+        <field name="source_id">412</field>
+        <field name="district_id" ref="bd_district_54"/>
+    </record>
+    <record id="bd_upazila_413" model="tori.bd.upazila">
+        <field name="name">Hakimpur</field>
+        <field name="code">U0413</field>
+        <field name="source_id">413</field>
+        <field name="district_id" ref="bd_district_54"/>
+    </record>
+    <record id="bd_upazila_414" model="tori.bd.upazila">
+        <field name="name">Khansama</field>
+        <field name="code">U0414</field>
+        <field name="source_id">414</field>
+        <field name="district_id" ref="bd_district_54"/>
+    </record>
+    <record id="bd_upazila_415" model="tori.bd.upazila">
+        <field name="name">Birol</field>
+        <field name="code">U0415</field>
+        <field name="source_id">415</field>
+        <field name="district_id" ref="bd_district_54"/>
+    </record>
+    <record id="bd_upazila_416" model="tori.bd.upazila">
+        <field name="name">Chirirbandar</field>
+        <field name="code">U0416</field>
+        <field name="source_id">416</field>
+        <field name="district_id" ref="bd_district_54"/>
+    </record>
+    <record id="bd_upazila_417" model="tori.bd.upazila">
+        <field name="name">Lalmonirhat Sadar</field>
+        <field name="code">U0417</field>
+        <field name="source_id">417</field>
+        <field name="district_id" ref="bd_district_55"/>
+    </record>
+    <record id="bd_upazila_418" model="tori.bd.upazila">
+        <field name="name">Kaliganj</field>
+        <field name="code">U0418</field>
+        <field name="source_id">418</field>
+        <field name="district_id" ref="bd_district_55"/>
+    </record>
+    <record id="bd_upazila_419" model="tori.bd.upazila">
+        <field name="name">Hatibandha</field>
+        <field name="code">U0419</field>
+        <field name="source_id">419</field>
+        <field name="district_id" ref="bd_district_55"/>
+    </record>
+    <record id="bd_upazila_420" model="tori.bd.upazila">
+        <field name="name">Patgram</field>
+        <field name="code">U0420</field>
+        <field name="source_id">420</field>
+        <field name="district_id" ref="bd_district_55"/>
+    </record>
+    <record id="bd_upazila_421" model="tori.bd.upazila">
+        <field name="name">Aditmari</field>
+        <field name="code">U0421</field>
+        <field name="source_id">421</field>
+        <field name="district_id" ref="bd_district_55"/>
+    </record>
+    <record id="bd_upazila_422" model="tori.bd.upazila">
+        <field name="name">Syedpur</field>
+        <field name="code">U0422</field>
+        <field name="source_id">422</field>
+        <field name="district_id" ref="bd_district_56"/>
+    </record>
+    <record id="bd_upazila_423" model="tori.bd.upazila">
+        <field name="name">Domar</field>
+        <field name="code">U0423</field>
+        <field name="source_id">423</field>
+        <field name="district_id" ref="bd_district_56"/>
+    </record>
+    <record id="bd_upazila_424" model="tori.bd.upazila">
+        <field name="name">Dimla</field>
+        <field name="code">U0424</field>
+        <field name="source_id">424</field>
+        <field name="district_id" ref="bd_district_56"/>
+    </record>
+    <record id="bd_upazila_425" model="tori.bd.upazila">
+        <field name="name">Jaldhaka</field>
+        <field name="code">U0425</field>
+        <field name="source_id">425</field>
+        <field name="district_id" ref="bd_district_56"/>
+    </record>
+    <record id="bd_upazila_426" model="tori.bd.upazila">
+        <field name="name">Kishorganj</field>
+        <field name="code">U0426</field>
+        <field name="source_id">426</field>
+        <field name="district_id" ref="bd_district_56"/>
+    </record>
+    <record id="bd_upazila_427" model="tori.bd.upazila">
+        <field name="name">Nilphamari Sadar</field>
+        <field name="code">U0427</field>
+        <field name="source_id">427</field>
+        <field name="district_id" ref="bd_district_56"/>
+    </record>
+    <record id="bd_upazila_428" model="tori.bd.upazila">
+        <field name="name">Sadullapur</field>
+        <field name="code">U0428</field>
+        <field name="source_id">428</field>
+        <field name="district_id" ref="bd_district_57"/>
+    </record>
+    <record id="bd_upazila_429" model="tori.bd.upazila">
+        <field name="name">Gaibandha Sadar</field>
+        <field name="code">U0429</field>
+        <field name="source_id">429</field>
+        <field name="district_id" ref="bd_district_57"/>
+    </record>
+    <record id="bd_upazila_430" model="tori.bd.upazila">
+        <field name="name">Palashbari</field>
+        <field name="code">U0430</field>
+        <field name="source_id">430</field>
+        <field name="district_id" ref="bd_district_57"/>
+    </record>
+    <record id="bd_upazila_431" model="tori.bd.upazila">
+        <field name="name">Saghata</field>
+        <field name="code">U0431</field>
+        <field name="source_id">431</field>
+        <field name="district_id" ref="bd_district_57"/>
+    </record>
+    <record id="bd_upazila_432" model="tori.bd.upazila">
+        <field name="name">Gobindaganj</field>
+        <field name="code">U0432</field>
+        <field name="source_id">432</field>
+        <field name="district_id" ref="bd_district_57"/>
+    </record>
+    <record id="bd_upazila_433" model="tori.bd.upazila">
+        <field name="name">Sundarganj</field>
+        <field name="code">U0433</field>
+        <field name="source_id">433</field>
+        <field name="district_id" ref="bd_district_57"/>
+    </record>
+    <record id="bd_upazila_434" model="tori.bd.upazila">
+        <field name="name">Phulchari</field>
+        <field name="code">U0434</field>
+        <field name="source_id">434</field>
+        <field name="district_id" ref="bd_district_57"/>
+    </record>
+    <record id="bd_upazila_435" model="tori.bd.upazila">
+        <field name="name">Thakurgaon Sadar</field>
+        <field name="code">U0435</field>
+        <field name="source_id">435</field>
+        <field name="district_id" ref="bd_district_58"/>
+    </record>
+    <record id="bd_upazila_436" model="tori.bd.upazila">
+        <field name="name">Pirganj</field>
+        <field name="code">U0436</field>
+        <field name="source_id">436</field>
+        <field name="district_id" ref="bd_district_58"/>
+    </record>
+    <record id="bd_upazila_437" model="tori.bd.upazila">
+        <field name="name">Ranisankail</field>
+        <field name="code">U0437</field>
+        <field name="source_id">437</field>
+        <field name="district_id" ref="bd_district_58"/>
+    </record>
+    <record id="bd_upazila_438" model="tori.bd.upazila">
+        <field name="name">Haripur</field>
+        <field name="code">U0438</field>
+        <field name="source_id">438</field>
+        <field name="district_id" ref="bd_district_58"/>
+    </record>
+    <record id="bd_upazila_439" model="tori.bd.upazila">
+        <field name="name">Baliadangi</field>
+        <field name="code">U0439</field>
+        <field name="source_id">439</field>
+        <field name="district_id" ref="bd_district_58"/>
+    </record>
+    <record id="bd_upazila_440" model="tori.bd.upazila">
+        <field name="name">Rangpur Sadar</field>
+        <field name="code">U0440</field>
+        <field name="source_id">440</field>
+        <field name="district_id" ref="bd_district_59"/>
+    </record>
+    <record id="bd_upazila_441" model="tori.bd.upazila">
+        <field name="name">Gangachara</field>
+        <field name="code">U0441</field>
+        <field name="source_id">441</field>
+        <field name="district_id" ref="bd_district_59"/>
+    </record>
+    <record id="bd_upazila_442" model="tori.bd.upazila">
+        <field name="name">Taragonj</field>
+        <field name="code">U0442</field>
+        <field name="source_id">442</field>
+        <field name="district_id" ref="bd_district_59"/>
+    </record>
+    <record id="bd_upazila_443" model="tori.bd.upazila">
+        <field name="name">Badargonj</field>
+        <field name="code">U0443</field>
+        <field name="source_id">443</field>
+        <field name="district_id" ref="bd_district_59"/>
+    </record>
+    <record id="bd_upazila_444" model="tori.bd.upazila">
+        <field name="name">Mithapukur</field>
+        <field name="code">U0444</field>
+        <field name="source_id">444</field>
+        <field name="district_id" ref="bd_district_59"/>
+    </record>
+    <record id="bd_upazila_445" model="tori.bd.upazila">
+        <field name="name">Pirgonj</field>
+        <field name="code">U0445</field>
+        <field name="source_id">445</field>
+        <field name="district_id" ref="bd_district_59"/>
+    </record>
+    <record id="bd_upazila_446" model="tori.bd.upazila">
+        <field name="name">Kaunia</field>
+        <field name="code">U0446</field>
+        <field name="source_id">446</field>
+        <field name="district_id" ref="bd_district_59"/>
+    </record>
+    <record id="bd_upazila_447" model="tori.bd.upazila">
+        <field name="name">Pirgacha</field>
+        <field name="code">U0447</field>
+        <field name="source_id">447</field>
+        <field name="district_id" ref="bd_district_59"/>
+    </record>
+    <record id="bd_upazila_448" model="tori.bd.upazila">
+        <field name="name">Kurigram Sadar</field>
+        <field name="code">U0448</field>
+        <field name="source_id">448</field>
+        <field name="district_id" ref="bd_district_60"/>
+    </record>
+    <record id="bd_upazila_449" model="tori.bd.upazila">
+        <field name="name">Nageshwari</field>
+        <field name="code">U0449</field>
+        <field name="source_id">449</field>
+        <field name="district_id" ref="bd_district_60"/>
+    </record>
+    <record id="bd_upazila_450" model="tori.bd.upazila">
+        <field name="name">Bhurungamari</field>
+        <field name="code">U0450</field>
+        <field name="source_id">450</field>
+        <field name="district_id" ref="bd_district_60"/>
+    </record>
+    <record id="bd_upazila_451" model="tori.bd.upazila">
+        <field name="name">Phulbari</field>
+        <field name="code">U0451</field>
+        <field name="source_id">451</field>
+        <field name="district_id" ref="bd_district_60"/>
+    </record>
+    <record id="bd_upazila_452" model="tori.bd.upazila">
+        <field name="name">Rajarhat</field>
+        <field name="code">U0452</field>
+        <field name="source_id">452</field>
+        <field name="district_id" ref="bd_district_60"/>
+    </record>
+    <record id="bd_upazila_453" model="tori.bd.upazila">
+        <field name="name">Ulipur</field>
+        <field name="code">U0453</field>
+        <field name="source_id">453</field>
+        <field name="district_id" ref="bd_district_60"/>
+    </record>
+    <record id="bd_upazila_454" model="tori.bd.upazila">
+        <field name="name">Chilmari</field>
+        <field name="code">U0454</field>
+        <field name="source_id">454</field>
+        <field name="district_id" ref="bd_district_60"/>
+    </record>
+    <record id="bd_upazila_455" model="tori.bd.upazila">
+        <field name="name">Rowmari</field>
+        <field name="code">U0455</field>
+        <field name="source_id">455</field>
+        <field name="district_id" ref="bd_district_60"/>
+    </record>
+    <record id="bd_upazila_456" model="tori.bd.upazila">
+        <field name="name">Charrajibpur</field>
+        <field name="code">U0456</field>
+        <field name="source_id">456</field>
+        <field name="district_id" ref="bd_district_60"/>
+    </record>
+    <record id="bd_upazila_457" model="tori.bd.upazila">
+        <field name="name">Sherpur Sadar</field>
+        <field name="code">U0457</field>
+        <field name="source_id">457</field>
+        <field name="district_id" ref="bd_district_61"/>
+    </record>
+    <record id="bd_upazila_458" model="tori.bd.upazila">
+        <field name="name">Nalitabari</field>
+        <field name="code">U0458</field>
+        <field name="source_id">458</field>
+        <field name="district_id" ref="bd_district_61"/>
+    </record>
+    <record id="bd_upazila_459" model="tori.bd.upazila">
+        <field name="name">Sreebordi</field>
+        <field name="code">U0459</field>
+        <field name="source_id">459</field>
+        <field name="district_id" ref="bd_district_61"/>
+    </record>
+    <record id="bd_upazila_460" model="tori.bd.upazila">
+        <field name="name">Nokla</field>
+        <field name="code">U0460</field>
+        <field name="source_id">460</field>
+        <field name="district_id" ref="bd_district_61"/>
+    </record>
+    <record id="bd_upazila_461" model="tori.bd.upazila">
+        <field name="name">Jhenaigati</field>
+        <field name="code">U0461</field>
+        <field name="source_id">461</field>
+        <field name="district_id" ref="bd_district_61"/>
+    </record>
+    <record id="bd_upazila_462" model="tori.bd.upazila">
+        <field name="name">Fulbaria</field>
+        <field name="code">U0462</field>
+        <field name="source_id">462</field>
+        <field name="district_id" ref="bd_district_62"/>
+    </record>
+    <record id="bd_upazila_463" model="tori.bd.upazila">
+        <field name="name">Trishal</field>
+        <field name="code">U0463</field>
+        <field name="source_id">463</field>
+        <field name="district_id" ref="bd_district_62"/>
+    </record>
+    <record id="bd_upazila_464" model="tori.bd.upazila">
+        <field name="name">Bhaluka</field>
+        <field name="code">U0464</field>
+        <field name="source_id">464</field>
+        <field name="district_id" ref="bd_district_62"/>
+    </record>
+    <record id="bd_upazila_465" model="tori.bd.upazila">
+        <field name="name">Muktagacha</field>
+        <field name="code">U0465</field>
+        <field name="source_id">465</field>
+        <field name="district_id" ref="bd_district_62"/>
+    </record>
+    <record id="bd_upazila_466" model="tori.bd.upazila">
+        <field name="name">Mymensingh Sadar</field>
+        <field name="code">U0466</field>
+        <field name="source_id">466</field>
+        <field name="district_id" ref="bd_district_62"/>
+    </record>
+    <record id="bd_upazila_467" model="tori.bd.upazila">
+        <field name="name">Dhobaura</field>
+        <field name="code">U0467</field>
+        <field name="source_id">467</field>
+        <field name="district_id" ref="bd_district_62"/>
+    </record>
+    <record id="bd_upazila_468" model="tori.bd.upazila">
+        <field name="name">Phulpur</field>
+        <field name="code">U0468</field>
+        <field name="source_id">468</field>
+        <field name="district_id" ref="bd_district_62"/>
+    </record>
+    <record id="bd_upazila_469" model="tori.bd.upazila">
+        <field name="name">Haluaghat</field>
+        <field name="code">U0469</field>
+        <field name="source_id">469</field>
+        <field name="district_id" ref="bd_district_62"/>
+    </record>
+    <record id="bd_upazila_470" model="tori.bd.upazila">
+        <field name="name">Gouripur</field>
+        <field name="code">U0470</field>
+        <field name="source_id">470</field>
+        <field name="district_id" ref="bd_district_62"/>
+    </record>
+    <record id="bd_upazila_471" model="tori.bd.upazila">
+        <field name="name">Gafargaon</field>
+        <field name="code">U0471</field>
+        <field name="source_id">471</field>
+        <field name="district_id" ref="bd_district_62"/>
+    </record>
+    <record id="bd_upazila_472" model="tori.bd.upazila">
+        <field name="name">Iswarganj</field>
+        <field name="code">U0472</field>
+        <field name="source_id">472</field>
+        <field name="district_id" ref="bd_district_62"/>
+    </record>
+    <record id="bd_upazila_473" model="tori.bd.upazila">
+        <field name="name">Nandail</field>
+        <field name="code">U0473</field>
+        <field name="source_id">473</field>
+        <field name="district_id" ref="bd_district_62"/>
+    </record>
+    <record id="bd_upazila_474" model="tori.bd.upazila">
+        <field name="name">Tarakanda</field>
+        <field name="code">U0474</field>
+        <field name="source_id">474</field>
+        <field name="district_id" ref="bd_district_62"/>
+    </record>
+    <record id="bd_upazila_475" model="tori.bd.upazila">
+        <field name="name">Jamalpur Sadar</field>
+        <field name="code">U0475</field>
+        <field name="source_id">475</field>
+        <field name="district_id" ref="bd_district_63"/>
+    </record>
+    <record id="bd_upazila_476" model="tori.bd.upazila">
+        <field name="name">Melandah</field>
+        <field name="code">U0476</field>
+        <field name="source_id">476</field>
+        <field name="district_id" ref="bd_district_63"/>
+    </record>
+    <record id="bd_upazila_477" model="tori.bd.upazila">
+        <field name="name">Islampur</field>
+        <field name="code">U0477</field>
+        <field name="source_id">477</field>
+        <field name="district_id" ref="bd_district_63"/>
+    </record>
+    <record id="bd_upazila_478" model="tori.bd.upazila">
+        <field name="name">Dewangonj</field>
+        <field name="code">U0478</field>
+        <field name="source_id">478</field>
+        <field name="district_id" ref="bd_district_63"/>
+    </record>
+    <record id="bd_upazila_479" model="tori.bd.upazila">
+        <field name="name">Sarishabari</field>
+        <field name="code">U0479</field>
+        <field name="source_id">479</field>
+        <field name="district_id" ref="bd_district_63"/>
+    </record>
+    <record id="bd_upazila_480" model="tori.bd.upazila">
+        <field name="name">Madarganj</field>
+        <field name="code">U0480</field>
+        <field name="source_id">480</field>
+        <field name="district_id" ref="bd_district_63"/>
+    </record>
+    <record id="bd_upazila_481" model="tori.bd.upazila">
+        <field name="name">Bokshiganj</field>
+        <field name="code">U0481</field>
+        <field name="source_id">481</field>
+        <field name="district_id" ref="bd_district_63"/>
+    </record>
+    <record id="bd_upazila_482" model="tori.bd.upazila">
+        <field name="name">Barhatta</field>
+        <field name="code">U0482</field>
+        <field name="source_id">482</field>
+        <field name="district_id" ref="bd_district_64"/>
+    </record>
+    <record id="bd_upazila_483" model="tori.bd.upazila">
+        <field name="name">Durgapur</field>
+        <field name="code">U0483</field>
+        <field name="source_id">483</field>
+        <field name="district_id" ref="bd_district_64"/>
+    </record>
+    <record id="bd_upazila_484" model="tori.bd.upazila">
+        <field name="name">Kendua</field>
+        <field name="code">U0484</field>
+        <field name="source_id">484</field>
+        <field name="district_id" ref="bd_district_64"/>
+    </record>
+    <record id="bd_upazila_485" model="tori.bd.upazila">
+        <field name="name">Atpara</field>
+        <field name="code">U0485</field>
+        <field name="source_id">485</field>
+        <field name="district_id" ref="bd_district_64"/>
+    </record>
+    <record id="bd_upazila_486" model="tori.bd.upazila">
+        <field name="name">Madan</field>
+        <field name="code">U0486</field>
+        <field name="source_id">486</field>
+        <field name="district_id" ref="bd_district_64"/>
+    </record>
+    <record id="bd_upazila_487" model="tori.bd.upazila">
+        <field name="name">Khaliajuri</field>
+        <field name="code">U0487</field>
+        <field name="source_id">487</field>
+        <field name="district_id" ref="bd_district_64"/>
+    </record>
+    <record id="bd_upazila_488" model="tori.bd.upazila">
+        <field name="name">Kalmakanda</field>
+        <field name="code">U0488</field>
+        <field name="source_id">488</field>
+        <field name="district_id" ref="bd_district_64"/>
+    </record>
+    <record id="bd_upazila_489" model="tori.bd.upazila">
+        <field name="name">Mohongonj</field>
+        <field name="code">U0489</field>
+        <field name="source_id">489</field>
+        <field name="district_id" ref="bd_district_64"/>
+    </record>
+    <record id="bd_upazila_490" model="tori.bd.upazila">
+        <field name="name">Purbadhala</field>
+        <field name="code">U0490</field>
+        <field name="source_id">490</field>
+        <field name="district_id" ref="bd_district_64"/>
+    </record>
+    <record id="bd_upazila_491" model="tori.bd.upazila">
+        <field name="name">Netrokona Sadar</field>
+        <field name="code">U0491</field>
+        <field name="source_id">491</field>
+        <field name="district_id" ref="bd_district_64"/>
+    </record>
+    <record id="bd_upazila_492" model="tori.bd.upazila">
+        <field name="name">Eidgaon</field>
+        <field name="code">U0492</field>
+        <field name="source_id">492</field>
+        <field name="district_id" ref="bd_district_9"/>
+    </record>
+    <record id="bd_upazila_493" model="tori.bd.upazila">
+        <field name="name">Madhyanagar</field>
+        <field name="code">U0493</field>
+        <field name="source_id">493</field>
+        <field name="district_id" ref="bd_district_39"/>
+    </record>
+    <record id="bd_upazila_494" model="tori.bd.upazila">
+        <field name="name">Dasar</field>
+        <field name="code">U0494</field>
+        <field name="source_id">494</field>
+        <field name="district_id" ref="bd_district_50"/>
+    </record>
+</odoo>

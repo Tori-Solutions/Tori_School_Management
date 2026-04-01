@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_marksheet_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <h2>Marksheet</h2>
+                <p>
+                    <strong>Student:</strong>
+                    <span t-field="doc.enrollment_id.student_id"/>
+                </p>
+                <p>
+                    <strong>Term:</strong>
+                    <span t-field="doc.term_id"/>
+                </p>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Marks</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="doc.subject_result_ids" t-as="line">
+                            <td>
+                                <span t-field="line.subject_id"/>
+                            </td>
+                            <td>
+                                <span t-field="line.marks"/>
+                            </td>
+                            <td>
+                                <span t-field="line.total_marks"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>
+                    <strong>Percentage:</strong>
+                    <span t-field="doc.percentage"/>
+                </p>
+                <p>
+                    <strong>GPA:</strong>
+                    <span t-field="doc.gpa"/>
+                </p>
+                <p>
+                    <strong>Grade:</strong>
+                    <span t-field="doc.grade_letter"/>
+                </p>
+            </div>
+        </t>
+    </template>
+
+    <record id="action_report_marksheet" model="ir.actions.report">
+        <field name="name">Marksheet</field>
+        <field name="model">tori.marksheet</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tori_school_management.report_marksheet_document</field>
+        <field name="report_file">tori_school_management.report_marksheet_document</field>
+    </record>
+</odoo>
+

@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tori_demo_session_2026" model="tori.session">
+        <field name="name">2026-2027 Session</field>
+        <field name="start_date">2026-04-01</field>
+        <field name="end_date">2027-03-31</field>
+        <field name="state">in_progress</field>
+        <field name="branch_id" ref="base.main_company"/>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_demo_academic_year_2026" model="tori.academic.year">
+        <field name="title">AY 2026-27</field>
+        <field name="session_id" ref="tori_demo_session_2026"/>
+        <field name="start_date">2026-04-01</field>
+        <field name="end_date">2027-03-31</field>
+    </record>
+
+    <record id="tori_demo_term_1" model="tori.term">
+        <field name="name">Term 1</field>
+        <field name="academic_year_id" ref="tori_demo_academic_year_2026"/>
+        <field name="weightage">40.0</field>
+        <field name="start_date">2026-04-01</field>
+        <field name="end_date">2026-09-30</field>
+    </record>
+
+    <record id="tori_demo_term_2" model="tori.term">
+        <field name="name">Term 2</field>
+        <field name="academic_year_id" ref="tori_demo_academic_year_2026"/>
+        <field name="weightage">60.0</field>
+        <field name="start_date">2026-10-01</field>
+        <field name="end_date">2027-03-31</field>
+    </record>
+
+    <record id="tori_demo_grade_scale" model="tori.grade.scale">
+        <field name="name">Standard A-F Scale</field>
+        <field name="is_gpa_based">True</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_demo_grade_line_a" model="tori.grade.line">
+        <field name="grade_scale_id" ref="tori_demo_grade_scale"/>
+        <field name="grade_letter">A</field>
+        <field name="min_percent">90.0</field>
+        <field name="max_percent">100.0</field>
+        <field name="gpa_points">4.0</field>
+    </record>
+
+    <record id="tori_demo_grade_line_b" model="tori.grade.line">
+        <field name="grade_scale_id" ref="tori_demo_grade_scale"/>
+        <field name="grade_letter">B</field>
+        <field name="min_percent">80.0</field>
+        <field name="max_percent">89.99</field>
+        <field name="gpa_points">3.0</field>
+    </record>
+
+    <record id="tori_demo_grade_line_c" model="tori.grade.line">
+        <field name="grade_scale_id" ref="tori_demo_grade_scale"/>
+        <field name="grade_letter">C</field>
+        <field name="min_percent">70.0</field>
+        <field name="max_percent">79.99</field>
+        <field name="gpa_points">2.0</field>
+    </record>
+
+    <record id="tori_demo_grade_line_d" model="tori.grade.line">
+        <field name="grade_scale_id" ref="tori_demo_grade_scale"/>
+        <field name="grade_letter">D</field>
+        <field name="min_percent">60.0</field>
+        <field name="max_percent">69.99</field>
+        <field name="gpa_points">1.0</field>
+    </record>
+
+    <record id="tori_demo_grade_line_f" model="tori.grade.line">
+        <field name="grade_scale_id" ref="tori_demo_grade_scale"/>
+        <field name="grade_letter">F</field>
+        <field name="min_percent">0.0</field>
+        <field name="max_percent">59.99</field>
+        <field name="gpa_points">0.0</field>
+    </record>
+
+    <record id="tori_demo_subject_math" model="tori.subject">
+        <field name="name">Mathematics</field>
+        <field name="code">MATH-101</field>
+        <field name="credit_value">3.0</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_demo_subject_english" model="tori.subject">
+        <field name="name">English</field>
+        <field name="code">ENG-101</field>
+        <field name="credit_value">2.0</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_demo_subject_science" model="tori.subject">
+        <field name="name">Science</field>
+        <field name="code">SCI-101</field>
+        <field name="credit_value">3.0</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_demo_class_grade_10" model="tori.class">
+        <field name="name">Grade 10</field>
+        <field name="session_id" ref="tori_demo_session_2026"/>
+        <field name="teacher_id" ref="base.user_admin"/>
+        <field name="grade_scale_id" ref="tori_demo_grade_scale"/>
+        <field name="subject_ids" eval="[(6, 0, [ref('tori_demo_subject_math'), ref('tori_demo_subject_english'), ref('tori_demo_subject_science')])]"/>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_demo_section_a" model="tori.section">
+        <field name="name">A</field>
+        <field name="class_id" ref="tori_demo_class_grade_10"/>
+    </record>
+
+    <record id="tori_demo_section_b" model="tori.section">
+        <field name="name">B</field>
+        <field name="class_id" ref="tori_demo_class_grade_10"/>
+    </record>
+
+    <record id="tori_demo_room_101" model="tori.room">
+        <field name="name">Room 101</field>
+        <field name="capacity">40</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_demo_fee_structure_grade_10" model="tori.fee.structure">
+        <field name="name">Grade 10 Standard Fees</field>
+        <field name="class_id" ref="tori_demo_class_grade_10"/>
+        <field name="session_id" ref="tori_demo_session_2026"/>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_demo_fee_element_tuition" model="tori.fee.element">
+        <field name="fee_structure_id" ref="tori_demo_fee_structure_grade_10"/>
+        <field name="name">Monthly Tuition</field>
+        <field name="amount">450.0</field>
+        <field name="fee_type">recurring</field>
+        <field name="recurring_interval">monthly</field>
+        <field name="late_fee_amount">25.0</field>
+        <field name="grace_days">7</field>
+    </record>
+
+    <record id="tori_demo_fee_element_transport" model="tori.fee.element">
+        <field name="fee_structure_id" ref="tori_demo_fee_structure_grade_10"/>
+        <field name="name">Transport Fee</field>
+        <field name="amount">80.0</field>
+        <field name="fee_type">recurring</field>
+        <field name="recurring_interval">monthly</field>
+        <field name="late_fee_amount">10.0</field>
+        <field name="grace_days">5</field>
+    </record>
+
+    <record id="tori_demo_parent_johnson" model="res.partner">
+        <field name="name">Martha Johnson</field>
+        <field name="email">martha.johnson@example.com</field>
+        <field name="phone">+1-555-0101</field>
+        <field name="is_parent">True</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_demo_parent_owens" model="res.partner">
+        <field name="name">Daniel Owens</field>
+        <field name="email">daniel.owens@example.com</field>
+        <field name="phone">+1-555-0102</field>
+        <field name="is_parent">True</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_demo_student_alex" model="res.partner">
+        <field name="name">Alex Johnson</field>
+        <field name="email">alex.johnson@student.example.com</field>
+        <field name="phone">+1-555-1001</field>
+        <field name="barcode">STU-1001</field>
+        <field name="is_student">True</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_demo_student_emma" model="res.partner">
+        <field name="name">Emma Owens</field>
+        <field name="email">emma.owens@student.example.com</field>
+        <field name="phone">+1-555-1002</field>
+        <field name="barcode">STU-1002</field>
+        <field name="is_student">True</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_demo_student_liam" model="res.partner">
+        <field name="name">Liam Carter</field>
+        <field name="email">liam.carter@student.example.com</field>
+        <field name="phone">+1-555-1003</field>
+        <field name="barcode">STU-1003</field>
+        <field name="is_student">True</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_demo_application_1" model="tori.student.application">
+        <field name="student_name">Alex Johnson</field>
+        <field name="email">alex.johnson@student.example.com</field>
+        <field name="phone">+1-555-1001</field>
+        <field name="session_id" ref="tori_demo_session_2026"/>
+        <field name="class_id" ref="tori_demo_class_grade_10"/>
+        <field name="section_id" ref="tori_demo_section_a"/>
+        <field name="student_partner_id" ref="tori_demo_student_alex"/>
+        <field name="state">enrolled</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_demo_application_2" model="tori.student.application">
+        <field name="student_name">Emma Owens</field>
+        <field name="email">emma.owens@student.example.com</field>
+        <field name="phone">+1-555-1002</field>
+        <field name="session_id" ref="tori_demo_session_2026"/>
+        <field name="class_id" ref="tori_demo_class_grade_10"/>
+        <field name="section_id" ref="tori_demo_section_b"/>
+        <field name="student_partner_id" ref="tori_demo_student_emma"/>
+        <field name="state">confirm</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_demo_enrollment_alex" model="tori.enrollment">
+        <field name="student_id" ref="tori_demo_student_alex"/>
+        <field name="session_id" ref="tori_demo_session_2026"/>
+        <field name="academic_year_id" ref="tori_demo_academic_year_2026"/>
+        <field name="class_id" ref="tori_demo_class_grade_10"/>
+        <field name="section_id" ref="tori_demo_section_a"/>
+        <field name="subject_ids" eval="[(6, 0, [ref('tori_demo_subject_math'), ref('tori_demo_subject_english'), ref('tori_demo_subject_science')])]"/>
+        <field name="fee_structure_id" ref="tori_demo_fee_structure_grade_10"/>
+        <field name="parent_id" ref="tori_demo_parent_johnson"/>
+        <field name="state">active</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_demo_enrollment_emma" model="tori.enrollment">
+        <field name="student_id" ref="tori_demo_student_emma"/>
+        <field name="session_id" ref="tori_demo_session_2026"/>
+        <field name="academic_year_id" ref="tori_demo_academic_year_2026"/>
+        <field name="class_id" ref="tori_demo_class_grade_10"/>
+        <field name="section_id" ref="tori_demo_section_b"/>
+        <field name="subject_ids" eval="[(6, 0, [ref('tori_demo_subject_math'), ref('tori_demo_subject_english')])]"/>
+        <field name="fee_structure_id" ref="tori_demo_fee_structure_grade_10"/>
+        <field name="parent_id" ref="tori_demo_parent_owens"/>
+        <field name="state">active</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_demo_enrollment_liam" model="tori.enrollment">
+        <field name="student_id" ref="tori_demo_student_liam"/>
+        <field name="session_id" ref="tori_demo_session_2026"/>
+        <field name="academic_year_id" ref="tori_demo_academic_year_2026"/>
+        <field name="class_id" ref="tori_demo_class_grade_10"/>
+        <field name="section_id" ref="tori_demo_section_a"/>
+        <field name="subject_ids" eval="[(6, 0, [ref('tori_demo_subject_english'), ref('tori_demo_subject_science')])]"/>
+        <field name="fee_structure_id" ref="tori_demo_fee_structure_grade_10"/>
+        <field name="state">active</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_demo_assignment_math" model="tori.assignment">
+        <field name="name">Algebra Homework 1</field>
+        <field name="assignment_type">homework</field>
+        <field name="class_id" ref="tori_demo_class_grade_10"/>
+        <field name="section_id" ref="tori_demo_section_a"/>
+        <field name="subject_id" ref="tori_demo_subject_math"/>
+        <field name="teacher_id" ref="base.user_admin"/>
+        <field name="term_id" ref="tori_demo_term_1"/>
+        <field name="deadline">2026-05-10 16:00:00</field>
+        <field name="total_marks">100.0</field>
+        <field name="instructions" type="html">
+            <p>Solve worksheet questions 1-15 with full steps.</p>
+        </field>
+    </record>
+
+    <record id="tori_demo_submission_alex" model="tori.submission">
+        <field name="assignment_id" ref="tori_demo_assignment_math"/>
+        <field name="enrollment_id" ref="tori_demo_enrollment_alex"/>
+        <field name="submission_date">2026-05-09 14:00:00</field>
+        <field name="marks">92.0</field>
+        <field name="feedback">Excellent work.</field>
+        <field name="state">graded</field>
+    </record>
+
+    <record id="tori_demo_submission_liam" model="tori.submission">
+        <field name="assignment_id" ref="tori_demo_assignment_math"/>
+        <field name="enrollment_id" ref="tori_demo_enrollment_liam"/>
+        <field name="submission_date">2026-05-10 09:30:00</field>
+        <field name="marks">74.0</field>
+        <field name="feedback">Review linear equations chapter.</field>
+        <field name="state">graded</field>
+    </record>
+
+    <record id="tori_demo_attendance_alex" model="tori.student.attendance">
+        <field name="enrollment_id" ref="tori_demo_enrollment_alex"/>
+        <field name="date">2026-05-01</field>
+        <field name="status">present</field>
+        <field name="method">manual</field>
+        <field name="marked_by" ref="base.user_admin"/>
+    </record>
+
+    <record id="tori_demo_attendance_emma" model="tori.student.attendance">
+        <field name="enrollment_id" ref="tori_demo_enrollment_emma"/>
+        <field name="date">2026-05-01</field>
+        <field name="status">late</field>
+        <field name="method">manual</field>
+        <field name="marked_by" ref="base.user_admin"/>
+    </record>
+
+    <record id="tori_demo_attendance_liam" model="tori.student.attendance">
+        <field name="enrollment_id" ref="tori_demo_enrollment_liam"/>
+        <field name="date">2026-05-01</field>
+        <field name="status">absent</field>
+        <field name="method">manual</field>
+        <field name="marked_by" ref="base.user_admin"/>
+    </record>
+
+    <record id="tori_demo_fee_slip_alex" model="tori.fee.slip">
+        <field name="enrollment_id" ref="tori_demo_enrollment_alex"/>
+        <field name="fee_structure_id" ref="tori_demo_fee_structure_grade_10"/>
+        <field name="fee_element_id" ref="tori_demo_fee_element_tuition"/>
+        <field name="amount">450.0</field>
+        <field name="due_date">2026-05-05</field>
+        <field name="state">paid</field>
+        <field name="paid_date">2026-05-04</field>
+    </record>
+
+    <record id="tori_demo_fee_slip_emma" model="tori.fee.slip">
+        <field name="enrollment_id" ref="tori_demo_enrollment_emma"/>
+        <field name="fee_structure_id" ref="tori_demo_fee_structure_grade_10"/>
+        <field name="fee_element_id" ref="tori_demo_fee_element_tuition"/>
+        <field name="amount">450.0</field>
+        <field name="due_date">2026-05-05</field>
+        <field name="state">sent</field>
+    </record>
+
+    <record id="tori_demo_fee_slip_liam" model="tori.fee.slip">
+        <field name="enrollment_id" ref="tori_demo_enrollment_liam"/>
+        <field name="fee_structure_id" ref="tori_demo_fee_structure_grade_10"/>
+        <field name="fee_element_id" ref="tori_demo_fee_element_transport"/>
+        <field name="amount">80.0</field>
+        <field name="due_date">2026-05-07</field>
+        <field name="late_fee_applied">10.0</field>
+        <field name="state">overdue</field>
+    </record>
+
+    <record id="tori_demo_book_algebra" model="tori.library.book">
+        <field name="name">Foundations of Algebra</field>
+        <field name="isbn">978-0-12-345678-9</field>
+        <field name="author">K. Carter</field>
+        <field name="total_copies">8</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_demo_book_issue_alex" model="tori.book.issue">
+        <field name="book_id" ref="tori_demo_book_algebra"/>
+        <field name="student_id" ref="tori_demo_student_alex"/>
+        <field name="issued_by" ref="base.user_admin"/>
+        <field name="issue_date">2026-05-02</field>
+        <field name="due_date">2026-05-16</field>
+        <field name="state">issued</field>
+        <field name="barcode_method">True</field>
+    </record>
+
+    <record id="tori_demo_vehicle_1" model="tori.vehicle">
+        <field name="name">School Bus 01</field>
+        <field name="reg_number">TSM-1001</field>
+        <field name="capacity">45</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_demo_driver_1" model="tori.driver">
+        <field name="name">George Miller</field>
+        <field name="license_no">DRV-55431</field>
+        <field name="phone">+1-555-3001</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_demo_route_north" model="tori.transport.route">
+        <field name="name">North Route</field>
+        <field name="vehicle_id" ref="tori_demo_vehicle_1"/>
+        <field name="driver_id" ref="tori_demo_driver_1"/>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_demo_stop_maple" model="tori.transport.stop">
+        <field name="name">Maple Street</field>
+        <field name="route_id" ref="tori_demo_route_north"/>
+        <field name="sequence">1</field>
+        <field name="arrival_time">7.2</field>
+    </record>
+
+    <record id="tori_demo_stop_oak" model="tori.transport.stop">
+        <field name="name">Oak Avenue</field>
+        <field name="route_id" ref="tori_demo_route_north"/>
+        <field name="sequence">2</field>
+        <field name="arrival_time">7.5</field>
+    </record>
+
+    <record id="tori_demo_student_transport_alex" model="tori.student.transport">
+        <field name="enrollment_id" ref="tori_demo_enrollment_alex"/>
+        <field name="route_id" ref="tori_demo_route_north"/>
+        <field name="stop_id" ref="tori_demo_stop_maple"/>
+        <field name="trip_type">both</field>
+        <field name="trip_attendance">present</field>
+        <field name="trip_date">2026-05-01</field>
+    </record>
+
+    <record id="tori_demo_student_transport_emma" model="tori.student.transport">
+        <field name="enrollment_id" ref="tori_demo_enrollment_emma"/>
+        <field name="route_id" ref="tori_demo_route_north"/>
+        <field name="stop_id" ref="tori_demo_stop_oak"/>
+        <field name="trip_type">pickup</field>
+        <field name="trip_attendance">present</field>
+        <field name="trip_date">2026-05-01</field>
+    </record>
+
+    <record id="tori_demo_announcement" model="tori.announcement">
+        <field name="title">Mid-Term Exams Start Next Week</field>
+        <field name="body" type="html">
+            <p>Please review the published exam timetable and reporting instructions.</p>
+        </field>
+        <field name="date">2026-06-10</field>
+        <field name="audience">all</field>
+        <field name="session_id" ref="tori_demo_session_2026"/>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_demo_marksheet_alex" model="tori.marksheet">
+        <field name="enrollment_id" ref="tori_demo_enrollment_alex"/>
+        <field name="term_id" ref="tori_demo_term_1"/>
+    </record>
+
+    <record id="tori_demo_result_alex_math" model="tori.subject.result">
+        <field name="marksheet_id" ref="tori_demo_marksheet_alex"/>
+        <field name="subject_id" ref="tori_demo_subject_math"/>
+        <field name="marks">91.0</field>
+        <field name="total_marks">100.0</field>
+    </record>
+
+    <record id="tori_demo_result_alex_english" model="tori.subject.result">
+        <field name="marksheet_id" ref="tori_demo_marksheet_alex"/>
+        <field name="subject_id" ref="tori_demo_subject_english"/>
+        <field name="marks">84.0</field>
+        <field name="total_marks">100.0</field>
+    </record>
+
+    <record id="tori_demo_id_design" model="tori.id.card.design">
+        <field name="name">Default Student Card</field>
+        <field name="orientation">horizontal</field>
+        <field name="template_html" type="html">
+            <div>
+                <strong>Student Card</strong>
+            </div>
+        </field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tori_demo_id_card_alex" model="tori.id.card">
+        <field name="enrollment_id" ref="tori_demo_enrollment_alex"/>
+        <field name="design_id" ref="tori_demo_id_design"/>
+    </record>
+
+    <record id="tori_demo_id_card_emma" model="tori.id.card">
+        <field name="enrollment_id" ref="tori_demo_enrollment_emma"/>
+        <field name="design_id" ref="tori_demo_id_design"/>
+    </record>
+</odoo>

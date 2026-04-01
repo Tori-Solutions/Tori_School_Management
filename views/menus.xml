@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_tori_school_root" name="Education" sequence="10" web_icon="tori_school_management,static/description/icon.png" groups="base.group_user"/>
+
+    <menuitem id="menu_tori_school_setup" name="Setup" parent="menu_tori_school_root" sequence="10"/>
+    <menuitem id="menu_tori_school_admission" name="Admissions" parent="menu_tori_school_root" sequence="20"/>
+    <menuitem id="menu_tori_school_academics" name="Academics" parent="menu_tori_school_root" sequence="30"/>
+    <menuitem id="menu_tori_school_finance" name="Finance" parent="menu_tori_school_root" sequence="40"/>
+    <menuitem id="menu_tori_school_library" name="Library" parent="menu_tori_school_root" sequence="50"/>
+    <menuitem id="menu_tori_school_transport" name="Transport" parent="menu_tori_school_root" sequence="60"/>
+    <menuitem id="menu_tori_school_reports" name="Reports" parent="menu_tori_school_root" sequence="70"/>
+</odoo>
+
