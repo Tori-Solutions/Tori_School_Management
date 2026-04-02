@@ -270,8 +270,12 @@
                 <h3>Application Status</h3>
                 <form method="get" action="/edu/application/status" class="mb-3">
                     <input type="text" name="reference" t-att-value="reference" placeholder="Application Ref" class="form-control mb-2"/>
+                    <input type="text" name="guardian_phone" t-att-value="guardian_phone" placeholder="Guardian Mobile Number" class="form-control mb-2"/>
                     <button type="submit" class="btn btn-primary">Check</button>
                 </form>
+                <t t-if="reference and not guardian_phone">
+                    <div class="alert alert-warning" role="alert">Enter the guardian mobile number used on the application to verify status.</div>
+                </t>
                 <t t-if="application">
                     <p>
                         <strong>Reference:</strong>
@@ -282,7 +286,7 @@
                         <span t-esc="application.state"/>
                     </p>
                 </t>
-                <t t-elif="reference">
+                <t t-elif="reference and guardian_phone">
                     <p>No application found.</p>
                 </t>
             </div>

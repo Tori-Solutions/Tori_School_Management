@@ -3,9 +3,9 @@
     'version': '4.6.1',
     'category': 'Education',
     'summary': 'Complete school and college management - admissions, classes, attendance, fees, transport',
-    'author': 'Your Name',
+    'author': 'Tori Solutions Ltd',
     'depends': [
-        'base', 'mail', 'portal', 'website', 'account', 'hr', 'web',
+        'base', 'mail', 'portal', 'website', 'account', 'hr', 'web', 'base_automation',
     ],
     'data': [
         'security/security.xml',
@@ -14,7 +14,6 @@
         'data/mail_templates.xml',
         'data/bd_location_data.xml',
         'data/application_stage_data.xml',
-        'data/test_assets.xml',
         'data/application_stage_backfill.xml',
         'views/menus.xml',
         'views/session_views.xml',
@@ -41,6 +40,9 @@
         'website/templates/portal_templates.xml',
         'website/templates/portal_navigation.xml',
         'website/website_pages.xml',
+    ],
+    'demo': [
+        'data/test_assets.xml',
     ],
     'assets': {
         'web.assets_backend': [

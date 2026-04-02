@@ -81,10 +81,13 @@ class ToriFeeSlip(models.Model):
             element = slip.fee_element_id
             grace_days = element.grace_days if element else 0
             if slip.due_date and (today - slip.due_date).days > grace_days:
-                slip.state = 'overdue'
+                values = {'state': 'overdue'}
                 if element and element.late_fee_amount and not slip.late_fee_applied:
-                    slip.late_fee_applied = element.late_fee_amount
-                    slip.amount += element.late_fee_amount
+                    values.update({
+                        'late_fee_applied': element.late_fee_amount,
+                        'amount': slip.amount + element.late_fee_amount,
+                    })
+                slip.write(values)
 
     @api.model
     def cron_generate_recurring_slips(self):
@@ -93,23 +96,40 @@ class ToriFeeSlip(models.Model):
             ('state', '=', 'active'),
             ('fee_structure_id', '!=', False),
         ])
+
+        recurring_element_ids = enrollments.mapped('fee_structure_id.fee_element_ids').filtered(
+            lambda element: element.fee_type == 'recurring'
+        )
+        existing_keys = set()
+        if enrollments and recurring_element_ids:
+            existing_slips = self.search([
+                ('enrollment_id', 'in', enrollments.ids),
+                ('fee_element_id', 'in', recurring_element_ids.ids),
+                ('due_date', '>=', today),
+                ('state', 'in', ['draft', 'sent', 'overdue']),
+            ])
+            existing_keys = {
+                (slip.enrollment_id.id, slip.fee_element_id.id)
+                for slip in existing_slips
+            }
+
+        create_vals = []
         for enrollment in enrollments:
             for element in enrollment.fee_structure_id.fee_element_ids.filtered(lambda e: e.fee_type == 'recurring'):
-                existing = self.search([
-                    ('enrollment_id', '=', enrollment.id),
-                    ('fee_element_id', '=', element.id),
-                    ('due_date', '>=', today),
-                    ('state', 'in', ['draft', 'sent', 'overdue']),
-                ], limit=1)
-                if existing:
+                key = (enrollment.id, element.id)
+                if key in existing_keys:
                     continue
-                self.create({
+                create_vals.append({
                     'enrollment_id': enrollment.id,
                     'fee_structure_id': enrollment.fee_structure_id.id,
                     'fee_element_id': element.id,
                     'amount': enrollment._get_prorated_amount(element.amount),
                     'due_date': today,
                 })
+                existing_keys.add(key)
+
+        if create_vals:
+            self.create(create_vals)
 
 
 class ToriEnrollmentFeeHook(models.Model):

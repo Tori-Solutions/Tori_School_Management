@@ -53,11 +53,47 @@ class ToriEnrollment(models.Model):
     company_id = fields.Many2one('res.company', default=lambda self: self.env.company, required=True)
 
     def _compute_counts(self):
+        attendance_counts = {
+            enrollment.id: count
+            for enrollment, count in self.env['tori.student.attendance']._read_group(
+                [('enrollment_id', 'in', self.ids)],
+                ['enrollment_id'],
+                ['__count'],
+            )
+            if enrollment
+        }
+        fee_slip_counts = {
+            enrollment.id: count
+            for enrollment, count in self.env['tori.fee.slip']._read_group(
+                [('enrollment_id', 'in', self.ids)],
+                ['enrollment_id'],
+                ['__count'],
+            )
+            if enrollment
+        }
+        marksheet_counts = {
+            enrollment.id: count
+            for enrollment, count in self.env['tori.marksheet']._read_group(
+                [('enrollment_id', 'in', self.ids)],
+                ['enrollment_id'],
+                ['__count'],
+            )
+            if enrollment
+        }
+        submission_counts = {
+            enrollment.id: count
+            for enrollment, count in self.env['tori.submission']._read_group(
+                [('enrollment_id', 'in', self.ids)],
+                ['enrollment_id'],
+                ['__count'],
+            )
+            if enrollment
+        }
         for rec in self:
-            rec.attendance_count = len(rec.attendance_ids)
-            rec.fee_slip_count = len(rec.fee_slip_ids)
-            rec.marksheet_count = len(rec.marksheet_ids)
-            rec.submission_count = len(rec.submission_ids)
+            rec.attendance_count = attendance_counts.get(rec.id, 0)
+            rec.fee_slip_count = fee_slip_counts.get(rec.id, 0)
+            rec.marksheet_count = marksheet_counts.get(rec.id, 0)
+            rec.submission_count = submission_counts.get(rec.id, 0)
 
     def action_view_attendance(self):
         return {
@@ -137,6 +173,9 @@ class ToriEnrollment(models.Model):
                 rec.portal_access_granted = True
 
     def action_revoke_parent_portal_access(self):
+        portal_group = self.env.ref('base.group_portal')
         for rec in self:
+            if rec.parent_id and rec.parent_id.user_ids:
+                rec.parent_id.user_ids.write({'groups_id': [(3, portal_group.id)]})
             rec.portal_access_granted = False
 

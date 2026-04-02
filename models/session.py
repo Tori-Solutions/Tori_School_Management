@@ -25,40 +25,81 @@ class ToriSession(models.Model):
     today_assignment_count = fields.Integer(compute='_compute_dashboard_metrics', readonly=True)
 
     def _compute_dashboard_metrics(self):
-        application_count = 0
-        enrollment_count = 0
-        student_count = 0
-        faculty_count = 0
         today = fields.Date.context_today(self)
-        assignment_count = 0
+        session_ids = self.ids
+        company_ids = self.mapped('company_id').ids
 
-        try:
-            application_count = self.env['tori.student.application'].search_count([])
-        except AccessError:
-            pass
-        try:
-            enrollment_count = self.env['tori.enrollment'].search_count([])
-        except AccessError:
-            pass
-        try:
-            student_count = self.env['res.partner'].search_count([('is_student', '=', True)])
-        except AccessError:
-            pass
-        try:
-            faculty_count = self.env['res.users'].search_count([])
-        except AccessError:
-            pass
-        try:
-            assignment_count = self.env['tori.assignment'].search_count([('deadline', '>=', today)])
-        except AccessError:
-            pass
+        application_counts = {}
+        enrollment_counts = {}
+        student_counts = {}
+        faculty_counts = {}
+        assignment_counts = {}
+
+        if session_ids:
+            try:
+                application_counts = {
+                    session.id: count
+                    for session, count in self.env['tori.student.application']._read_group(
+                        [('session_id', 'in', session_ids)],
+                        ['session_id'],
+                        ['__count'],
+                    )
+                    if session
+                }
+            except AccessError:
+                application_counts = {}
+
+            try:
+                enrollment_counts = {
+                    session.id: count
+                    for session, count in self.env['tori.enrollment']._read_group(
+                        [('session_id', 'in', session_ids)],
+                        ['session_id'],
+                        ['__count'],
+                    )
+                    if session
+                }
+                for session, student, _count in self.env['tori.enrollment']._read_group(
+                    [('session_id', 'in', session_ids)],
+                    ['session_id', 'student_id'],
+                    ['__count'],
+                ):
+                    if session and student:
+                        student_counts[session.id] = student_counts.get(session.id, 0) + 1
+            except AccessError:
+                enrollment_counts = {}
+                student_counts = {}
+
+            try:
+                faculty_counts = {
+                    company.id: count
+                    for company, count in self.env['hr.employee']._read_group(
+                        [('is_teacher', '=', True), ('company_id', 'in', company_ids)],
+                        ['company_id'],
+                        ['__count'],
+                    )
+                    if company
+                }
+            except AccessError:
+                faculty_counts = {}
+
+            try:
+                assignments = self.env['tori.assignment'].search([
+                    ('class_id.session_id', 'in', session_ids),
+                    ('deadline', '>=', today),
+                ])
+                for assignment in assignments:
+                    session_id = assignment.class_id.session_id.id
+                    assignment_counts[session_id] = assignment_counts.get(session_id, 0) + 1
+            except AccessError:
+                assignment_counts = {}
 
         for rec in self:
-            rec.total_application_count = application_count
-            rec.total_enrollment_count = enrollment_count
-            rec.total_student_count = student_count
-            rec.total_faculty_count = faculty_count
-            rec.today_assignment_count = assignment_count
+            rec.total_application_count = application_counts.get(rec.id, 0)
+            rec.total_enrollment_count = enrollment_counts.get(rec.id, 0)
+            rec.total_student_count = student_counts.get(rec.id, 0)
+            rec.total_faculty_count = faculty_counts.get(rec.company_id.id, 0)
+            rec.today_assignment_count = assignment_counts.get(rec.id, 0)
 
     @api.constrains('start_date', 'end_date')
     def _check_dates(self):

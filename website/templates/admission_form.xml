@@ -29,6 +29,9 @@
                 <t t-if="request.params.get('error') == 'photo_too_large'">
                     <div class="alert alert-danger" role="alert">Student photo must be 2MB or less.</div>
                 </t>
+                <t t-if="request.params.get('error') == 'invalid_file_type'">
+                    <div class="alert alert-danger" role="alert">Student photo must be a JPG, PNG, GIF, or WEBP image.</div>
+                </t>
                 <t t-if="request.params.get('error') == 'duplicate_application'">
                     <div class="alert alert-danger" role="alert">
                         Duplicate application blocked. A record already exists for this Date of Birth + Guardian Phone + Class + Session.
@@ -39,6 +42,10 @@
 
                 <form action="/admission/submit" method="post" enctype="multipart/form-data" class="tori-admission-form">
                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="d-none" aria-hidden="true">
+                        <label for="admission_website">Website</label>
+                        <input id="admission_website" type="text" name="website" tabindex="-1" autocomplete="off"/>
+                    </div>
 
                     <section class="tori-adm-section mb-3">
                         <div class="tori-adm-section-title bg-primary-subtle">Student's Primary Info</div>

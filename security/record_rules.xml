@@ -1,5 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="rule_admission_enquiry_company" model="ir.rule">
+        <field name="name">Admission Enquiry Company</field>
+        <field name="model_id" ref="model_tori_admission_enquiry"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_student_application_company" model="ir.rule">
+        <field name="name">Student Application Company</field>
+        <field name="model_id" ref="model_tori_student_application"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_announcement_company" model="ir.rule">
+        <field name="name">Announcement Company</field>
+        <field name="model_id" ref="model_tori_announcement"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_application_stage_company" model="ir.rule">
+        <field name="name">Application Stage Company</field>
+        <field name="model_id" ref="model_tori_application_stage"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_assignment_company" model="ir.rule">
+        <field name="name">Assignment Company</field>
+        <field name="model_id" ref="model_tori_assignment"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_submission_company" model="ir.rule">
+        <field name="name">Submission Company</field>
+        <field name="model_id" ref="model_tori_submission"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_attendance_company" model="ir.rule">
+        <field name="name">Attendance Company</field>
+        <field name="model_id" ref="model_tori_student_attendance"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_subject_company" model="ir.rule">
+        <field name="name">Subject Company</field>
+        <field name="model_id" ref="model_tori_subject"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_class_company" model="ir.rule">
+        <field name="name">Class Company</field>
+        <field name="model_id" ref="model_tori_class"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_section_company" model="ir.rule">
+        <field name="name">Section Company</field>
+        <field name="model_id" ref="model_tori_section"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_room_company" model="ir.rule">
+        <field name="name">Room Company</field>
+        <field name="model_id" ref="model_tori_room"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_community_service_company" model="ir.rule">
+        <field name="name">Community Service Company</field>
+        <field name="model_id" ref="model_tori_community_service"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_discipline_company" model="ir.rule">
+        <field name="name">Discipline Company</field>
+        <field name="model_id" ref="model_tori_discipline_record"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_enrollment_company" model="ir.rule">
+        <field name="name">Enrollment Company</field>
+        <field name="model_id" ref="model_tori_enrollment"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_fee_structure_company" model="ir.rule">
+        <field name="name">Fee Structure Company</field>
+        <field name="model_id" ref="model_tori_fee_structure"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_fee_element_company" model="ir.rule">
+        <field name="name">Fee Element Company</field>
+        <field name="model_id" ref="model_tori_fee_element"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_fee_slip_company" model="ir.rule">
+        <field name="name">Fee Slip Company</field>
+        <field name="model_id" ref="model_tori_fee_slip"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_grade_scale_company" model="ir.rule">
+        <field name="name">Grade Scale Company</field>
+        <field name="model_id" ref="model_tori_grade_scale"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_grade_line_company" model="ir.rule">
+        <field name="name">Grade Line Company</field>
+        <field name="model_id" ref="model_tori_grade_line"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_id_card_company" model="ir.rule">
+        <field name="name">ID Card Company</field>
+        <field name="model_id" ref="model_tori_id_card"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_id_card_design_company" model="ir.rule">
+        <field name="name">ID Card Design Company</field>
+        <field name="model_id" ref="model_tori_id_card_design"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_lesson_plan_company" model="ir.rule">
+        <field name="name">Lesson Plan Company</field>
+        <field name="model_id" ref="model_tori_lesson_plan"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_homework_company" model="ir.rule">
+        <field name="name">Homework Company</field>
+        <field name="model_id" ref="model_tori_homework"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_library_book_company" model="ir.rule">
+        <field name="name">Library Book Company</field>
+        <field name="model_id" ref="model_tori_library_book"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_book_issue_company" model="ir.rule">
+        <field name="name">Book Issue Company</field>
+        <field name="model_id" ref="model_tori_book_issue"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_marksheet_company" model="ir.rule">
+        <field name="name">Marksheet Company</field>
+        <field name="model_id" ref="model_tori_marksheet"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_subject_result_company" model="ir.rule">
+        <field name="name">Subject Result Company</field>
+        <field name="model_id" ref="model_tori_subject_result"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_scholarship_company" model="ir.rule">
+        <field name="name">Scholarship Company</field>
+        <field name="model_id" ref="model_tori_scholarship"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_session_company" model="ir.rule">
+        <field name="name">Session Company</field>
+        <field name="model_id" ref="model_tori_session"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_academic_year_company" model="ir.rule">
+        <field name="name">Academic Year Company</field>
+        <field name="model_id" ref="model_tori_academic_year"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_term_company" model="ir.rule">
+        <field name="name">Term Company</field>
+        <field name="model_id" ref="model_tori_term"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_timetable_slot_company" model="ir.rule">
+        <field name="name">Timetable Slot Company</field>
+        <field name="model_id" ref="model_tori_timetable_slot"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_transport_route_company" model="ir.rule">
+        <field name="name">Transport Route Company</field>
+        <field name="model_id" ref="model_tori_transport_route"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_transport_stop_company" model="ir.rule">
+        <field name="name">Transport Stop Company</field>
+        <field name="model_id" ref="model_tori_transport_stop"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_vehicle_company" model="ir.rule">
+        <field name="name">Vehicle Company</field>
+        <field name="model_id" ref="model_tori_vehicle"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_driver_company" model="ir.rule">
+        <field name="name">Driver Company</field>
+        <field name="model_id" ref="model_tori_driver"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_student_transport_company" model="ir.rule">
+        <field name="name">Student Transport Company</field>
+        <field name="model_id" ref="model_tori_student_transport"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
     <record id="rule_enrollment_teacher" model="ir.rule">
         <field name="name">Enrollment Teacher Own Classes</field>
         <field name="model_id" ref="model_tori_enrollment"/>
@@ -28,11 +250,95 @@
         <field name="domain_force">[('enrollment_id.student_id.user_ids', 'in', [user.id])]</field>
     </record>
 
+    <record id="rule_assignment_student" model="ir.rule">
+        <field name="name">Assignment Student Relevant Classes</field>
+        <field name="model_id" ref="model_tori_assignment"/>
+        <field name="groups" eval="[(4, ref('tori_school_management.group_education_student'))]"/>
+        <field name="domain_force">[('class_id', 'in', user.partner_id.enrollment_ids.class_id.ids)]</field>
+    </record>
+
+    <record id="rule_attendance_student" model="ir.rule">
+        <field name="name">Attendance Student Own</field>
+        <field name="model_id" ref="model_tori_student_attendance"/>
+        <field name="groups" eval="[(4, ref('tori_school_management.group_education_student'))]"/>
+        <field name="domain_force">[('enrollment_id.student_id.user_ids', 'in', [user.id])]</field>
+    </record>
+
     <record id="rule_enrollment_student" model="ir.rule">
         <field name="name">Enrollment Student Own</field>
         <field name="model_id" ref="model_tori_enrollment"/>
         <field name="groups" eval="[(4, ref('tori_school_management.group_education_student'))]"/>
         <field name="domain_force">[('student_id.user_ids', 'in', [user.id])]</field>
+    </record>
+
+    <record id="rule_fee_slip_student" model="ir.rule">
+        <field name="name">Fee Slip Student Own</field>
+        <field name="model_id" ref="model_tori_fee_slip"/>
+        <field name="groups" eval="[(4, ref('tori_school_management.group_education_student'))]"/>
+        <field name="domain_force">[('enrollment_id.student_id.user_ids', 'in', [user.id])]</field>
+    </record>
+
+    <record id="rule_marksheet_student" model="ir.rule">
+        <field name="name">Marksheet Student Own</field>
+        <field name="model_id" ref="model_tori_marksheet"/>
+        <field name="groups" eval="[(4, ref('tori_school_management.group_education_student'))]"/>
+        <field name="domain_force">[('enrollment_id.student_id.user_ids', 'in', [user.id])]</field>
+    </record>
+
+    <record id="rule_subject_result_student" model="ir.rule">
+        <field name="name">Subject Result Student Own</field>
+        <field name="model_id" ref="model_tori_subject_result"/>
+        <field name="groups" eval="[(4, ref('tori_school_management.group_education_student'))]"/>
+        <field name="domain_force">[('marksheet_id.enrollment_id.student_id.user_ids', 'in', [user.id])]</field>
+    </record>
+
+    <record id="rule_timetable_student" model="ir.rule">
+        <field name="name">Timetable Student Relevant Classes</field>
+        <field name="model_id" ref="model_tori_timetable_slot"/>
+        <field name="groups" eval="[(4, ref('tori_school_management.group_education_student'))]"/>
+        <field name="domain_force">[('class_id', 'in', user.partner_id.enrollment_ids.class_id.ids)]</field>
+    </record>
+
+    <record id="rule_class_student" model="ir.rule">
+        <field name="name">Class Student Own Classes</field>
+        <field name="model_id" ref="model_tori_class"/>
+        <field name="groups" eval="[(4, ref('tori_school_management.group_education_student'))]"/>
+        <field name="domain_force">[('id', 'in', user.partner_id.enrollment_ids.class_id.ids)]</field>
+    </record>
+
+    <record id="rule_section_student" model="ir.rule">
+        <field name="name">Section Student Own Sections</field>
+        <field name="model_id" ref="model_tori_section"/>
+        <field name="groups" eval="[(4, ref('tori_school_management.group_education_student'))]"/>
+        <field name="domain_force">[('id', 'in', user.partner_id.enrollment_ids.section_id.ids)]</field>
+    </record>
+
+    <record id="rule_subject_student" model="ir.rule">
+        <field name="name">Subject Student Relevant Subjects</field>
+        <field name="model_id" ref="model_tori_subject"/>
+        <field name="groups" eval="[(4, ref('tori_school_management.group_education_student'))]"/>
+        <field name="domain_force">[('id', 'in', user.partner_id.enrollment_ids.class_id.subject_ids.ids)]</field>
+    </record>
+
+    <record id="rule_announcement_student" model="ir.rule">
+        <field name="name">Announcement Student Audience</field>
+        <field name="model_id" ref="model_tori_announcement"/>
+        <field name="groups" eval="[(4, ref('tori_school_management.group_education_student'))]"/>
+        <field name="domain_force">['&amp;', ('audience', 'in', ['all', 'students']), '|', ('session_id', '=', False), ('session_id', 'in', user.partner_id.enrollment_ids.session_id.ids)]</field>
+    </record>
+
+    <record id="rule_book_issue_student" model="ir.rule">
+        <field name="name">Book Issue Student Own</field>
+        <field name="model_id" ref="model_tori_book_issue"/>
+        <field name="groups" eval="[(4, ref('tori_school_management.group_education_student'))]"/>
+        <field name="domain_force">[('student_id.user_ids', 'in', [user.id])]</field>
+    </record>
+
+    <record id="rule_library_book_student" model="ir.rule">
+        <field name="name">Library Book Student Issued Only</field>
+        <field name="model_id" ref="model_tori_library_book"/>
+        <field name="groups" eval="[(4, ref('tori_school_management.group_education_student'))]"/>
+        <field name="domain_force">[('issue_ids.student_id.user_ids', 'in', [user.id])]</field>
     </record>
 
     <record id="rule_enrollment_parent" model="ir.rule">

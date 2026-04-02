@@ -1,8 +1,12 @@
 import base64
+import mimetypes
 
 from odoo import fields, http
 from odoo.http import request
 from odoo.addons.portal.controllers.portal import CustomerPortal
+
+
+ALLOWED_PHOTO_MIME_TYPES = {'image/jpeg', 'image/png', 'image/gif', 'image/webp'}
 
 
 class ToriSchoolPortal(CustomerPortal):
@@ -215,8 +219,20 @@ class ToriSchoolPublic(http.Controller):
         except Exception:
             return False
 
+    def _is_honeypot_triggered(self, post):
+        return bool((post.get('website') or '').strip())
+
+    def _validate_upload_type(self, upload_file):
+        content_type = (upload_file.mimetype or '').split(';', 1)[0].strip().lower()
+        if not content_type:
+            content_type = (mimetypes.guess_type(upload_file.filename or '')[0] or '').lower()
+        return content_type in ALLOWED_PHOTO_MIME_TYPES
+
     @http.route('/admission/submit', type='http', auth='public', methods=['POST'], website=True, csrf=True)
     def admission_submit(self, **post):
+        if self._is_honeypot_triggered(post):
+            return request.redirect('/admission?submitted=1')
+
         first_name = (post.get('first_name') or '').strip()
         last_name = (post.get('last_name') or '').strip()
         student_name = ('%s %s' % (first_name, last_name)).strip() or first_name
@@ -303,6 +319,8 @@ class ToriSchoolPublic(http.Controller):
         upload_vals = {}
         student_photo_file = request.httprequest.files.get('student_photo')
         if student_photo_file and student_photo_file.filename:
+            if not self._validate_upload_type(student_photo_file):
+                return request.redirect('/admission?error=invalid_file_type')
             student_photo_bytes = student_photo_file.read()
             if len(student_photo_bytes) > 2 * 1024 * 1024:
                 return request.redirect('/admission?error=photo_too_large')
@@ -316,15 +334,29 @@ class ToriSchoolPublic(http.Controller):
 
     @http.route('/edu/application/status', type='http', auth='public', website=True)
     def application_status(self, **kwargs):
-        app_ref = kwargs.get('reference')
-        application = request.env['tori.student.application'].sudo().search([('name', '=', app_ref)], limit=1)
+        app_ref = (kwargs.get('reference') or '').strip()
+        guardian_phone = (kwargs.get('guardian_phone') or '').strip()
+        application = request.env['tori.student.application']
+        if app_ref and guardian_phone:
+            normalized_phone = request.env['tori.student.application']._normalize_phone(guardian_phone)
+            application = request.env['tori.student.application'].sudo().search([
+                ('name', '=', app_ref),
+                ('guardian_phone_normalized', '=', normalized_phone),
+            ], limit=1)
         return request.render('tori_school_management.application_status_page', {
             'reference': app_ref,
+            'guardian_phone': guardian_phone,
             'application': application,
         })
 
     @http.route('/edu/attendance/scan', type='jsonrpc', auth='user')
     def attendance_scan(self, barcode=None, method='barcode', **kwargs):
+        if not (
+            request.env.user.has_group('tori_school_management.group_education_admin')
+            or request.env.user.has_group('tori_school_management.group_education_teacher')
+        ):
+            return {'success': False, 'message': 'You do not have permission to mark attendance'}
+
         partner = request.env['res.partner'].sudo().search([('barcode', '=', barcode), ('is_student', '=', True)], limit=1)
         if not partner:
             return {'success': False, 'message': 'Student not found'}
@@ -345,6 +377,15 @@ class ToriSchoolPublic(http.Controller):
             ('start_time', '<=', current_time),
             ('end_time', '>=', current_time),
         ], limit=1)
+
+        existing = request.env['tori.student.attendance'].sudo().search([
+            ('enrollment_id', '=', enrollment.id),
+            ('date', '=', today),
+            ('timetable_slot_id', '=', slot.id if slot else False),
+        ], limit=1)
+        if existing:
+            return {'success': True, 'message': 'Attendance already marked'}
+
         request.env['tori.student.attendance'].sudo().create({
             'enrollment_id': enrollment.id,
             'date': today,

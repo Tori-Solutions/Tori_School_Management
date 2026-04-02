@@ -1,5 +1,6 @@
 from odoo import models, fields, api
 
+
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
@@ -36,10 +37,27 @@ class ResPartner(models.Model):
         'enrollment_ids.state',
     )
     def _compute_current_academic(self):
+        current_enrollment_by_partner = {}
+        partner_ids = self.ids
+
+        if partner_ids:
+            active_enrollments = self.env['tori.enrollment'].search([
+                ('student_id', 'in', partner_ids),
+                ('state', '=', 'active'),
+            ], order='student_id, id desc')
+            for enrollment in active_enrollments:
+                current_enrollment_by_partner.setdefault(enrollment.student_id.id, enrollment)
+
+            missing_partner_ids = [partner_id for partner_id in partner_ids if partner_id not in current_enrollment_by_partner]
+            if missing_partner_ids:
+                latest_enrollments = self.env['tori.enrollment'].search([
+                    ('student_id', 'in', missing_partner_ids),
+                ], order='student_id, id desc')
+                for enrollment in latest_enrollments:
+                    current_enrollment_by_partner.setdefault(enrollment.student_id.id, enrollment)
+
         for partner in self:
-            # Pick the most recent active enrollment; fall back to any latest enrollment
-            active = partner.enrollment_ids.filtered(lambda e: e.state == 'active')
-            enrollment = active[:1] if active else partner.enrollment_ids[:1]
+            enrollment = current_enrollment_by_partner.get(partner.id)
             partner.tori_current_class_id = enrollment.class_id if enrollment else False
             partner.tori_current_section_id = enrollment.section_id if enrollment else False
             partner.tori_current_session_id = enrollment.session_id if enrollment else False
@@ -47,9 +65,27 @@ class ResPartner(models.Model):
 
     @api.depends('application_ids', 'enrollment_ids')
     def _compute_tori_counts(self):
+        application_counts = {
+            student_partner.id: count
+            for student_partner, count in self.env['tori.student.application']._read_group(
+                [('student_partner_id', 'in', self.ids)],
+                ['student_partner_id'],
+                ['__count'],
+            )
+            if student_partner
+        }
+        enrollment_counts = {
+            student.id: count
+            for student, count in self.env['tori.enrollment']._read_group(
+                [('student_id', 'in', self.ids)],
+                ['student_id'],
+                ['__count'],
+            )
+            if student
+        }
         for partner in self:
-            partner.tori_application_count = len(partner.application_ids)
-            partner.tori_enrollment_count = len(partner.enrollment_ids)
+            partner.tori_application_count = application_counts.get(partner.id, 0)
+            partner.tori_enrollment_count = enrollment_counts.get(partner.id, 0)
 
     def action_view_tori_applications(self):
         self.ensure_one()
