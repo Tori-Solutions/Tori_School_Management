@@ -63,12 +63,7 @@
                 <field name="tori_current_class_id" string="Class"/>
                 <field name="tori_current_section_id" string="Section" optional="show"/>
                 <field name="tori_current_session_id" string="Session"/>
-                <field name="tori_current_enrollment_state" string="Status" widget="badge"
-                       decoration-success="tori_current_enrollment_state == 'active'"
-                       decoration-warning="tori_current_enrollment_state == 'inactive'"
-                       decoration-muted="tori_current_enrollment_state == 'graduated'"
-                       optional="show"/>
-                <field name="mobile"/>
+                <field name="tori_current_enrollment_state" string="Status" widget="badge" decoration-success="tori_current_enrollment_state == 'active'" decoration-warning="tori_current_enrollment_state == 'inactive'" decoration-muted="tori_current_enrollment_state == 'graduated'" optional="show"/>
                 <field name="phone" optional="show"/>
                 <field name="email"/>
                 <field name="city" optional="show"/>
@@ -87,7 +82,6 @@
             <search string="Student Database Search">
                 <!-- Text search fields -->
                 <field name="name"/>
-                <field name="mobile"/>
                 <field name="phone"/>
                 <field name="email"/>
                 <field name="city"/>
@@ -100,28 +94,21 @@
                 <separator/>
                 <!-- Enrollment status filters -->
                 <filter name="student_only" string="Students" domain="[('is_student', '=', True)]"/>
-                <filter name="enrollment_active" string="Active Enrollment"
-                        domain="[('tori_current_enrollment_state', '=', 'active')]"/>
-                <filter name="enrollment_inactive" string="Inactive Enrollment"
-                        domain="[('tori_current_enrollment_state', '=', 'inactive')]"/>
-                <filter name="enrollment_graduated" string="Graduated"
-                        domain="[('tori_current_enrollment_state', '=', 'graduated')]"/>
+                <filter name="enrollment_active" string="Active Enrollment" domain="[('tori_current_enrollment_state', '=', 'active')]"/>
+                <filter name="enrollment_inactive" string="Inactive Enrollment" domain="[('tori_current_enrollment_state', '=', 'inactive')]"/>
+                <filter name="enrollment_graduated" string="Graduated" domain="[('tori_current_enrollment_state', '=', 'graduated')]"/>
                 <separator/>
                 <!-- Admission / enrollment presence filters -->
-                <filter name="with_admission" string="Has Application"
-                        domain="[('tori_application_count', '&gt;', 0)]"/>
-                <filter name="with_enrollment" string="Enrolled"
-                        domain="[('tori_enrollment_count', '&gt;', 0)]"/>
-                <filter name="without_enrollment" string="Not Enrolled"
-                        domain="[('tori_enrollment_count', '=', 0)]"/>
+                <filter name="with_admission" string="Has Application" domain="[('tori_application_count', '&gt;', 0)]"/>
+                <filter name="with_enrollment" string="Enrolled" domain="[('tori_enrollment_count', '&gt;', 0)]"/>
+                <filter name="without_enrollment" string="Not Enrolled" domain="[('tori_enrollment_count', '=', 0)]"/>
                 <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
                 <!-- Group By -->
-                <group expand="0" string="Group By">
+                <group name="group_by">
                     <filter name="group_class" string="Class" context="{'group_by': 'tori_current_class_id'}"/>
                     <filter name="group_section" string="Section" context="{'group_by': 'tori_current_section_id'}"/>
                     <filter name="group_session" string="Session" context="{'group_by': 'tori_current_session_id'}"/>
                     <filter name="group_status" string="Enrollment Status" context="{'group_by': 'tori_current_enrollment_state'}"/>
-                    <separator/>
                     <filter name="group_city" string="City" context="{'group_by': 'city'}"/>
                     <filter name="group_state" string="State" context="{'group_by': 'state_id'}"/>
                     <filter name="group_country" string="Country" context="{'group_by': 'country_id'}"/>

@@ -3,10 +3,11 @@ from odoo import models, fields, api
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    tori_application_count = fields.Integer(compute='_compute_tori_counts', string='Applications')
-    tori_enrollment_count = fields.Integer(compute='_compute_tori_counts', string='Enrollments')
+    application_ids = fields.One2many('tori.student.application', 'student_partner_id', string='Application Records')
+    tori_application_count = fields.Integer(compute='_compute_tori_counts', string='Applications', store=True)
+    tori_enrollment_count = fields.Integer(compute='_compute_tori_counts', string='Enrollments', store=True)
 
-    enrollment_ids = fields.One2many('tori.enrollment', 'student_id', string='Enrollments')
+    enrollment_ids = fields.One2many('tori.enrollment', 'student_id', string='Enrollment Records')
 
     tori_current_class_id = fields.Many2one(
         'tori.class', string='Current Class',
@@ -27,6 +28,7 @@ class ResPartner(models.Model):
     )
 
     @api.depends(
+        'application_ids',
         'enrollment_ids',
         'enrollment_ids.class_id',
         'enrollment_ids.section_id',
@@ -43,10 +45,11 @@ class ResPartner(models.Model):
             partner.tori_current_session_id = enrollment.session_id if enrollment else False
             partner.tori_current_enrollment_state = enrollment.state if enrollment else False
 
+    @api.depends('application_ids', 'enrollment_ids')
     def _compute_tori_counts(self):
         for partner in self:
-            partner.tori_application_count = self.env['tori.student.application'].search_count([('student_partner_id', '=', partner.id)])
-            partner.tori_enrollment_count = self.env['tori.enrollment'].search_count([('student_id', '=', partner.id)])
+            partner.tori_application_count = len(partner.application_ids)
+            partner.tori_enrollment_count = len(partner.enrollment_ids)
 
     def action_view_tori_applications(self):
         self.ensure_one()
