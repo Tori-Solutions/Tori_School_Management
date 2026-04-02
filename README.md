@@ -17,6 +17,29 @@ This module provides school operations in one app:
 
 ## Latest Implemented Updates
 
+### 2026-04-03 — Security Hardening, Performance, and Test Suite (commit 579a484)
+
+- **Security**: Added multi-company record rules for all models with `company_id` (~25 rules).
+- **Security**: Restricted wizard ACLs from `base.group_user` to `group_education_admin`.
+- **Security**: Added student read ACLs for 11 portal-relevant models.
+- **Security**: Group hierarchy fixed — admin now implies teacher.
+- **Security**: Portal access revoke correctly removes `base.group_portal` from user.
+- **Security**: Portal admission controller hardened with MIME-type and input validation.
+- **Security**: Student-facing backend record rules added (own enrollments, submissions, attendance, fee slips).
+- **Performance**: Migrated all compute methods from deprecated `read_group` API to `_read_group`.
+- **Performance**: Recurring fee cron N+1 eliminated with bulk prefetch and batch create.
+- **Performance**: Overdue fee cron changed from per-field assignment to batched `write()`.
+- **Performance**: Session dashboard metrics query is now session-scoped and grouped correctly.
+- **Data model**: Attendance uniqueness constraint added (enrollment + date + timetable slot).
+- **Infrastructure**: `base_automation` added to manifest `depends` (fixes fresh-install `KeyError`).
+- **Infrastructure**: `test_assets.xml` moved from `data` to `demo` in manifest.
+- **Infrastructure**: Author updated in manifest.
+- **Tests**: Full test suite added (`tests/` package) — 4 tests, 0 failures on clean install.
+  - Company isolation rules
+  - Student backend visibility scoping
+  - Recurring fee cron creates missing slip exactly once
+  - Recurring fee cron ignores one-time elements
+
 - Website and portal integration completed with Admission and Application Status pages.
 - Portal navigation improved with breadcrumbs, section tabs, and mobile horizontal scrolling.
 - Education app icon refreshed to match Odoo app launcher style.

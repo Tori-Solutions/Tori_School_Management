@@ -22,6 +22,42 @@ This file tracks major implementation tasks completed in `tori_school_management
 - Integration and stabilization pass
 - Added cross-app integrations (Contacts/HR/Accounting), fixed migration compatibility issues, and improved view stability.
 
+## 2026-04-02 / 2026-04-03
+
+- Security hardening sprint
+- Added ~25 multi-company record rules for all models with `company_id`.
+- Restricted wizard ACLs to `group_education_admin` only.
+- Fixed group hierarchy — admin now implies teacher.
+- Added student read ACLs for 11 portal-relevant models.
+- Added student-scoped backend record rules (enrollments, submissions, attendance, fee slips).
+- Hardened portal admission controller with MIME-type, file size, and input validation.
+- Fixed portal access revoke to actually remove `base.group_portal` from user.
+
+- Performance optimization sprint
+- Migrated all compute methods from deprecated `read_group` to `_read_group` API.
+- Eliminated N+1 in recurring fee cron via bulk prefetch and batch create.
+- Changed overdue fee cron to batched `write()` instead of per-field assignment.
+- Session dashboard metrics now session-scoped and uses correct grouped queries.
+- Current academic field computation optimized.
+
+- Data model and infrastructure
+- Added attendance uniqueness constraint (enrollment + date + timetable slot).
+- Added `base_automation` to manifest `depends` (fixes fresh-install `KeyError`).
+- Moved `test_assets.xml` from `data` to `demo` key in manifest.
+- Updated manifest author to `Tori Solutions Ltd`.
+
+- Test suite
+- Added `tests/__init__.py` and `tests/test_security_and_fees.py`.
+- 4 tests covering company isolation, student scoping, and recurring fee cron behavior.
+- Resolved Odoo 19 compatibility issues: `TransactionCase` (not `SavepointCase`), `group_ids` (not `groups_id`).
+- Handled enterprise module NOT NULL columns without DB defaults via temporary ALTER TABLE DEFAULT pattern.
+- All 4 tests passing on both fresh install and upgrade validation.
+
+- Documentation refresh
+- Updated `analysis/PRODUCTION_READINESS_REPORT.md` with post-remediation scores (54% → 76%).
+- Updated `analysis/REMEDIATION_BACKLOG.md` with resolved/outstanding items.
+- Updated all core documentation files.
+
 ## 2026-03-31
 
 - Website discoverability and portal UX

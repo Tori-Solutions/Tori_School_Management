@@ -2,9 +2,11 @@
 
 ## 1. Executive Summary
 
-This report summarizes the implementation status of `tori_school_management` on Odoo 19.
+This report summarizes the implementation and remediation status of `tori_school_management` on Odoo 19.
 
-The module is now stabilized across backend, website, and portal layers, and includes:
+The module has been stabilized across backend, website, and portal layers, and after a full production readiness audit and remediation sprint it is now **conditionally production ready**.
+
+The only remaining blocker is B3 (CAPTCHA/rate-limiting on the public admission form). All other P0 and P1 findings have been resolved.
 
 - Core school operations
 - Cross-app ERP integration (Contacts, HR, Accounting)
@@ -12,10 +14,39 @@ The module is now stabilized across backend, website, and portal layers, and inc
 - CRM-style admissions pipeline with editable stages
 - Bangladesh location master data
 - Duplicate-application prevention controls
+- Multi-company record rule isolation
+- Student-scoped ACLs and record rules
+- Automated test suite (4 tests, 0 failures)
 
-Status: Completed and stable for pilot use.
+Initial audit score: **54% (325/600) — NOT PRODUCTION READY**  
+Post-remediation score: **76% (455/600) — CONDITIONALLY PRODUCTION READY**
 
 ## 2. Feature Completion Snapshot
+
+### Completed: Security Hardening (2026-04-03)
+
+- Multi-company record rules for all 25+ models with `company_id`
+- Wizard ACLs restricted to `group_education_admin`
+- Group hierarchy fixed (admin implies teacher)
+- Student read ACLs for 11 portal-relevant models
+- Student-scoped backend record rules (own enrollments, submissions, attendance, fee slips)
+- Portal controller hardened (MIME-type validation, input sanitization)
+- Portal access revoke correctly removes `base.group_portal` from user
+
+### Completed: Performance Optimizations (2026-04-03)
+
+- All `len(One2many)` compute patterns replaced with `_read_group` (eliminates N+1 for list views)
+- Recurring fee cron: bulk prefetch existing slips + batch create missing ones
+- Overdue fee cron: batched `write()` instead of per-record field assignment
+- Session dashboard metrics: session-scoped grouped queries
+- Current academic field: optimized compute path
+
+### Completed: Test Suite (2026-04-03)
+
+- `tests/__init__.py` + `tests/test_security_and_fees.py`
+- 4 tests: company isolation, student scoping, recurring fee cron (creates once, ignores one-time elements)
+- 0 failures on clean install and upgrade
+- Odoo 19 API-compatible (TransactionCase, group_ids)
 
 ### Completed: Academics and Core Operations
 
@@ -116,6 +147,14 @@ Primary module validation command:
 python d:/odoo/odoo/odoo-bin -c d:/odoo/odoo.conf -d MUloom -u tori_school_management --stop-after-init
 ```
 
+Test suite validation:
+
+```powershell
+python d:/odoo/odoo/odoo-bin -c d:/odoo/odoo.conf -d <testdb> -u tori_school_management --test-enable --test-tags tori_school_management --stop-after-init --no-http
+```
+
+Expected: `0 failed, 0 error(s) of 4 tests`
+
 Location dataset validation:
 
 ```sql
@@ -143,12 +182,23 @@ Validated outcomes:
 - Dashboard scroll behavior validated after UI expansion.
 - Enrollment duplicate groups reduced to zero and DB uniqueness enforcement verified.
 
-## 5. Current Pilot Readiness
+## 5. Current Production Readiness
 
-The module is ready for pilot operations with stabilized admissions, portal UX, stage-driven pipeline management, and address/duplicate controls.
+The module has passed a full security, performance, and infrastructure audit with remediation. It is **conditionally production ready**.
 
-Recommended next checks during pilot:
+| Area | Status |
+|------|--------|
+| Fresh install | ✅ Clean |
+| MUloom upgrade | ✅ Clean (7s, no errors) |
+| Test suite | ✅ 4/4 passing |
+| Multi-company isolation | ✅ Record rules in place |
+| Student data scoping | ✅ ACLs + record rules |
+| Performance (N+1 fixes) | ✅ All identified hotspots resolved |
+| Public form security | ⚠️ CAPTCHA/rate-limiting still outstanding (B3) |
 
-1. Role-based UAT for admin, teacher, student, and parent personas.
-2. Browser/device checks for public admission form and portal tabs.
-3. Live process validation of application-to-enrollment conversion.
+Recommended next steps before go-live:
+
+1. Implement CAPTCHA or honeypot on `/admission/submit` (B3 — last P0 blocker).
+2. Apply production `odoo.conf` hardening (strong passwords, `dbfilter`, `list_db = False`).
+3. Run role-based UAT for admin, teacher, student, and parent personas.
+4. Validate all report PDFs render correctly.

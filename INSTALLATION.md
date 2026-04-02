@@ -26,6 +26,7 @@ From module manifest:
 - account
 - hr
 - web
+- base_automation
 
 ### 1.3 Python dependencies
 
@@ -98,19 +99,19 @@ If frontend changed, perform hard refresh in browser:
 The module loads in this order (important for stability):
 
 1. Security:
-   - security/security.xml
-   - security/ir.model.access.csv
-   - security/record_rules.xml
+   - security/security.xml (groups: teacher defined before admin; admin implies teacher)
+   - security/ir.model.access.csv (includes student ACLs for portal-relevant models; wizards restricted to admin)
+   - security/record_rules.xml (multi-company isolation + student-scoped rules)
 2. Data:
    - mail templates + automations + crons
    - Bangladesh location master data
    - application stages
-   - test assets
    - stage backfill
 3. Backend views/actions/menus
 4. Reports
 5. Website templates/pages
 6. Web assets (dashboard JS/XML/CSS and scanner JS)
+7. Demo data (test_assets.xml — only on databases created with demo)
 
 ## 6) First-Time Functional Setup Checklist
 
@@ -230,7 +231,14 @@ Quick-action buttons route to valid backend module actions.
 PowerShell:
 python D:/odoo/odoo/odoo-bin -c D:/odoo/odoo.conf -d MUloom -u tori_school_management --stop-after-init
 
-### 8.2 Bangladesh location data validation
+### 8.4 Run test suite
+
+PowerShell:
+python D:/odoo/odoo/odoo-bin -c D:/odoo/odoo.conf -d <testdb> -u tori_school_management --test-enable --test-tags tori_school_management --stop-after-init --no-http
+
+Expected: `0 failed, 0 error(s) of 4 tests`
+
+### 8.3 Bangladesh location data validation
 
 PowerShell:
 $env:PGPASSWORD='123123'; psql -h localhost -p 5432 -U odoo -d MUloom -c "SELECT 'districts' AS item, COUNT(*) FROM tori_bd_district UNION ALL SELECT 'upazilas', COUNT(*) FROM tori_bd_upazila;"
@@ -240,12 +248,12 @@ Expected:
 - districts = 64
 - upazilas = 494
 
-### 8.3 Stage sequence validation
+### 8.5 Stage sequence validation
 
 PowerShell:
 $env:PGPASSWORD='123123'; psql -h localhost -p 5432 -U odoo -d MUloom -c "SELECT sequence, name, code, fold FROM tori_application_stage ORDER BY sequence, id;"
 
-### 8.4 Enrollment duplicate validation
+### 8.6 Enrollment duplicate validation
 
 No duplicate groups should exist:
 

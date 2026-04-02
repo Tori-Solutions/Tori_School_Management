@@ -336,6 +336,95 @@ Root cause:
 Fix:
 
 - Rebuilt `data/test_assets.xml` in schema-compliant format.
+
+---
+
+## 18) KeyError: 'base.automation' on fresh install
+
+Error pattern:
+
+- `KeyError: 'base.automation'` during fresh install when loading `data/mail_templates.xml`.
+
+Root cause:
+
+- `base_automation` module was not listed under `depends` in `__manifest__.py`. The `ir.actions.server`
+  records in `mail_templates.xml` reference the `base.automation` model, which requires the module to be loaded first.
+
+Fix:
+
+- Added `'base_automation'` to the `depends` list in `__manifest__.py`.
+
+Impact:
+
+- Fresh install completes without `KeyError`. Module now declares its dependency correctly.
+
+---
+
+## 19) ImportError: cannot import name 'SavepointCase' from 'odoo.tests'
+
+Error pattern:
+
+- Test loader crashed: `ImportError: cannot import name 'SavepointCase' from 'odoo.tests'`
+  and subsequently from `odoo.tests.common`.
+
+Root cause:
+
+- Odoo 19 removed `SavepointCase` entirely. Only `TransactionCase` and `SingleTransactionCase` remain.
+
+Fix:
+
+- Changed test base class from `SavepointCase` to `TransactionCase`.
+- Updated imports: `from odoo.tests import tagged` + `from odoo.tests.common import TransactionCase`.
+
+Impact:
+
+- Test module loads and test methods execute correctly.
+
+---
+
+## 20) Invalid field 'groups_id' in 'res.users'
+
+Error pattern:
+
+- `ValueError: Invalid field 'groups_id' in 'res.users'` during test `setUpClass`.
+
+Root cause:
+
+- Odoo 19 renamed the user groups many2many field from `groups_id` to `group_ids`.
+
+Fix:
+
+- Updated all `res.users` create calls in tests to use `'group_ids'` instead of `'groups_id'`.
+
+Impact:
+
+- Test users are created with correct group assignments.
+
+---
+
+## 21) NotNullViolation: account_return_reminder_day on test company create
+
+Error pattern:
+
+- `psycopg2.errors.NotNullViolation: null value in column "account_return_reminder_day" of relation "res_company"`
+  during `setUpClass` when creating test companies with bare `Company.create({'name': ...})`.
+
+Root cause:
+
+- `account_reports` (enterprise) adds `account_return_reminder_day` as a `required=True, default=7`
+  `Integer` field on `res.company`. When the module is installed in the DB but not in the active
+  registry of the current test run, the ORM Python default is not applied and the DB NOT NULL
+  constraint fires.
+
+Fix:
+
+- Detect columns that are `NOT NULL` without a DB-level default via `information_schema.columns`.
+- Temporarily set a `DEFAULT` on those columns via `ALTER TABLE` before creating test companies.
+- Remove the temporary defaults immediately after creation to leave schema state clean.
+
+Impact:
+
+- Test companies create successfully regardless of which enterprise modules are installed in the DB.
 - Added HTML field typing where needed and validated against Odoo parser before upgrade.
 
 Impact:
