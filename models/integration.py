@@ -6,6 +6,43 @@ class ResPartner(models.Model):
     tori_application_count = fields.Integer(compute='_compute_tori_counts', string='Applications')
     tori_enrollment_count = fields.Integer(compute='_compute_tori_counts', string='Enrollments')
 
+    enrollment_ids = fields.One2many('tori.enrollment', 'student_id', string='Enrollments')
+
+    tori_current_class_id = fields.Many2one(
+        'tori.class', string='Current Class',
+        compute='_compute_current_academic', store=True,
+    )
+    tori_current_section_id = fields.Many2one(
+        'tori.section', string='Current Section',
+        compute='_compute_current_academic', store=True,
+    )
+    tori_current_session_id = fields.Many2one(
+        'tori.session', string='Current Session',
+        compute='_compute_current_academic', store=True,
+    )
+    tori_current_enrollment_state = fields.Selection(
+        [('active', 'Active'), ('inactive', 'Inactive'), ('graduated', 'Graduated')],
+        string='Enrollment Status',
+        compute='_compute_current_academic', store=True,
+    )
+
+    @api.depends(
+        'enrollment_ids',
+        'enrollment_ids.class_id',
+        'enrollment_ids.section_id',
+        'enrollment_ids.session_id',
+        'enrollment_ids.state',
+    )
+    def _compute_current_academic(self):
+        for partner in self:
+            # Pick the most recent active enrollment; fall back to any latest enrollment
+            active = partner.enrollment_ids.filtered(lambda e: e.state == 'active')
+            enrollment = active[:1] if active else partner.enrollment_ids[:1]
+            partner.tori_current_class_id = enrollment.class_id if enrollment else False
+            partner.tori_current_section_id = enrollment.section_id if enrollment else False
+            partner.tori_current_session_id = enrollment.session_id if enrollment else False
+            partner.tori_current_enrollment_state = enrollment.state if enrollment else False
+
     def _compute_tori_counts(self):
         for partner in self:
             partner.tori_application_count = self.env['tori.student.application'].search_count([('student_partner_id', '=', partner.id)])
