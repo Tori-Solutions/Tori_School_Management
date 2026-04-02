@@ -8,8 +8,8 @@ class ResPartner(models.Model):
 
     def _compute_tori_counts(self):
         for partner in self:
-            partner.tori_application_count = self.env['tori.student.application'].search_count([('student_id', '=', partner.id)])
-            partner.tori_enrollment_count = self.env['tori.student.enrollment'].search_count([('student_id', '=', partner.id)])
+            partner.tori_application_count = self.env['tori.student.application'].search_count([('student_partner_id', '=', partner.id)])
+            partner.tori_enrollment_count = self.env['tori.enrollment'].search_count([('student_id', '=', partner.id)])
 
     def action_view_tori_applications(self):
         self.ensure_one()
@@ -17,7 +17,7 @@ class ResPartner(models.Model):
             'name': 'Applications',
             'view_mode': 'list,form',
             'res_model': 'tori.student.application',
-            'domain': [('student_id', '=', self.id)],
+            'domain': [('student_partner_id', '=', self.id)],
             'type': 'ir.actions.act_window',
         }
 
@@ -26,7 +26,7 @@ class ResPartner(models.Model):
         return {
             'name': 'Enrollments',
             'view_mode': 'list,form',
-            'res_model': 'tori.student.enrollment',
+            'res_model': 'tori.enrollment',
             'domain': [('student_id', '=', self.id)],
             'type': 'ir.actions.act_window',
         }
