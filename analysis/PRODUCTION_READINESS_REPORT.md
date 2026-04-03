@@ -26,7 +26,9 @@
 
 ---
 
-## Section B — Critical Blockers (Must-Fix Before Go-Live)
+## Section B — Baseline Critical Blockers (Pre-Remediation Snapshot)
+
+These findings are preserved from the initial audit for traceability. Current resolution status is tracked in Section G and in [analysis/REMEDIATION_BACKLOG.md](analysis/REMEDIATION_BACKLOG.md).
 
 ### B1. No Multi-Company Record Rules — DATA LEAK
 
@@ -138,7 +140,9 @@ if content_type not in ALLOWED_TYPES:
 
 ---
 
-## Section C — High Priority Issues
+## Section C — Baseline High Priority Issues (Pre-Remediation Snapshot)
+
+These findings are preserved from the initial audit for traceability. Current resolution status is tracked in Section G and in [analysis/REMEDIATION_BACKLOG.md](analysis/REMEDIATION_BACKLOG.md).
 
 ### C1. Security Group Hierarchy Not Defined
 
@@ -262,7 +266,9 @@ rec.total_enrollment_count = self.env['tori.enrollment'].search_count([('session
 
 ---
 
-## Section D — Medium Priority Issues
+## Section D — Baseline Medium Priority Issues (Pre-Remediation Snapshot)
+
+These findings are preserved from the initial audit for traceability. Current resolution status is tracked in Section G and in [analysis/REMEDIATION_BACKLOG.md](analysis/REMEDIATION_BACKLOG.md).
 
 ### D1. `len()` on One2many in Compute Methods — N+1
 
