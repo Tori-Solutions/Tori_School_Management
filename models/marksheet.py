@@ -5,8 +5,8 @@ class ToriMarksheet(models.Model):
     _name = 'tori.marksheet'
     _description = 'Marksheet'
 
-    enrollment_id = fields.Many2one('tori.enrollment', required=True)
-    term_id = fields.Many2one('tori.term', required=True)
+    enrollment_id = fields.Many2one('tori.enrollment', required=True, index=True)
+    term_id = fields.Many2one('tori.term', required=True, index=True)
     percentage = fields.Float(compute='_compute_result', store=True)
     gpa = fields.Float(compute='_compute_result', store=True)
     grade_letter = fields.Char(compute='_compute_result', store=True)

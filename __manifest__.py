@@ -1,6 +1,6 @@
 {
     'name': 'Education Management System',
-    'version': '19.0.4.7.0',
+    'version': '19.0.4.8.0',
     'category': 'Education',
     'summary': 'Complete school and college management - admissions, classes, attendance, fees, transport',
     'author': 'Tori Solutions Ltd',

@@ -17,7 +17,7 @@ class ToriScholarship(models.Model):
         [('draft', 'Draft'), ('approved', 'Approved'), ('paid', 'Paid')],
         default='draft',
     )
-    vendor_bill_id = fields.Many2one('account.move')
+    vendor_bill_id = fields.Many2one('account.move', ondelete='restrict', index=True)
     company_id = fields.Many2one(related='enrollment_id.company_id', store=True, readonly=True)
 
     def action_approve(self):

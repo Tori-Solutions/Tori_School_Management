@@ -45,9 +45,9 @@ class ToriFeeSlip(models.Model):
     _inherit = ['mail.thread']
     _order = 'due_date desc, id desc'
 
-    enrollment_id = fields.Many2one('tori.enrollment', required=True)
-    fee_structure_id = fields.Many2one('tori.fee.structure')
-    fee_element_id = fields.Many2one('tori.fee.element')
+    enrollment_id = fields.Many2one('tori.enrollment', required=True, index=True)
+    fee_structure_id = fields.Many2one('tori.fee.structure', index=True)
+    fee_element_id = fields.Many2one('tori.fee.element', index=True)
     currency_id = fields.Many2one(
         'res.currency',
         related='enrollment_id.company_id.currency_id',
@@ -62,7 +62,7 @@ class ToriFeeSlip(models.Model):
         default='draft',
         tracking=True,
     )
-    invoice_id = fields.Many2one('account.move')
+    invoice_id = fields.Many2one('account.move', ondelete='restrict', index=True)
     company_id = fields.Many2one(related='enrollment_id.company_id', store=True, readonly=True)
 
     def action_send(self):

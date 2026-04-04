@@ -158,8 +158,20 @@ class ToriSchoolPortal(CustomerPortal):
         enrollments = self._get_allowed_enrollments()
         if enrollment_id not in enrollments.ids:
             return request.redirect('/my/assignments')
+        # S6-R4: verify the assignment belongs to the enrollment's class/session context
+        enrollment = enrollments.filtered(lambda e: e.id == enrollment_id)
+        assignment = request.env['tori.assignment'].sudo().search([
+            ('id', '=', assignment_id),
+            ('class_id', 'in', enrollment.mapped('class_id').ids),
+        ], limit=1)
+        if not assignment:
+            _logger.warning(
+                "Portal assignment submit blocked: assignment %s not valid for enrollment %s (user %s)",
+                assignment_id, enrollment_id, request.env.user.id,
+            )
+            return request.redirect('/my/assignments')
         request.env['tori.submission'].sudo().create({
-            'assignment_id': assignment_id,
+            'assignment_id': assignment.id,
             'enrollment_id': enrollment_id,
             'submission_date': fields.Datetime.now(),
             'state': 'submitted',
@@ -197,7 +209,12 @@ class ToriSchoolPortal(CustomerPortal):
 
     @http.route('/my/announcements', type='http', auth='user', website=True)
     def my_announcements(self, **kwargs):
-        announcements = request.env['tori.announcement'].sudo().search([], order='date desc')
+        # S6-R3: scope to current company so cross-tenant isolation is preserved
+        company_id = request.env.company.id
+        announcements = request.env['tori.announcement'].sudo().search(
+            ['|', ('company_id', '=', False), ('company_id', '=', company_id)],
+            order='date desc',
+        )
         return request.render('tori_school_management.portal_announcements', {'announcements': announcements, 'page_name': 'announcements'})
 
     @http.route('/my/children', type='http', auth='user', website=True)
@@ -372,6 +389,19 @@ class ToriSchoolPublic(http.Controller):
 
     @http.route('/edu/application/status', type='http', auth='public', website=True)
     def application_status(self, **kwargs):
+        # S6-R2: rate-limit brute-force enumeration on public status lookup
+        client_ip = request.httprequest.environ.get(
+            'HTTP_X_FORWARDED_FOR', request.httprequest.remote_addr
+        )
+        if client_ip:
+            client_ip = client_ip.split(',')[0].strip()
+        if _is_rate_limited(client_ip):
+            _logger.warning("Rate limit hit for IP: %s on /edu/application/status", client_ip)
+            return request.render('tori_school_management.application_status_page', {
+                'reference': '', 'guardian_phone': '',
+                'application': request.env['tori.student.application'],
+                'error': 'rate_limited',
+            })
         app_ref = (kwargs.get('reference') or '').strip()
         guardian_phone = (kwargs.get('guardian_phone') or '').strip()
         application = request.env['tori.student.application']

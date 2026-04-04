@@ -28,8 +28,8 @@ class ToriSubmission(models.Model):
     _name = 'tori.submission'
     _description = 'Assignment Submission'
 
-    assignment_id = fields.Many2one('tori.assignment', required=True, ondelete='cascade')
-    enrollment_id = fields.Many2one('tori.enrollment', required=True)
+    assignment_id = fields.Many2one('tori.assignment', required=True, ondelete='cascade', index=True)
+    enrollment_id = fields.Many2one('tori.enrollment', required=True, index=True)
     submission_date = fields.Datetime()
     attachment_ids = fields.Many2many('ir.attachment')
     marks = fields.Float()
