@@ -98,6 +98,27 @@
         <field name="view_mode">list,form</field>
     </record>
 
+    <!-- D5: Assignment search view -->
+    <record id="view_assignment_search" model="ir.ui.view">
+        <field name="name">tori.assignment.search</field>
+        <field name="model">tori.assignment</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="class_id"/>
+                <field name="subject_id"/>
+                <field name="teacher_id"/>
+                <filter string="Overdue" name="overdue" domain="[('deadline','&lt;', datetime.datetime.now())]"/>
+                <separator/>
+                <group>
+                    <filter string="Class" name="by_class" context="{'group_by': 'class_id'}"/>
+                    <filter string="Type" name="by_type" context="{'group_by': 'assignment_type'}"/>
+                    <filter string="Subject" name="by_subject" context="{'group_by': 'subject_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <record id="action_tori_marksheet" model="ir.actions.act_window">
         <field name="name">Marksheets</field>
         <field name="res_model">tori.marksheet</field>

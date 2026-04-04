@@ -4,6 +4,7 @@ from odoo import fields, models
 class ToriDisciplineRecord(models.Model):
     _name = 'tori.discipline.record'
     _description = 'Discipline Record'
+    _order = 'date desc'
 
     enrollment_id = fields.Many2one('tori.enrollment', required=True)
     date = fields.Date(required=True)

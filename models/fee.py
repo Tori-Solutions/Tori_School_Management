@@ -9,6 +9,11 @@ class ToriFeeStructure(models.Model):
     class_id = fields.Many2one('tori.class')
     session_id = fields.Many2one('tori.session')
     fee_element_ids = fields.One2many('tori.fee.element', 'fee_structure_id')
+    currency_id = fields.Many2one(
+        'res.currency',
+        default=lambda self: self.env.company.currency_id,
+        required=True,
+    )
     company_id = fields.Many2one('res.company', default=lambda self: self.env.company, required=True)
 
 
@@ -18,13 +23,18 @@ class ToriFeeElement(models.Model):
 
     fee_structure_id = fields.Many2one('tori.fee.structure', ondelete='cascade')
     name = fields.Char(required=True)
-    amount = fields.Float()
+    currency_id = fields.Many2one(
+        'res.currency',
+        related='fee_structure_id.currency_id',
+        store=True, readonly=True,
+    )
+    amount = fields.Monetary(currency_field='currency_id')
     fee_type = fields.Selection([('one_time', 'One Time'), ('recurring', 'Recurring')], default='one_time')
     recurring_interval = fields.Selection(
         [('monthly', 'Monthly'), ('quarterly', 'Quarterly'), ('yearly', 'Yearly')],
         default='monthly',
     )
-    late_fee_amount = fields.Float()
+    late_fee_amount = fields.Monetary(currency_field='currency_id')
     grace_days = fields.Integer(default=7)
     company_id = fields.Many2one(related='fee_structure_id.company_id', store=True, readonly=True)
 
@@ -33,14 +43,20 @@ class ToriFeeSlip(models.Model):
     _name = 'tori.fee.slip'
     _description = 'Fee Slip'
     _inherit = ['mail.thread']
+    _order = 'due_date desc, id desc'
 
     enrollment_id = fields.Many2one('tori.enrollment', required=True)
     fee_structure_id = fields.Many2one('tori.fee.structure')
     fee_element_id = fields.Many2one('tori.fee.element')
-    amount = fields.Float(tracking=True)
+    currency_id = fields.Many2one(
+        'res.currency',
+        related='enrollment_id.company_id.currency_id',
+        store=True, readonly=True,
+    )
+    amount = fields.Monetary(currency_field='currency_id', tracking=True)
     due_date = fields.Date(tracking=True)
     paid_date = fields.Date()
-    late_fee_applied = fields.Float()
+    late_fee_applied = fields.Monetary(currency_field='currency_id')
     state = fields.Selection(
         [('draft', 'Draft'), ('sent', 'Sent'), ('paid', 'Paid'), ('overdue', 'Overdue')],
         default='draft',
@@ -160,4 +176,26 @@ class ToriEnrollmentFeeHook(models.Model):
                     'amount': amount,
                     'due_date': fields.Date.today(),
                 })
+
+
+class AccountMoveExtension(models.Model):
+    """Sync invoice payment state back to linked fee slips."""
+    _inherit = 'account.move'
+
+    def _tori_sync_fee_slip_state(self):
+        slip_model = self.env['tori.fee.slip']
+        for move in self:
+            slips = slip_model.search([('invoice_id', '=', move.id)])
+            if not slips:
+                continue
+            if move.payment_state in ('paid', 'in_payment'):
+                slips.filtered(lambda s: s.state != 'paid').write({'state': 'paid'})
+            elif move.payment_state == 'not_paid' and move.state == 'posted':
+                slips.filtered(lambda s: s.state == 'paid').write({'state': 'sent'})
+
+    def write(self, vals):
+        res = super().write(vals)
+        if 'payment_state' in vals:
+            self._tori_sync_fee_slip_state()
+        return res
 

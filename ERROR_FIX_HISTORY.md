@@ -278,6 +278,63 @@ Fix:
 
 - Added `website/templates/portal_navigation.xml`.
 - Extended portal breadcrumbs for school pages.
+
+## 22) Fresh install ParseError from menu action ordering
+
+Error pattern:
+
+- Fresh install failed with `External ID not found in the system: tori_school_management.action_lesson_plan`
+- Parse error in `views/menus.xml` when loading menu items referencing actions not yet loaded.
+
+Root cause:
+
+- `views/menus.xml` loaded before new view files that define the corresponding `ir.actions.act_window` records.
+
+Fix:
+
+- Kept top-level menu tree in `views/menus.xml` and loaded it early.
+- Moved action-bound feature menuitems into new `views/feature_menus.xml` loaded after view/action files.
+
+Impact:
+
+- Fresh install and upgrade both load cleanly.
+
+## 23) Odoo 19 search view parser incompatibility for `<group>`
+
+Error pattern:
+
+- `Invalid view ... search definition`
+- RNG errors for `expand` and `string` attributes on `<group>` inside `<search>`.
+
+Root cause:
+
+- Legacy search group syntax was used (`expand="0"`, `string="Group By"`) which is invalid for Odoo 19 search views.
+
+Fix:
+
+- Updated all search views to use a bare `<group>` with nested group-by filters.
+
+Impact:
+
+- Search views import cleanly in Odoo 19.
+
+## 24) Invalid fee slip state sync value
+
+Error pattern:
+
+- Fee slip sync attempted to write `state='unpaid'`, which is not a valid value in `tori.fee.slip` state selection.
+
+Root cause:
+
+- Incorrect fallback mapping in account move payment-state sync logic.
+
+Fix:
+
+- Changed fallback to `state='sent'` when posted invoice returns to `not_paid`.
+
+Impact:
+
+- Payment-state sync remains valid and no selection mismatch can occur.
 - Added portal section navigation tabs linked to `/my/*` routes.
 
 Impact:

@@ -58,6 +58,25 @@ This file tracks major implementation tasks completed in `tori_school_management
 - Updated `analysis/REMEDIATION_BACKLOG.md` with resolved/outstanding items.
 - Updated all core documentation files.
 
+## 2026-04-04
+
+- Final sprint completion (B3, D3-D10, L1-L11)
+- Implemented public admission anti-bot stack: honeypot + CAPTCHA + IP rate limiting.
+- Converted fee/scholarship amounts to Monetary fields and added migration backfill support.
+- Added missing backend views/actions/menus for lesson, discipline, announcement, community service, and ID card.
+- Added search views for enrollment, fee slip, assignment, and attendance.
+- Scoped barcode scanning behavior to attendance context only.
+- Split shared dashboard CSS into backend-only and portal-only assets.
+- Added portal ownership rules for marksheet and book issue visibility.
+- Added sanitized HTML for ID card templates and `_order` defaults across key models.
+- Added `active` archive flag to enrollments.
+- Hardened enrollment creation with savepoint and explicit UserError on failure.
+- Added account.move payment-state sync back to fee slips.
+- Added uninstall hook and GitHub Actions CI workflow.
+- Fixed fresh-install load ordering issue by splitting feature menus into `views/feature_menus.xml` and loading base menus early.
+- Fixed Odoo 19 search view parser compatibility (`<group>` in search views without legacy attributes).
+- Validated module upgrade on `MULOOM` and fresh install on clean test DB.
+
 ## 2026-03-31
 
 - Website discoverability and portal UX

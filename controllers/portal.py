@@ -1,12 +1,37 @@
 import base64
+import logging
 import mimetypes
+import time
+from collections import defaultdict
+from threading import Lock
 
 from odoo import fields, http
 from odoo.http import request
 from odoo.addons.portal.controllers.portal import CustomerPortal
 
+_logger = logging.getLogger(__name__)
 
 ALLOWED_PHOTO_MIME_TYPES = {'image/jpeg', 'image/png', 'image/gif', 'image/webp'}
+
+# ---------------------------------------------------------------------------
+# B3: In-process rate limiter for public admission form
+# For multi-worker production, replace with PostgreSQL or Redis counters.
+# ---------------------------------------------------------------------------
+_rate_limit_store = defaultdict(list)
+_rate_limit_lock = Lock()
+RATE_LIMIT_MAX = 5          # max submissions
+RATE_LIMIT_WINDOW = 3600    # per hour (seconds)
+
+
+def _is_rate_limited(ip: str) -> bool:
+    now = time.time()
+    with _rate_limit_lock:
+        timestamps = _rate_limit_store[ip]
+        _rate_limit_store[ip] = [t for t in timestamps if now - t < RATE_LIMIT_WINDOW]
+        if len(_rate_limit_store[ip]) >= RATE_LIMIT_MAX:
+            return True
+        _rate_limit_store[ip].append(now)
+        return False
 
 
 class ToriSchoolPortal(CustomerPortal):
@@ -230,7 +255,20 @@ class ToriSchoolPublic(http.Controller):
 
     @http.route('/admission/submit', type='http', auth='public', methods=['POST'], website=True, csrf=True)
     def admission_submit(self, **post):
+        # Layer 1: Rate limiting by IP
+        client_ip = request.httprequest.environ.get(
+            'HTTP_X_FORWARDED_FOR', request.httprequest.remote_addr
+        )
+        if client_ip:
+            client_ip = client_ip.split(',')[0].strip()
+        if _is_rate_limited(client_ip):
+            _logger.warning("Rate limit hit for IP: %s on /admission/submit", client_ip)
+            return request.redirect('/admission?error=rate_limited')
+
+        # Layer 2: Honeypot checks (original + new hidden field)
         if self._is_honeypot_triggered(post):
+            return request.redirect('/admission?submitted=1')
+        if post.get('website_url'):
             return request.redirect('/admission?submitted=1')
 
         first_name = (post.get('first_name') or '').strip()

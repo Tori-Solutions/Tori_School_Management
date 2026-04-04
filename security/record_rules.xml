@@ -198,6 +198,37 @@
         <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
     </record>
 
+    <!-- D10: Portal students/parents see only own marksheets -->
+    <record id="rule_marksheet_portal" model="ir.rule">
+        <field name="name">Marksheet: Portal sees own/children only</field>
+        <field name="model_id" ref="model_tori_marksheet"/>
+        <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+        <field name="domain_force">
+            ['|',
+              ('enrollment_id.student_id.user_ids', 'in', [user.id]),
+              ('enrollment_id.parent_id.user_ids', 'in', [user.id])
+            ]
+        </field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <!-- D10: Portal students/parents see only own book issues -->
+    <record id="rule_book_issue_portal" model="ir.rule">
+        <field name="name">Book Issue: Portal sees own only</field>
+        <field name="model_id" ref="model_tori_book_issue"/>
+        <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+        <field name="domain_force">
+            [('student_id.user_ids', 'in', [user.id])]
+        </field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
     <record id="rule_transport_stop_company" model="ir.rule">
         <field name="name">Transport Stop Company</field>
         <field name="model_id" ref="model_tori_transport_stop"/>

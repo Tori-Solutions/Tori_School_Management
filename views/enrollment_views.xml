@@ -125,6 +125,28 @@
         <field name="res_model">tori.enrollment</field>
         <field name="view_mode">list,form</field>
     </record>
+
+    <!-- D5: Enrollment search view -->
+    <record id="view_enrollment_search" model="ir.ui.view">
+        <field name="name">tori.enrollment.search</field>
+        <field name="model">tori.enrollment</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="student_id" string="Student"/>
+                <field name="class_id"/>
+                <field name="session_id"/>
+                <filter string="Active" name="active_state" domain="[('state','=','active')]"/>
+                <filter string="Mid-term" name="mid_term" domain="[('is_mid_term','=',True)]"/>
+                <filter string="Portal Access Granted" name="portal" domain="[('portal_access_granted','=',True)]"/>
+                <separator/>
+                <group>
+                    <filter string="Class" name="by_class" context="{'group_by': 'class_id'}"/>
+                    <filter string="Session" name="by_session" context="{'group_by': 'session_id'}"/>
+                    <filter string="Status" name="by_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
 </odoo>
 
 

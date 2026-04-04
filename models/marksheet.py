@@ -21,33 +21,51 @@ class ToriMarksheet(models.Model):
     )
     def _compute_result(self):
         for rec in self:
+            results = rec.subject_result_ids
+            if not results:
+                rec.percentage = 0.0
+                rec.gpa = 0.0
+                rec.grade_letter = False
+                continue
+
+            total_credits = 0.0
             weighted_percent = 0.0
             weighted_gpa = 0.0
-            total_credits = 0.0
-            for line in rec.subject_result_ids:
-                credit = line.subject_id.credit_value or 1.0
-                pct = ((line.marks or 0.0) / (line.total_marks or 1.0)) * 100.0
-                weighted_percent += credit * pct
-                total_credits += credit
-            rec.percentage = weighted_percent / total_credits if total_credits else 0.0
-
             scale = rec.enrollment_id.class_id.grade_scale_id
-            line = False
-            if scale:
-                line = scale.grade_line_ids.filtered(
-                    lambda g: g.min_percent <= rec.percentage <= g.max_percent
-                )[:1]
-            rec.grade_letter = line.grade_letter if line else False
-            rec.gpa = line.gpa_points if line else 0.0
-            if total_credits and scale:
-                # Credit-weighted GPA at subject-line level when possible.
-                weighted_gpa_points = 0.0
-                for sline in rec.subject_result_ids:
-                    credit = sline.subject_id.credit_value or 1.0
-                    pct = ((sline.marks or 0.0) / (sline.total_marks or 1.0)) * 100.0
-                    gl = scale.grade_line_ids.filtered(lambda g: g.min_percent <= pct <= g.max_percent)[:1]
-                    weighted_gpa_points += credit * (gl.gpa_points if gl else 0.0)
-                rec.gpa = weighted_gpa_points / total_credits
+            grade_lines = scale.grade_line_ids if scale else self.env['tori.grade.line']
+
+            # Single pass over subject results
+            for sline in results:
+                credit = sline.subject_id.credit_value or 1.0
+                pct = ((sline.marks or 0.0) / (sline.total_marks or 1.0)) * 100.0
+
+                # Lookup GPA from grade scale in this same pass
+                gpa_pts = 0.0
+                for gl in grade_lines:
+                    if gl.min_percent <= pct <= gl.max_percent:
+                        gpa_pts = gl.gpa_points
+                        break
+
+                weighted_percent += credit * pct
+                weighted_gpa += credit * gpa_pts
+                total_credits += credit
+
+            if total_credits:
+                final_pct = weighted_percent / total_credits
+                final_gpa = weighted_gpa / total_credits
+            else:
+                final_pct = final_gpa = 0.0
+
+            # Map final percentage to grade letter
+            final_letter = False
+            for gl in grade_lines:
+                if gl.min_percent <= final_pct <= gl.max_percent:
+                    final_letter = gl.grade_letter
+                    break
+
+            rec.percentage = final_pct
+            rec.gpa = final_gpa
+            rec.grade_letter = final_letter
 
 
 class ToriSubjectResult(models.Model):

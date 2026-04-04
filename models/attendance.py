@@ -4,6 +4,7 @@ from odoo import fields, models
 class ToriStudentAttendance(models.Model):
     _name = 'tori.student.attendance'
     _description = 'Student Attendance'
+    _order = 'date desc, id desc'
     _uniq_tori_attendance_enrollment_date_slot = models.Constraint(
         'unique(enrollment_id, date, timetable_slot_id)',
         'Attendance is already recorded for this student, date, and timetable slot.',

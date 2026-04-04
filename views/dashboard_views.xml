@@ -5,9 +5,9 @@
         <field name="tag">tori_school_dashboard</field>
     </record>
 
+    <!-- L3: Root menu action wiring (definition stays in menus.xml only) -->
     <record id="menu_tori_school_root" model="ir.ui.menu">
         <field name="action" ref="action_tori_dashboard_client"/>
-        <field name="web_icon">tori_school_management,static/description/icon.png</field>
     </record>
 
     <menuitem id="menu_tori_dashboard" name="Dashboard" parent="tori_school_management.menu_tori_school_root" action="action_tori_dashboard_client" sequence="1"/>

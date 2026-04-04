@@ -7,7 +7,12 @@ class ToriScholarship(models.Model):
 
     enrollment_id = fields.Many2one('tori.enrollment', required=True)
     name = fields.Char()
-    amount = fields.Float()
+    currency_id = fields.Many2one(
+        'res.currency',
+        related='enrollment_id.company_id.currency_id',
+        store=True, readonly=True,
+    )
+    amount = fields.Monetary(currency_field='currency_id')
     state = fields.Selection(
         [('draft', 'Draft'), ('approved', 'Approved'), ('paid', 'Paid')],
         default='draft',

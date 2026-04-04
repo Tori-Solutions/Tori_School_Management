@@ -8,6 +8,7 @@
                 <field name="name"/>
                 <field name="class_id"/>
                 <field name="session_id"/>
+                <field name="currency_id" optional="hide"/>
             </list>
         </field>
     </record>
@@ -22,14 +23,16 @@
                         <field name="name"/>
                         <field name="class_id"/>
                         <field name="session_id"/>
+                        <field name="currency_id" groups="base.group_multi_currency"/>
                     </group>
                     <field name="fee_element_ids">
                         <list editable="bottom">
                             <field name="name"/>
-                            <field name="amount"/>
+                            <field name="currency_id" column_invisible="1"/>
+                            <field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                             <field name="fee_type"/>
                             <field name="recurring_interval"/>
-                            <field name="late_fee_amount"/>
+                            <field name="late_fee_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                             <field name="grace_days"/>
                         </list>
                     </field>
@@ -45,9 +48,10 @@
             <list>
                 <field name="enrollment_id"/>
                 <field name="fee_element_id"/>
-                <field name="amount"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                 <field name="due_date"/>
-                <field name="late_fee_applied"/>
+                <field name="late_fee_applied" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                 <field name="state"/>
             </list>
         </field>
@@ -76,9 +80,10 @@
                         </group>
                         <group string="Payment Details">
                             <!-- Admin can edit amount and due_date after generation -->
-                            <field name="amount" readonly="state not in ('draft','sent')" groups="tori_school_management.group_education_admin"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="state not in ('draft','sent')" groups="tori_school_management.group_education_admin"/>
                             <field name="due_date" readonly="state not in ('draft','sent')" groups="tori_school_management.group_education_admin"/>
-                            <field name="late_fee_applied" readonly="1"/>
+                            <field name="late_fee_applied" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
                             <field name="paid_date" readonly="state != 'sent'"/>
                         </group>
                     </group>
@@ -123,6 +128,25 @@
         <field name="name">Fee Slips</field>
         <field name="res_model">tori.fee.slip</field>
         <field name="view_mode">list,form,pivot,graph</field>
+    </record>
+
+    <!-- D5: Fee slip search view -->
+    <record id="view_fee_slip_search" model="ir.ui.view">
+        <field name="name">tori.fee.slip.search</field>
+        <field name="model">tori.fee.slip</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="enrollment_id" string="Student"/>
+                <filter string="Overdue" name="overdue" domain="[('state','=','overdue')]"/>
+                <filter string="Unpaid" name="unpaid" domain="[('state','in',['draft','sent','overdue'])]"/>
+                <filter string="Paid" name="paid" domain="[('state','=','paid')]"/>
+                <separator/>
+                <group>
+                    <filter string="Status" name="by_state" context="{'group_by': 'state'}"/>
+                    <filter string="Due Date" name="by_due_date" context="{'group_by': 'due_date:month'}"/>
+                </group>
+            </search>
+        </field>
     </record>
 
     <menuitem id="menu_tori_fee_structure" name="Fee Structures" parent="tori_school_management.menu_tori_school_finance" action="action_tori_fee_structure" sequence="10"/>

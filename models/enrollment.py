@@ -28,6 +28,7 @@ class ToriEnrollment(models.Model):
     subject_ids = fields.Many2many('tori.subject')
     fee_structure_id = fields.Many2one('tori.fee.structure')
     is_mid_term = fields.Boolean(default=False)
+    active = fields.Boolean(default=True)
     state = fields.Selection(
         [('active', 'Active'), ('inactive', 'Inactive'), ('graduated', 'Graduated')],
         default='active',

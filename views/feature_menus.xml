@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- D4: Feature menus loaded after corresponding actions are defined -->
+    <menuitem id="menu_lesson_plan" name="Lesson Plans" parent="tori_school_management.menu_tori_school_academics" action="tori_school_management.action_lesson_plan" sequence="40"/>
+    <menuitem id="menu_announcement" name="Announcements" parent="tori_school_management.menu_tori_school_academics" action="tori_school_management.action_announcement" sequence="50"/>
+    <menuitem id="menu_discipline" name="Discipline Records" parent="tori_school_management.menu_tori_school_students" action="tori_school_management.action_discipline" sequence="30"/>
+    <menuitem id="menu_community_service" name="Community Service" parent="tori_school_management.menu_tori_school_students" action="tori_school_management.action_community_service" sequence="40"/>
+    <menuitem id="menu_id_card" name="ID Cards" parent="tori_school_management.menu_tori_school_config" action="tori_school_management.action_id_card" sequence="30"/>
+    <menuitem id="menu_id_card_design" name="ID Card Designs" parent="tori_school_management.menu_tori_school_config" action="tori_school_management.action_id_card_design" sequence="31"/>
+</odoo>

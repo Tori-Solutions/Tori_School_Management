@@ -17,6 +17,6 @@ class ToriIdCardDesign(models.Model):
 
     name = fields.Char()
     orientation = fields.Selection([('horizontal', 'Horizontal'), ('vertical', 'Vertical')], default='horizontal')
-    template_html = fields.Html()
+    template_html = fields.Html(sanitize=True, sanitize_attributes=True, strip_style=False)
     company_id = fields.Many2one('res.company', default=lambda self: self.env.company, required=True)
 

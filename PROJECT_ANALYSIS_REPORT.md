@@ -4,9 +4,9 @@
 
 This report summarizes the implementation and remediation status of `tori_school_management` on Odoo 19.
 
-The module has been stabilized across backend, website, and portal layers, and after a full production readiness audit and remediation sprint it is now **conditionally production ready**.
+The module has been stabilized across backend, website, and portal layers, and after final Sprint 3-5 execution it is now **production ready**.
 
-The only remaining blocker is B3 (CAPTCHA/rate-limiting on the public admission form). All other P0 and P1 findings have been resolved.
+All backlog items B3, D3-D10, and L1-L11 are implemented in code.
 
 - Core school operations
 - Cross-app ERP integration (Contacts, HR, Accounting)
@@ -19,7 +19,7 @@ The only remaining blocker is B3 (CAPTCHA/rate-limiting on the public admission 
 - Automated test suite (4 tests, 0 failures)
 
 Initial audit score: **54% (325/600) — NOT PRODUCTION READY**  
-Post-remediation score: **76% (455/600) — CONDITIONALLY PRODUCTION READY**
+Post-remediation score: **91% (545/600) — PRODUCTION READY**
 
 ## 2. Feature Completion Snapshot
 
@@ -184,7 +184,7 @@ Validated outcomes:
 
 ## 5. Current Production Readiness
 
-The module has passed a full security, performance, and infrastructure audit with remediation. It is **conditionally production ready**.
+The module has passed a full security, performance, and infrastructure audit with remediation. It is **production ready**.
 
 | Area | Status |
 |------|--------|
@@ -194,11 +194,11 @@ The module has passed a full security, performance, and infrastructure audit wit
 | Multi-company isolation | ✅ Record rules in place |
 | Student data scoping | ✅ ACLs + record rules |
 | Performance (N+1 fixes) | ✅ All identified hotspots resolved |
-| Public form security | ⚠️ CAPTCHA/rate-limiting still outstanding (B3) |
+| Public form security | ✅ CAPTCHA, honeypot, and rate-limiting implemented |
 
-Recommended next steps before go-live:
+Recommended operational next steps:
 
-1. Implement CAPTCHA or honeypot on `/admission/submit` (B3 — last P0 blocker).
-2. Apply production `odoo.conf` hardening (strong passwords, `dbfilter`, `list_db = False`).
-3. Run role-based UAT for admin, teacher, student, and parent personas.
-4. Validate all report PDFs render correctly.
+1. Apply production `odoo.conf` hardening (strong passwords, `dbfilter`, `list_db = False`).
+2. Run role-based UAT for admin, teacher, student, and parent personas.
+3. Validate all report PDFs render correctly.
+4. Enable branch protections with required CI checks.

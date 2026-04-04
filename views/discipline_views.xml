@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_discipline_list" model="ir.ui.view">
+        <field name="name">tori.discipline.record.list</field>
+        <field name="model">tori.discipline.record</field>
+        <field name="arch" type="xml">
+            <list string="Discipline Records" default_order="date desc">
+                <field name="date"/>
+                <field name="enrollment_id"/>
+                <field name="category"/>
+                <field name="reported_by"/>
+                <field name="action_taken" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_discipline_form" model="ir.ui.view">
+        <field name="name">tori.discipline.record.form</field>
+        <field name="model">tori.discipline.record</field>
+        <field name="arch" type="xml">
+            <form string="Discipline Record">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="enrollment_id"/>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="category"/>
+                            <field name="reported_by"/>
+                        </group>
+                    </group>
+                    <group string="Details">
+                        <field name="description" placeholder="Describe the incident..."/>
+                        <field name="action_taken" placeholder="What action was taken..."/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_discipline_search" model="ir.ui.view">
+        <field name="name">tori.discipline.record.search</field>
+        <field name="model">tori.discipline.record</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="enrollment_id"/>
+                <field name="category"/>
+                <field name="reported_by"/>
+                <group>
+                    <filter string="Category" name="group_category" context="{'group_by': 'category'}"/>
+                    <filter string="Reporter" name="group_reporter" context="{'group_by': 'reported_by'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_discipline" model="ir.actions.act_window">
+        <field name="name">Discipline Records</field>
+        <field name="res_model">tori.discipline.record</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

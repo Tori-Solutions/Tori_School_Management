@@ -1,0 +1,130 @@
+/* ── Student / Parent Portal + Website (D9) ────── */
+/* Only loaded in web.assets_frontend — lightweight, no dark theme variables */
+
+/* Portal welcome banner gradient */
+.o_portal_wrap .bg-primary {
+  background: linear-gradient(135deg, #4158D0 0%, #C850C0 100%) !important;
+}
+
+/* Portal schedule time pill */
+.o_portal_wrap .text-primary {
+  font-variant-numeric: tabular-nums;
+}
+
+.o_portal_wrap .card {
+  border-radius: 12px;
+  transition: box-shadow 0.15s ease;
+}
+
+/* Portal section navigation */
+.tori-portal-nav {
+  margin-bottom: 0.75rem;
+}
+
+.tori-portal-nav-scroll {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.25rem;
+}
+
+.tori-portal-tab {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  border-radius: 999px;
+}
+
+@media (min-width: 992px) {
+  .tori-portal-nav-scroll {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+}
+
+/* Website admission form styling */
+.tori-admission-page {
+  max-width: 1140px;
+}
+
+.tori-adm-section {
+  border: 1px solid #d9dee5;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.tori-adm-section-title {
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.92rem;
+}
+
+.tori-adm-section-body {
+  padding: 0.9rem;
+}
+
+.tori-adm-section .form-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  color: #3f4752;
+}
+
+.tori-adm-section .form-control,
+.tori-adm-section .form-select {
+  min-height: 38px;
+  border-radius: 8px;
+}
+
+.tori-adm-choice-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  border: 1px solid #d9dee5;
+  border-radius: 8px;
+  padding: 0.45rem 0.6rem;
+  min-height: 38px;
+  background: #f8fafc;
+}
+
+.tori-adm-choice-row .form-check {
+  margin-bottom: 0;
+  font-size: 0.86rem;
+}
+
+.tori-adm-photo-upload-box {
+  width: 124px;
+  height: 124px;
+  margin-left: auto;
+  border: 1px dashed #c6cdd8;
+  border-radius: 10px;
+  background: #f4f7fb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.tori-adm-photo-upload-box::before {
+  content: "+";
+  font-size: 2rem;
+  line-height: 1;
+  color: #9ca8b8;
+}
+
+.tori-adm-photo-upload-box:hover {
+  border-color: #7fa9d9;
+  background: #edf3fb;
+}
+
+@media (max-width: 768px) {
+  .tori-adm-section-body {
+    padding: 0.7rem;
+  }
+
+  .tori-adm-photo-upload-box {
+    margin-left: 0;
+  }
+}

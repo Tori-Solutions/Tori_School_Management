@@ -17,6 +17,21 @@ This module provides school operations in one app:
 
 ## Latest Implemented Updates
 
+### 2026-04-04 — Final Sprint Completion (B3, D3-D10, L1-L11)
+
+- **Security**: Added honeypot + CAPTCHA validation + IP rate-limiting to `/admission/submit`.
+- **Data Model**: Converted fee/scholarship amount fields to `fields.Monetary` with `currency_id`.
+- **Views/UX**: Added missing backend views/actions/menus for lesson plan, discipline, announcement, community service, and ID card models.
+- **Views/UX**: Added dedicated search views and group-by filters for enrollment, fee slip, assignment, and attendance.
+- **Frontend**: Scoped barcode scanner behavior to attendance context only.
+- **Frontend**: Split CSS assets into backend-only and portal-only files.
+- **Security**: Added ownership record rules for marksheets and book issues.
+- **Polish**: Added sanitized HTML for ID card templates, `_order` defaults, and enrollment `active` archiving support.
+- **Business Logic**: Made enrollment creation flow atomic with savepoint + explicit error reporting.
+- **Business Logic**: Added invoice payment-state sync back to fee slips.
+- **Infrastructure**: Added uninstall hook, migration script for Monetary backfill, and GitHub Actions CI workflow.
+- **Validation**: Module upgrade and fresh install validated on 2026-04-04.
+
 ### 2026-04-03 — Security Hardening, Performance, and Test Suite (commit 579a484)
 
 - **Security**: Added multi-company record rules for all models with `company_id` (~25 rules).

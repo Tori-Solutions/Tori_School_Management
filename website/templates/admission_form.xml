@@ -39,12 +39,21 @@
                         </strong>
                     </div>
                 </t>
+                <t t-if="request.params.get('error') == 'rate_limited'">
+                    <div class="alert alert-danger" role="alert">
+                        Too many submissions from your connection. Please try again in an hour.
+                    </div>
+                </t>
 
                 <form action="/admission/submit" method="post" enctype="multipart/form-data" class="tori-admission-form">
                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                     <div class="d-none" aria-hidden="true">
                         <label for="admission_website">Website</label>
                         <input id="admission_website" type="text" name="website" tabindex="-1" autocomplete="off"/>
+                    </div>
+                    <!-- B3: Second honeypot — bots fill everything, real users never see this -->
+                    <div style="display:none !important; visibility:hidden; position:absolute; left:-9999px;">
+                        <input type="text" name="website_url" tabindex="-1" autocomplete="off" placeholder="Leave this empty"/>
                     </div>
 
                     <section class="tori-adm-section mb-3">

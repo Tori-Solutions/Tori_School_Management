@@ -1,7 +1,7 @@
 import re
 
 from odoo import api, fields, models
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 
 
 class ToriAdmissionEnquiry(models.Model):
@@ -331,88 +331,94 @@ class ToriStudentApplication(models.Model):
     def action_enroll(self):
         enrollment_model = self.env['tori.enrollment']
         for rec in self:
-            partner = rec.student_partner_id
-            if not partner:
-                partner = self.env['res.partner'].create({
-                    'name': rec.student_name,
-                    'email': rec.email or rec.guardian_email or rec.father_email,
-                    'phone': rec.phone or rec.guardian_phone or rec.father_phone or rec.mother_mobile,
-                    'street': rec.street,
-                    'street2': rec.street2,
-                    'city': rec.city,
-                    'state_id': rec.state_id.id,
-                    'zip': rec.zip,
-                    'country_id': rec.country_id.id,
-                    'is_student': True,
-                    'company_id': rec.company_id.id,
-                    'barcode': rec.name,
-                })
-                rec.student_partner_id = partner.id
+            with self.env.cr.savepoint():
+                try:
+                    partner = rec.student_partner_id
+                    if not partner:
+                        partner = self.env['res.partner'].create({
+                            'name': rec.student_name,
+                            'email': rec.email or rec.guardian_email or rec.father_email,
+                            'phone': rec.phone or rec.guardian_phone or rec.father_phone or rec.mother_mobile,
+                            'street': rec.street,
+                            'street2': rec.street2,
+                            'city': rec.city,
+                            'state_id': rec.state_id.id,
+                            'zip': rec.zip,
+                            'country_id': rec.country_id.id,
+                            'is_student': True,
+                            'company_id': rec.company_id.id,
+                            'barcode': rec.name,
+                        })
+                        rec.student_partner_id = partner.id
 
-            parent_name = rec.guardian_name or rec.father_name or rec.mother_name
-            parent_email = rec.guardian_email or rec.father_email
-            parent_phone = rec.guardian_phone or rec.father_phone or rec.mother_mobile
-            parent_partner = self.env['res.partner']
-            if parent_name:
-                domain = [('is_parent', '=', True)]
-                if parent_email:
-                    domain = [('email', '=', parent_email)]
-                elif parent_phone:
-                    domain = [('phone', '=', parent_phone)]
-                parent_partner = self.env['res.partner'].search(domain, limit=1)
-                if not parent_partner:
-                    parent_partner = self.env['res.partner'].create({
-                        'name': parent_name,
-                        'email': parent_email,
-                        'phone': parent_phone,
-                        'is_parent': True,
+                    parent_name = rec.guardian_name or rec.father_name or rec.mother_name
+                    parent_email = rec.guardian_email or rec.father_email
+                    parent_phone = rec.guardian_phone or rec.father_phone or rec.mother_mobile
+                    parent_partner = self.env['res.partner']
+                    if parent_name:
+                        domain = [('is_parent', '=', True)]
+                        if parent_email:
+                            domain = [('email', '=', parent_email)]
+                        elif parent_phone:
+                            domain = [('phone', '=', parent_phone)]
+                        parent_partner = self.env['res.partner'].search(domain, limit=1)
+                        if not parent_partner:
+                            parent_partner = self.env['res.partner'].create({
+                                'name': parent_name,
+                                'email': parent_email,
+                                'phone': parent_phone,
+                                'is_parent': True,
+                                'company_id': rec.company_id.id,
+                            })
+
+                    year = self.env['tori.academic.year'].search([
+                        ('session_id', '=', rec.session_id.id)
+                    ], limit=1)
+
+                    fee_structure = self.env['tori.fee.structure'].search([
+                        ('class_id', '=', rec.class_id.id),
+                        ('session_id', '=', rec.session_id.id),
+                    ], limit=1)
+
+                    enrollment_vals = {
+                        'student_id': partner.id,
+                        'session_id': rec.session_id.id,
+                        'academic_year_id': rec.academic_year_id.id or year.id,
+                        'class_id': rec.class_id.id,
+                        'section_id': rec.section_id.id,
+                        'subject_ids': [(6, 0, rec.class_id.subject_ids.ids)],
+                        'fee_structure_id': fee_structure.id,
+                        'parent_id': parent_partner.id,
                         'company_id': rec.company_id.id,
-                    })
+                    }
 
-            year = self.env['tori.academic.year'].search([
-                ('session_id', '=', rec.session_id.id)
-            ], limit=1)
+                    enrollment = enrollment_model.search([
+                        ('student_id', '=', partner.id),
+                        ('session_id', '=', rec.session_id.id),
+                        ('company_id', '=', rec.company_id.id),
+                    ], limit=1)
 
-            fee_structure = self.env['tori.fee.structure'].search([
-                ('class_id', '=', rec.class_id.id),
-                ('session_id', '=', rec.session_id.id),
-            ], limit=1)
+                    if enrollment:
+                        enrollment.write({
+                            'academic_year_id': enrollment_vals['academic_year_id'],
+                            'class_id': enrollment_vals['class_id'],
+                            'section_id': enrollment_vals['section_id'],
+                            'subject_ids': enrollment_vals['subject_ids'],
+                            'fee_structure_id': enrollment_vals['fee_structure_id'],
+                            'parent_id': enrollment_vals['parent_id'],
+                        })
+                    else:
+                        enrollment = enrollment_model.create(enrollment_vals)
 
-            enrollment_vals = {
-                'student_id': partner.id,
-                'session_id': rec.session_id.id,
-                'academic_year_id': rec.academic_year_id.id or year.id,
-                'class_id': rec.class_id.id,
-                'section_id': rec.section_id.id,
-                'subject_ids': [(6, 0, rec.class_id.subject_ids.ids)],
-                'fee_structure_id': fee_structure.id,
-                'parent_id': parent_partner.id,
-                'company_id': rec.company_id.id,
-            }
+                    if enrollment.fee_structure_id and not enrollment.fee_slip_ids:
+                        enrollment.action_generate_fee_slips()
 
-            enrollment = enrollment_model.search([
-                ('student_id', '=', partner.id),
-                ('session_id', '=', rec.session_id.id),
-                ('company_id', '=', rec.company_id.id),
-            ], limit=1)
-
-            if enrollment:
-                enrollment.write({
-                    'academic_year_id': enrollment_vals['academic_year_id'],
-                    'class_id': enrollment_vals['class_id'],
-                    'section_id': enrollment_vals['section_id'],
-                    'subject_ids': enrollment_vals['subject_ids'],
-                    'fee_structure_id': enrollment_vals['fee_structure_id'],
-                    'parent_id': enrollment_vals['parent_id'],
-                })
-            else:
-                enrollment = enrollment_model.create(enrollment_vals)
-
-            if enrollment.fee_structure_id and not enrollment.fee_slip_ids:
-                enrollment.action_generate_fee_slips()
-
-            rec.write({'state': 'enrolled'})
-            if rec.enquiry_id:
-                rec.enquiry_id.state = 'done'
-            rec.message_post(body='Enrollment created: %s' % enrollment.display_name)
+                    rec.write({'state': 'enrolled'})
+                    if rec.enquiry_id:
+                        rec.enquiry_id.state = 'done'
+                    rec.message_post(body='Enrollment created: %s' % enrollment.display_name)
+                except Exception as e:
+                    raise UserError(
+                        'Enrollment failed for %s: %s' % (rec.student_name, e)
+                    ) from e
 

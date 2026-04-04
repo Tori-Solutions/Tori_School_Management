@@ -110,7 +110,7 @@ The module loads in this order (important for stability):
 3. Backend views/actions/menus
 4. Reports
 5. Website templates/pages
-6. Web assets (dashboard JS/XML/CSS and scanner JS)
+6. Web assets (dashboard JS/XML and scanner JS + split CSS)
 7. Demo data (test_assets.xml — only on databases created with demo)
 
 ## 6) First-Time Functional Setup Checklist
@@ -231,7 +231,7 @@ Quick-action buttons route to valid backend module actions.
 PowerShell:
 python D:/odoo/odoo/odoo-bin -c D:/odoo/odoo.conf -d MUloom -u tori_school_management --stop-after-init
 
-### 8.4 Run test suite
+### 8.2 Run test suite
 
 PowerShell:
 python D:/odoo/odoo/odoo-bin -c D:/odoo/odoo.conf -d <testdb> -u tori_school_management --test-enable --test-tags tori_school_management --stop-after-init --no-http
@@ -248,12 +248,12 @@ Expected:
 - districts = 64
 - upazilas = 494
 
-### 8.5 Stage sequence validation
+### 8.4 Stage sequence validation
 
 PowerShell:
 $env:PGPASSWORD='123123'; psql -h localhost -p 5432 -U odoo -d MUloom -c "SELECT sequence, name, code, fold FROM tori_application_stage ORDER BY sequence, id;"
 
-### 8.6 Enrollment duplicate validation
+### 8.5 Enrollment duplicate validation
 
 No duplicate groups should exist:
 

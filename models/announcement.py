@@ -4,6 +4,7 @@ from odoo import fields, models
 class ToriAnnouncement(models.Model):
     _name = 'tori.announcement'
     _description = 'Announcement'
+    _order = 'date desc'
 
     title = fields.Char(required=True)
     body = fields.Html()

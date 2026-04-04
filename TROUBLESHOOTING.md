@@ -107,6 +107,24 @@ Fix strategy:
 2. Re-upgrade module.
 3. Inspect server logs for validation errors.
 
+## Admission form blocked (CAPTCHA or rate limit)
+
+Symptoms:
+
+- Form redirects with `?error=captcha_failed` or `?error=rate_limited`.
+
+Checks:
+
+- Website CAPTCHA keys are configured under Website settings.
+- Hidden honeypot fields (`website_url`, `website_company`) are empty in browser submission.
+- Reverse proxy forwards client IP correctly (`X-Forwarded-For`) so rate limiting behaves as expected.
+
+Fix strategy:
+
+1. Verify CAPTCHA keys and domain binding.
+2. Ensure real users are not auto-filling hidden honeypot inputs (password managers/extensions).
+3. If behind proxy, verify forwarded IP headers and trusted proxy config.
+
 ## Bangladesh district/thana dropdowns are empty
 
 Symptoms:
@@ -185,7 +203,7 @@ Symptoms:
 Checks:
 
 - `website/templates/portal_navigation.xml` is loaded.
-- Frontend CSS includes responsive nav rules in `static/src/css/dashboard.css`.
+- Frontend CSS includes responsive nav rules in `static/src/css/portal_styles.css`.
 
 Fix strategy:
 

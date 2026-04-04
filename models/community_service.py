@@ -4,6 +4,7 @@ from odoo import fields, models
 class ToriCommunityService(models.Model):
     _name = 'tori.community.service'
     _description = 'Community Service'
+    _order = 'date desc'
 
     enrollment_id = fields.Many2one('tori.enrollment', required=True)
     date = fields.Date()
@@ -12,4 +13,7 @@ class ToriCommunityService(models.Model):
     state = fields.Selection([('pending', 'Pending'), ('approved', 'Approved')], default='pending')
     approved_by = fields.Many2one('res.users')
     company_id = fields.Many2one(related='enrollment_id.company_id', store=True, readonly=True)
+
+    def action_approve(self):
+        self.write({'state': 'approved', 'approved_by': self.env.uid})
 

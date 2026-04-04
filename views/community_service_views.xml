@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_community_service_list" model="ir.ui.view">
+        <field name="name">tori.community.service.list</field>
+        <field name="model">tori.community.service</field>
+        <field name="arch" type="xml">
+            <list string="Community Service" decoration-success="state == 'approved'" decoration-warning="state == 'pending'">
+                <field name="enrollment_id"/>
+                <field name="date"/>
+                <field name="hours"/>
+                <field name="description"/>
+                <field name="state" widget="badge" decoration-success="state == 'approved'" decoration-warning="state == 'pending'"/>
+                <field name="approved_by" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_community_service_form" model="ir.ui.view">
+        <field name="name">tori.community.service.form</field>
+        <field name="model">tori.community.service</field>
+        <field name="arch" type="xml">
+            <form string="Community Service">
+                <header>
+                    <button name="action_approve" string="Approve" type="object" class="btn-primary" invisible="state != 'pending'" groups="tori_school_management.group_education_admin"/>
+                    <field name="state" widget="statusbar" statusbar_visible="pending,approved"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="enrollment_id"/>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="hours"/>
+                            <field name="approved_by" readonly="1"/>
+                        </group>
+                    </group>
+                    <field name="description" placeholder="Describe the service activity..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_community_service_search" model="ir.ui.view">
+        <field name="name">tori.community.service.search</field>
+        <field name="model">tori.community.service</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="enrollment_id"/>
+                <filter string="Pending" name="pending" domain="[('state','=','pending')]"/>
+                <filter string="Approved" name="approved" domain="[('state','=','approved')]"/>
+                <group>
+                    <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_community_service" model="ir.actions.act_window">
+        <field name="name">Community Service</field>
+        <field name="res_model">tori.community.service</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>
