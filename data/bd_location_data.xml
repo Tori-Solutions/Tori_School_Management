@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <data noupdate="1">
     <record id="bd_district_1" model="tori.bd.district">
         <field name="name">Comilla</field>
         <field name="code">D001</field>
@@ -3284,4 +3285,5 @@
         <field name="source_id">494</field>
         <field name="district_id" ref="bd_district_50"/>
     </record>
+    </data>
 </odoo>
