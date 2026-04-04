@@ -155,4 +155,7 @@ class ToriDashboard extends Component {
     }
 }
 
-registry.category("actions").add("tori_school_dashboard", ToriDashboard);
+const actionRegistry = registry.category("actions");
+if (!actionRegistry.contains("tori_school_dashboard")) {
+    actionRegistry.add("tori_school_dashboard", ToriDashboard);
+}
