@@ -55,6 +55,11 @@ class ToriDashboard extends Component {
         return `${Math.max(12, Math.round(base))}%`;
     }
 
+    stagePercent(count) {
+        const base = this.state.pipelineMax ? (count / this.state.pipelineMax) * 100 : 0;
+        return Math.round(base);
+    }
+
     getInitials(name) {
         const value = (name || "").trim();
         if (!value) {
@@ -82,6 +87,36 @@ class ToriDashboard extends Component {
             minimumFractionDigits: 0,
             maximumFractionDigits: 2,
         }).format(amount || 0);
+    }
+
+    formatDateTime(value) {
+        if (!value) {
+            return "Just now";
+        }
+        try {
+            return new Intl.DateTimeFormat(undefined, {
+                day: "2-digit",
+                month: "short",
+                hour: "2-digit",
+                minute: "2-digit",
+            }).format(new Date(value));
+        } catch (error) {
+            return "Just now";
+        }
+    }
+
+    attendanceTone(value) {
+        const pct = Number(value) || 0;
+        if (pct >= 90) {
+            return "Excellent";
+        }
+        if (pct >= 75) {
+            return "Stable";
+        }
+        if (pct >= 60) {
+            return "Watch";
+        }
+        return "Critical";
     }
 
     async openAction(xmlId, fallbackAction = null) {

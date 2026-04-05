@@ -2,10 +2,16 @@
 /* Only loaded in web.assets_backend — not on public website */
 
 .o_tori_dashboard {
-  --tori-surface: rgba(25, 31, 52, 0.72);
-  --tori-surface-2: rgba(35, 43, 68, 0.72);
-  --tori-border: rgba(137, 157, 209, 0.22);
-  --tori-text-soft: #9fb1d7;
+  --tori-surface: rgba(21, 32, 59, 0.76);
+  --tori-surface-2: rgba(28, 41, 73, 0.76);
+  --tori-surface-3: rgba(18, 28, 54, 0.82);
+  --tori-border: rgba(136, 177, 255, 0.26);
+  --tori-text-soft: #aac0ea;
+  --tori-text-main: #f4f7ff;
+  --tori-accent-cyan: #43d1ff;
+  --tori-accent-mint: #51dfb2;
+  --tori-accent-amber: #ffc95b;
+  --tori-accent-rose: #ff8d8d;
 }
 
 .tori-dash-scroll {
@@ -13,6 +19,9 @@
   overflow-y: auto;
   overflow-x: hidden;
   padding-bottom: 1.25rem;
+  background:
+    radial-gradient(circle at 100% -10%, rgba(67, 209, 255, 0.14), transparent 34%),
+    radial-gradient(circle at -4% 110%, rgba(81, 223, 178, 0.12), transparent 28%);
 }
 
 .o_tori_dashboard .card {
@@ -20,6 +29,8 @@
   border: 1px solid var(--tori-border) !important;
   border-radius: 14px;
   transition: box-shadow 0.18s ease, transform 0.18s ease;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
 }
 .o_tori_dashboard .card:hover {
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.26) !important;
@@ -32,25 +43,66 @@
 
 .tori-dash-hero {
   background:
-    radial-gradient(circle at 0% 0%, rgba(25, 185, 222, 0.24), transparent 48%),
-    linear-gradient(140deg, #132038 0%, #1d2f4f 52%, #1f3a4b 100%);
+    radial-gradient(circle at 0% 0%, rgba(67, 209, 255, 0.32), transparent 45%),
+    radial-gradient(circle at 100% 100%, rgba(81, 223, 178, 0.26), transparent 40%),
+    linear-gradient(140deg, #10213e 0%, #1b325c 52%, #204455 100%);
   border: 1px solid var(--tori-border);
   border-radius: 16px;
-  padding: 1rem 1.1rem;
+  padding: 1.2rem 1.2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.8rem;
+  gap: 1rem;
+  box-shadow: 0 16px 36px rgba(7, 13, 29, 0.3);
+}
+
+.tori-dash-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+  color: #d6e8ff;
+  opacity: 0.92;
 }
 
 .tori-dash-title {
   color: #f7f9ff;
-  font-size: 1.3rem;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-size: 1.44rem;
+  letter-spacing: 0.01em;
 }
 
 .tori-dash-subtitle {
   color: var(--tori-text-soft);
   font-size: 0.9rem;
+  max-width: 58ch;
+}
+
+.tori-dash-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tori-meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  border: 1px solid rgba(185, 214, 255, 0.34);
+  background: rgba(12, 20, 40, 0.32);
+  border-radius: 999px;
+  color: #e6efff;
+  font-size: 0.75rem;
+  padding: 0.28rem 0.62rem;
+}
+
+.tori-hero-btn {
+  border-radius: 10px;
+  min-height: 34px;
+}
+
+.tori-hero-btn--soft {
+  border-color: rgba(230, 241, 255, 0.42);
+  color: #eff6ff;
 }
 
 .tori-dash-qa-btn {
@@ -80,16 +132,29 @@
 .tori-stat-card {
   border: 1px solid var(--tori-border);
   border-radius: 13px;
-  background: var(--tori-surface-2);
-  color: #f5f8ff;
+  background: linear-gradient(150deg, rgba(29, 43, 77, 0.9), rgba(18, 29, 56, 0.92));
+  color: var(--tori-text-main);
   padding: 0.75rem;
-  min-height: 92px;
+  min-height: 112px;
   transition: transform 0.16s ease, border-color 0.16s ease;
+  animation: tori-rise 360ms ease both;
 }
 
 .tori-stat-card:hover {
-  transform: translateY(-1px);
-  border-color: rgba(165, 198, 255, 0.45);
+  transform: translateY(-2px);
+  border-color: rgba(165, 198, 255, 0.62);
+  box-shadow: 0 14px 24px rgba(8, 15, 31, 0.28);
+}
+
+.tori-stat-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tori-stat-topline i {
+  color: rgba(215, 231, 255, 0.85);
+  font-size: 0.95rem;
 }
 
 .tori-stat-label {
@@ -100,17 +165,31 @@
 }
 
 .tori-stat-value {
-  font-size: 1.55rem;
+  font-size: 1.62rem;
   font-weight: 700;
   line-height: 1.15;
-  margin-top: 0.25rem;
+  margin-top: 0.3rem;
 }
 
-.tori-stat-card--students { border-left: 4px solid #3ca7ff; }
-.tori-stat-card--faculty { border-left: 4px solid #34c48a; }
-.tori-stat-card--enrollments { border-left: 4px solid #5cc6ff; }
-.tori-stat-card--pending { border-left: 4px solid #f3bb35; }
-.tori-stat-card--fees { border-left: 4px solid #f56c6c; }
+.tori-stat-note {
+  margin-top: 0.2rem;
+  font-size: 0.72rem;
+  color: rgba(208, 224, 250, 0.9);
+}
+
+.tori-stat-card--students { border-left: 4px solid var(--tori-accent-cyan); }
+.tori-stat-card--faculty { border-left: 4px solid var(--tori-accent-mint); }
+.tori-stat-card--enrollments { border-left: 4px solid #7ec8ff; }
+.tori-stat-card--pending { border-left: 4px solid var(--tori-accent-amber); }
+.tori-stat-card--fees { border-left: 4px solid var(--tori-accent-rose); }
+
+.tori-panel-card {
+  animation: tori-rise 440ms ease both;
+}
+
+.tori-pipe-count {
+  color: #d8e7ff;
+}
 
 .tori-pipe-track {
   width: 100%;
@@ -167,10 +246,33 @@
   padding: 0.55rem 0.6rem;
 }
 
+@keyframes tori-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 991.98px) {
   .tori-dash-hero {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .tori-dash-title {
+    font-size: 1.26rem;
+  }
+
+  .tori-dash-hero__actions {
+    width: 100%;
+  }
+
+  .tori-hero-btn {
+    flex: 1 1 auto;
   }
 }
 

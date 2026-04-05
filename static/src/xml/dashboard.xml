@@ -3,16 +3,27 @@
     <t t-name="tori_school_management.Dashboard">
         <div class="o_tori_dashboard tori-dash-scroll p-4">
             <div class="tori-dash-hero mb-4">
-                <div>
-                    <h2 class="tori-dash-title mb-1">School Operations Dashboard</h2>
-                    <p class="tori-dash-subtitle mb-0">A connected snapshot of admissions, enrollment, finance, and attendance.</p>
+                <div class="tori-dash-hero__content">
+                    <p class="tori-dash-kicker mb-1">Live Operations</p>
+                    <h2 class="tori-dash-title mb-1">School Command Center</h2>
+                    <p class="tori-dash-subtitle mb-0">Track admissions, enrollment, finance, and attendance from one focused workspace.</p>
+                    <div class="tori-dash-meta mt-3">
+                        <span class="tori-meta-pill">
+                            <i class="fa fa-clock-o me-1"/>
+ Last sync: <t t-esc="this.formatDateTime(state.generatedOn)"/>
+                        </span>
+                        <span class="tori-meta-pill">
+                            <i class="fa fa-heartbeat me-1"/>
+ Attendance signal: <t t-esc="this.attendanceTone(state.stats.attendance_pct || 0)"/>
+                        </span>
+                    </div>
                 </div>
-                <div class="d-flex gap-2 flex-wrap">
-                    <button type="button" class="btn btn-outline-light btn-sm" t-on-click="loadData">
+                <div class="d-flex gap-2 flex-wrap tori-dash-hero__actions">
+                    <button type="button" class="btn btn-outline-light btn-sm tori-hero-btn tori-hero-btn--soft" t-on-click="loadData">
                         <i class="fa fa-refresh me-1"/>
  Refresh
                     </button>
-                    <button type="button" class="btn btn-primary btn-sm" t-on-click="openApplications">
+                    <button type="button" class="btn btn-primary btn-sm tori-hero-btn" t-on-click="openApplications">
                         <i class="fa fa-address-book-o me-1"/>
  Open Admissions
                     </button>
@@ -70,40 +81,63 @@
                 <div class="row g-3 mb-4">
                     <div class="col-xl col-md-6">
                         <button type="button" class="tori-stat-card tori-stat-card--students w-100 text-start" t-on-click="openStudents">
-                            <div class="tori-stat-label">Students</div>
+                            <div class="tori-stat-topline">
+                                <div class="tori-stat-label">Students</div>
+                                <i class="fa fa-users"/>
+                            </div>
                             <div class="tori-stat-value" t-esc="state.stats.total_students || 0"/>
+                            <div class="tori-stat-note">Learners in student records</div>
                         </button>
                     </div>
                     <div class="col-xl col-md-6">
                         <button type="button" class="tori-stat-card tori-stat-card--faculty w-100 text-start" t-on-click="openFaculty">
-                            <div class="tori-stat-label">Faculty</div>
+                            <div class="tori-stat-topline">
+                                <div class="tori-stat-label">Faculty</div>
+                                <i class="fa fa-graduation-cap"/>
+                            </div>
                             <div class="tori-stat-value" t-esc="state.stats.total_faculty || 0"/>
+                            <div class="tori-stat-note">Teachers and academic staff</div>
                         </button>
                     </div>
                     <div class="col-xl col-md-6">
                         <button type="button" class="tori-stat-card tori-stat-card--enrollments w-100 text-start" t-on-click="openEnrollments">
-                            <div class="tori-stat-label">Active Enrollments</div>
+                            <div class="tori-stat-topline">
+                                <div class="tori-stat-label">Active Enrollments</div>
+                                <i class="fa fa-id-badge"/>
+                            </div>
                             <div class="tori-stat-value" t-esc="state.stats.total_enrollments || 0"/>
+                            <div class="tori-stat-note">Students currently active</div>
                         </button>
                     </div>
                     <div class="col-xl col-md-6">
                         <button type="button" class="tori-stat-card tori-stat-card--pending w-100 text-start" t-on-click="openApplications">
-                            <div class="tori-stat-label">Pending Applications</div>
+                            <div class="tori-stat-topline">
+                                <div class="tori-stat-label">Pending Applications</div>
+                                <i class="fa fa-hourglass-half"/>
+                            </div>
                             <div class="tori-stat-value" t-esc="state.stats.pending_apps || 0"/>
+                            <div class="tori-stat-note">Awaiting decision workflow</div>
                         </button>
                     </div>
                     <div class="col-xl col-md-6">
                         <button type="button" class="tori-stat-card tori-stat-card--fees w-100 text-start" t-on-click="openFees">
-                            <div class="tori-stat-label">Overdue Fees</div>
+                            <div class="tori-stat-topline">
+                                <div class="tori-stat-label">Overdue Fees</div>
+                                <i class="fa fa-money"/>
+                            </div>
                             <div class="tori-stat-value" t-esc="state.stats.overdue_fees || 0"/>
+                            <div class="tori-stat-note">Need payment follow-up</div>
                         </button>
                     </div>
                 </div>
 
                 <div class="row g-3 mb-4">
                     <div class="col-lg-7">
-                        <div class="card border-0 shadow-sm h-100">
-                            <div class="card-header bg-transparent border-0 fw-semibold">Admissions Pipeline Health</div>
+                        <div class="card border-0 shadow-sm h-100 tori-panel-card">
+                            <div class="card-header bg-transparent border-0 fw-semibold d-flex justify-content-between align-items-center">
+                                <span>Admissions Pipeline Health</span>
+                                <span class="badge rounded-pill text-bg-light">Live</span>
+                            </div>
                             <div class="card-body">
                                 <t t-if="!state.pipeline.length">
                                     <div class="text-muted small">No pipeline activity yet.</div>
@@ -112,7 +146,10 @@
                                     <div class="mb-3">
                                         <div class="d-flex justify-content-between mb-1 small">
                                             <span class="fw-semibold" t-esc="item.stage"/>
-                                            <span t-esc="item.count"/>
+                                            <span class="tori-pipe-count">
+                                                <t t-esc="item.count"/>
+ (                                                <t t-esc="this.stagePercent(item.count)"/>
+%)</span>
                                         </div>
                                         <div class="tori-pipe-track">
                                             <div class="tori-pipe-fill" t-att-style="'width:' + this.stageBarWidth(item.count)"/>
@@ -123,8 +160,11 @@
                         </div>
                     </div>
                     <div class="col-lg-5">
-                        <div class="card border-0 shadow-sm h-100">
-                            <div class="card-header bg-transparent border-0 fw-semibold">Today's Attendance</div>
+                        <div class="card border-0 shadow-sm h-100 tori-panel-card">
+                            <div class="card-header bg-transparent border-0 fw-semibold d-flex justify-content-between align-items-center">
+                                <span>Today's Attendance</span>
+                                <span class="badge rounded-pill text-bg-light" t-esc="this.attendanceTone(state.stats.attendance_pct || 0)"/>
+                            </div>
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <span class="text-muted small">Presence Rate</span>
@@ -148,8 +188,11 @@
 
                 <div class="row g-3">
                     <div class="col-xl-6">
-                        <div class="card border-0 shadow-sm h-100">
-                            <div class="card-header bg-transparent border-0 fw-semibold">Recent Applications</div>
+                        <div class="card border-0 shadow-sm h-100 tori-panel-card">
+                            <div class="card-header bg-transparent border-0 fw-semibold d-flex justify-content-between align-items-center">
+                                <span>Recent Applications</span>
+                                <button type="button" class="btn btn-sm btn-link p-0 text-decoration-none" t-on-click="openApplications">View all</button>
+                            </div>
                             <div class="card-body p-0">
                                 <t t-if="!state.recentApplications.length">
                                     <div class="text-muted text-center py-4 small">No recent applications.</div>
@@ -174,7 +217,7 @@
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card border-0 shadow-sm h-100">
+                        <div class="card border-0 shadow-sm h-100 tori-panel-card">
                             <div class="card-header bg-transparent border-0 fw-semibold">Fee Alerts</div>
                             <div class="card-body p-0">
                                 <t t-if="!state.feeAlerts.length">
@@ -194,7 +237,7 @@
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card border-0 shadow-sm h-100">
+                        <div class="card border-0 shadow-sm h-100 tori-panel-card">
                             <div class="card-header bg-transparent border-0 fw-semibold">Today's Notices</div>
                             <div class="card-body">
                                 <t t-if="!state.announcements.length">
