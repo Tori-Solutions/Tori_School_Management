@@ -288,21 +288,17 @@ class ToriSchoolPublic(http.Controller):
         if post.get('website_url'):
             return request.redirect('/admission?submitted=1')
 
-        first_name = (post.get('first_name') or '').strip()
-        last_name = (post.get('last_name') or '').strip()
-        student_name = ('%s %s' % (first_name, last_name)).strip() or first_name
+        student_name = (post.get('student_name') or '').strip()
         class_id = self._to_int(post.get('class_id'))
         session_id = self._to_int(post.get('session_id'))
         date_of_birth = self._to_date(post.get('date_of_birth'))
         guardian_phone = (post.get('guardian_phone') or '').strip()
 
-        if not first_name or not class_id or not session_id or not date_of_birth or not guardian_phone:
+        if not student_name or not class_id or not session_id or not date_of_birth or not guardian_phone:
             return request.redirect('/admission?error=missing_required')
 
         application_vals = {
             'student_name': student_name,
-            'first_name': first_name,
-            'last_name': last_name,
             'student_full_name_bn': (post.get('student_full_name_bn') or '').strip(),
             'student_category': (post.get('student_category') or 'learn').strip(),
             'date_of_birth': date_of_birth,

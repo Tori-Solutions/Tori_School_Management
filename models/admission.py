@@ -50,8 +50,6 @@ class ToriStudentApplication(models.Model):
 
     name = fields.Char(default='New', readonly=True, copy=False)
     student_name = fields.Char(required=True)
-    first_name = fields.Char()
-    last_name = fields.Char()
     student_full_name_bn = fields.Char(string='Student Full Name (Bangla)')
     date_of_birth = fields.Date()
     birth_certificate_no = fields.Char()
@@ -271,9 +269,7 @@ class ToriStudentApplication(models.Model):
             if vals.get('name', 'New') == 'New':
                 vals['name'] = seq.next_by_code('tori.student.application') or 'APP-NEW'
             if not vals.get('student_name'):
-                first_name = (vals.get('first_name') or '').strip()
-                last_name = (vals.get('last_name') or '').strip()
-                vals['student_name'] = ('%s %s' % (first_name, last_name)).strip() or first_name or 'Unnamed Student'
+                vals['student_name'] = 'Unnamed Student'
             if not vals.get('email'):
                 vals['email'] = vals.get('guardian_email') or vals.get('father_email')
             if not vals.get('phone'):

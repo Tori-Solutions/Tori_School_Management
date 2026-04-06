@@ -61,8 +61,8 @@
                         <div class="tori-adm-section-body">
                             <div class="row g-3 align-items-start">
                                 <div class="col-lg-4 col-md-6">
-                                    <label class="form-label">First Name *</label>
-                                    <input type="text" name="first_name" class="form-control" required="required"/>
+                                    <label class="form-label">Student Name *</label>
+                                    <input type="text" name="student_name" class="form-control" required="required"/>
                                 </div>
                                 <div class="col-lg-4 col-md-6">
                                     <label class="form-label">Date Of Birth *</label>
@@ -73,10 +73,6 @@
                                     <label for="student_photo_input" class="tori-adm-photo-upload-box" aria-label="Upload student photo"></label>
                                 </div>
 
-                                <div class="col-lg-4 col-md-6">
-                                    <label class="form-label">Last Name</label>
-                                    <input type="text" name="last_name" class="form-control"/>
-                                </div>
                                 <div class="col-lg-4 col-md-6">
                                     <label class="form-label">Birth Certificate No</label>
                                     <input type="text" name="birth_certificate_no" class="form-control"/>
