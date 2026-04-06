@@ -3,33 +3,36 @@
     <record id="mail_template_application_confirmed" model="mail.template">
         <field name="name">Application Confirmed</field>
         <field name="model_id" ref="model_tori_student_application"/>
-        <field name="subject">Application Confirmed - ${object.name}</field>
-        <field name="email_to">${object.email}</field>
+        <field name="subject">Application Confirmed - {{ object.name }}</field>
+        <field name="email_to">{{ object.email }}</field>
         <field name="body_html" type="html">
-            <p>Dear ${object.student_name},</p>
-            <p>Your application <strong>${object.name}</strong> has been confirmed.</p>
+            <p>Hello {{ object.student_name or 'Student' }},</p>
+            <p>Your application <strong>{{ object.name }}</strong> has been confirmed.</p>
+            <p>Our admissions team will contact you with the next steps shortly.</p>
         </field>
     </record>
 
     <record id="mail_template_application_enrolled" model="mail.template">
         <field name="name">Application Enrolled</field>
         <field name="model_id" ref="model_tori_student_application"/>
-        <field name="subject">Application Enrolled - ${object.name}</field>
-        <field name="email_to">${object.email}</field>
+        <field name="subject">Application Enrolled - {{ object.name }}</field>
+        <field name="email_to">{{ object.email }}</field>
         <field name="body_html" type="html">
-            <p>Dear ${object.student_name},</p>
-            <p>Your application <strong>${object.name}</strong> is now enrolled.</p>
+            <p>Hello {{ object.student_name or 'Student' }},</p>
+            <p>Great news. Your application <strong>{{ object.name }}</strong> is now enrolled.</p>
+            <p>Welcome to the school.</p>
         </field>
     </record>
 
     <record id="mail_template_application_cancelled" model="mail.template">
         <field name="name">Application Cancelled</field>
         <field name="model_id" ref="model_tori_student_application"/>
-        <field name="subject">Application Cancelled - ${object.name}</field>
-        <field name="email_to">${object.email}</field>
+        <field name="subject">Application Cancelled - {{ object.name }}</field>
+        <field name="email_to">{{ object.email }}</field>
         <field name="body_html" type="html">
-            <p>Dear ${object.student_name},</p>
-            <p>Your application <strong>${object.name}</strong> has been cancelled.</p>
+            <p>Hello {{ object.student_name or 'Student' }},</p>
+            <p>Your application <strong>{{ object.name }}</strong> has been cancelled.</p>
+            <p>If you believe this was a mistake, please contact the admissions office.</p>
         </field>
     </record>
 
@@ -37,9 +40,10 @@
         <field name="name">Fee Payment Reminder</field>
         <field name="model_id" ref="model_tori_fee_slip"/>
         <field name="subject">Fee Payment Reminder</field>
-        <field name="email_to">${object.enrollment_id.parent_id.email or object.enrollment_id.student_id.email}</field>
+        <field name="email_to">{{ object.enrollment_id.parent_id.email or object.enrollment_id.student_id.email }}</field>
         <field name="body_html" type="html">
-            <p>Please pay fee slip for ${object.enrollment_id.student_id.name}.</p>
+            <p>This is a reminder to pay the fee slip for <strong>{{ object.enrollment_id.student_id.name }}</strong>.
+            </p>
         </field>
     </record>
 
@@ -47,9 +51,9 @@
         <field name="name">Fee Overdue Notice</field>
         <field name="model_id" ref="model_tori_fee_slip"/>
         <field name="subject">Fee Overdue Notice</field>
-        <field name="email_to">${object.enrollment_id.parent_id.email or object.enrollment_id.student_id.email}</field>
+        <field name="email_to">{{ object.enrollment_id.parent_id.email or object.enrollment_id.student_id.email }}</field>
         <field name="body_html" type="html">
-            <p>Fee slip for ${object.enrollment_id.student_id.name} is overdue.</p>
+            <p>The fee slip for <strong>{{ object.enrollment_id.student_id.name }}</strong> is now overdue.</p>
         </field>
     </record>
 
@@ -57,9 +61,9 @@
         <field name="name">Scholarship Approved</field>
         <field name="model_id" ref="model_tori_scholarship"/>
         <field name="subject">Scholarship Approved</field>
-        <field name="email_to">${object.enrollment_id.student_id.email}</field>
+        <field name="email_to">{{ object.enrollment_id.student_id.email }}</field>
         <field name="body_html" type="html">
-            <p>Your scholarship ${object.name} has been approved.</p>
+            <p>Your scholarship <strong>{{ object.name }}</strong> has been approved.</p>
         </field>
     </record>
 

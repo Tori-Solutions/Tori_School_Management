@@ -279,10 +279,22 @@ class ToriStudentApplication(models.Model):
         return super().create(vals_list)
 
     def write(self, vals):
+        previous_states = {rec.id: rec.state for rec in self}
         vals = dict(vals)
         self._apply_derived_fields(vals)
         self._sync_state_stage_values(vals)
-        return super().write(vals)
+        res = super().write(vals)
+
+        # When users move the statusbar stage directly to Enrolled,
+        # make sure enrollment/partner records are created as in action_enroll.
+        if not self.env.context.get('skip_auto_enroll') and ('state' in vals or 'stage_id' in vals):
+            moved_to_enrolled = self.filtered(
+                lambda rec: previous_states.get(rec.id) != 'enrolled' and rec.state == 'enrolled'
+            )
+            if moved_to_enrolled:
+                moved_to_enrolled._ensure_enrollment_records(set_enrolled_state=False)
+
+        return res
 
     @api.constrains('present_district_id', 'present_upazila_id', 'permanent_district_id', 'permanent_upazila_id')
     def _check_upazila_belongs_to_district(self):
@@ -324,7 +336,7 @@ class ToriStudentApplication(models.Model):
     def action_cancel(self):
         self.write({'state': 'cancel'})
 
-    def action_enroll(self):
+    def _ensure_enrollment_records(self, set_enrolled_state=False):
         enrollment_model = self.env['tori.enrollment']
         for rec in self:
             with self.env.cr.savepoint():
@@ -370,6 +382,14 @@ class ToriStudentApplication(models.Model):
                     year = self.env['tori.academic.year'].search([
                         ('session_id', '=', rec.session_id.id)
                     ], limit=1)
+                    academic_year = rec.academic_year_id or year
+                    if not academic_year and rec.session_id:
+                        academic_year = self.env['tori.academic.year'].create({
+                            'title': rec.session_id.name,
+                            'session_id': rec.session_id.id,
+                            'start_date': rec.session_id.start_date,
+                            'end_date': rec.session_id.end_date,
+                        })
 
                     fee_structure = self.env['tori.fee.structure'].search([
                         ('class_id', '=', rec.class_id.id),
@@ -379,7 +399,7 @@ class ToriStudentApplication(models.Model):
                     enrollment_vals = {
                         'student_id': partner.id,
                         'session_id': rec.session_id.id,
-                        'academic_year_id': rec.academic_year_id.id or year.id,
+                        'academic_year_id': academic_year.id,
                         'class_id': rec.class_id.id,
                         'section_id': rec.section_id.id,
                         'subject_ids': [(6, 0, rec.class_id.subject_ids.ids)],
@@ -409,7 +429,8 @@ class ToriStudentApplication(models.Model):
                     if enrollment.fee_structure_id and not enrollment.fee_slip_ids:
                         enrollment.action_generate_fee_slips()
 
-                    rec.write({'state': 'enrolled'})
+                    if set_enrolled_state and rec.state != 'enrolled':
+                        rec.with_context(skip_auto_enroll=True).write({'state': 'enrolled'})
                     if rec.enquiry_id:
                         rec.enquiry_id.state = 'done'
                     rec.message_post(body='Enrollment created: %s' % enrollment.display_name)
@@ -417,4 +438,7 @@ class ToriStudentApplication(models.Model):
                     raise UserError(
                         'Enrollment failed for %s: %s' % (rec.student_name, e)
                     ) from e
+
+    def action_enroll(self):
+        self._ensure_enrollment_records(set_enrolled_state=True)
 
