@@ -378,9 +378,12 @@ class ToriStudentApplication(models.Model):
                             'company_id': rec.company_id.id,
                             'barcode': rec.name,
                         })
-                        rec.student_partner_id = partner.id
                     elif not partner.is_student:
                         partner.write({'is_student': True, 'active': True})
+
+                    # Keep explicit link on application whenever enrollment-side partner is resolved.
+                    if rec.student_partner_id != partner:
+                        rec.student_partner_id = partner.id
 
                     parent_name = rec.guardian_name or rec.father_name or rec.mother_name
                     parent_email = rec.guardian_email or rec.father_email
