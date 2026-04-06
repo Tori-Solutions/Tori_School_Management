@@ -20,7 +20,12 @@ class ToriEnrollment(models.Model):
     )
 
     name = fields.Char(compute='_compute_name', store=True)
-    student_id = fields.Many2one('res.partner', required=True, domain=[('is_student', '=', True)])
+    student_id = fields.Many2one(
+        'res.partner',
+        required=True,
+        ondelete='cascade',
+        domain=[('is_student', '=', True)],
+    )
     session_id = fields.Many2one('tori.session', required=True)
     academic_year_id = fields.Many2one('tori.academic.year', required=True)
     class_id = fields.Many2one('tori.class', required=True)
