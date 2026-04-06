@@ -294,6 +294,12 @@ class ToriStudentApplication(models.Model):
             if moved_to_enrolled:
                 moved_to_enrolled._ensure_enrollment_records(set_enrolled_state=False)
 
+            moved_out_of_enrolled = self.filtered(
+                lambda rec: previous_states.get(rec.id) == 'enrolled' and rec.state != 'enrolled'
+            )
+            if moved_out_of_enrolled:
+                moved_out_of_enrolled._deactivate_enrollment_records()
+
         return res
 
     @api.constrains('present_district_id', 'present_upazila_id', 'permanent_district_id', 'permanent_upazila_id')
@@ -336,12 +342,27 @@ class ToriStudentApplication(models.Model):
     def action_cancel(self):
         self.write({'state': 'cancel'})
 
+    def _resolve_student_partner(self):
+        self.ensure_one()
+        partner = self.student_partner_id
+        if not partner and self.name:
+            partner = self.env['res.partner'].search([('barcode', '=', self.name)], limit=1)
+        if not partner and self.session_id and self.company_id and self.student_name:
+            enrollment = self.env['tori.enrollment'].with_context(active_test=False).search([
+                ('session_id', '=', self.session_id.id),
+                ('company_id', '=', self.company_id.id),
+                ('student_id.name', '=', self.student_name),
+            ], limit=1)
+            if enrollment:
+                partner = enrollment.student_id
+        return partner
+
     def _ensure_enrollment_records(self, set_enrolled_state=False):
-        enrollment_model = self.env['tori.enrollment']
+        enrollment_model = self.env['tori.enrollment'].with_context(active_test=False)
         for rec in self:
             with self.env.cr.savepoint():
                 try:
-                    partner = rec.student_partner_id
+                    partner = rec._resolve_student_partner()
                     if not partner:
                         partner = self.env['res.partner'].create({
                             'name': rec.student_name,
@@ -358,6 +379,8 @@ class ToriStudentApplication(models.Model):
                             'barcode': rec.name,
                         })
                         rec.student_partner_id = partner.id
+                    elif not partner.is_student:
+                        partner.write({'is_student': True, 'active': True})
 
                     parent_name = rec.guardian_name or rec.father_name or rec.mother_name
                     parent_email = rec.guardian_email or rec.father_email
@@ -422,6 +445,8 @@ class ToriStudentApplication(models.Model):
                             'subject_ids': enrollment_vals['subject_ids'],
                             'fee_structure_id': enrollment_vals['fee_structure_id'],
                             'parent_id': enrollment_vals['parent_id'],
+                            'state': 'active',
+                            'active': True,
                         })
                     else:
                         enrollment = enrollment_model.create(enrollment_vals)
@@ -438,6 +463,42 @@ class ToriStudentApplication(models.Model):
                     raise UserError(
                         'Enrollment failed for %s: %s' % (rec.student_name, e)
                     ) from e
+
+    def _deactivate_enrollment_records(self):
+        enrollment_model = self.env['tori.enrollment'].with_context(active_test=False)
+        for rec in self:
+            partner = rec._resolve_student_partner()
+            if not (partner and rec.session_id and rec.company_id):
+                continue
+            enrollments = enrollment_model.search([
+                ('student_id', '=', partner.id),
+                ('session_id', '=', rec.session_id.id),
+                ('company_id', '=', rec.company_id.id),
+            ])
+            if not enrollments:
+                if partner.is_student:
+                    partner.write({'is_student': False})
+                rec.with_context(skip_auto_enroll=True).write({'student_partner_id': False})
+                continue
+
+            # User requirement: keep application record, but remove non-enrolled student data.
+            # Clean dependent operational records first so enrollment can be removed safely.
+            for enrollment in enrollments:
+                enrollment.attendance_ids.unlink()
+                enrollment.submission_ids.unlink()
+                enrollment.transport_ids.unlink()
+                enrollment.scholarship_ids.unlink()
+                enrollment.fee_slip_ids.unlink()
+                enrollment.marksheet_ids.unlink()
+
+            enrollments.unlink()
+
+            other_enrollment_exists = bool(enrollment_model.search_count([
+                ('student_id', '=', partner.id),
+            ]))
+            if not other_enrollment_exists:
+                partner.write({'is_student': False})
+                rec.with_context(skip_auto_enroll=True).write({'student_partner_id': False})
 
     def action_enroll(self):
         self._ensure_enrollment_records(set_enrolled_state=True)
