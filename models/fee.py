@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class ToriFeeStructure(models.Model):
@@ -13,6 +14,12 @@ class ToriFeeStructure(models.Model):
         'res.currency',
         default=lambda self: self.env.company.currency_id,
         required=True,
+    )
+    sale_journal_id = fields.Many2one(
+        'account.journal',
+        domain="[('type', '=', 'sale'), ('company_id', '=', company_id)]",
+        check_company=True,
+        help='Optional sales journal used when creating fee invoices.',
     )
     company_id = fields.Many2one('res.company', default=lambda self: self.env.company, required=True)
 
@@ -29,6 +36,16 @@ class ToriFeeElement(models.Model):
         store=True, readonly=True,
     )
     amount = fields.Monetary(currency_field='currency_id')
+    income_account_id = fields.Many2one(
+        'account.account',
+        domain="[('deprecated', '=', False)]",
+        help='Income account used for invoice lines generated from this fee element.',
+    )
+    tax_ids = fields.Many2many(
+        'account.tax',
+        domain="[('type_tax_use', '=', 'sale')]",
+        help='Sales taxes applied when this fee element is invoiced.',
+    )
     fee_type = fields.Selection([('one_time', 'One Time'), ('recurring', 'Recurring')], default='one_time')
     recurring_interval = fields.Selection(
         [('monthly', 'Monthly'), ('quarterly', 'Quarterly'), ('yearly', 'Yearly')],
@@ -53,6 +70,8 @@ class ToriFeeSlip(models.Model):
         related='enrollment_id.company_id.currency_id',
         store=True, readonly=True,
     )
+    base_amount = fields.Monetary(currency_field='currency_id', tracking=True)
+    scholarship_discount = fields.Monetary(currency_field='currency_id', readonly=True)
     amount = fields.Monetary(currency_field='currency_id', tracking=True)
     due_date = fields.Date(tracking=True)
     paid_date = fields.Date()
@@ -65,6 +84,95 @@ class ToriFeeSlip(models.Model):
     invoice_id = fields.Many2one('account.move', ondelete='restrict', index=True)
     company_id = fields.Many2one(related='enrollment_id.company_id', store=True, readonly=True)
 
+    @api.onchange('enrollment_id')
+    def _onchange_enrollment_id(self):
+        for rec in self:
+            if rec.enrollment_id and not rec.fee_structure_id:
+                rec.fee_structure_id = rec.enrollment_id.fee_structure_id
+
+    @api.onchange('fee_structure_id')
+    def _onchange_fee_structure_id(self):
+        for rec in self:
+            if rec.fee_element_id and rec.fee_element_id.fee_structure_id != rec.fee_structure_id:
+                rec.fee_element_id = False
+
+    @api.onchange('fee_element_id')
+    def _onchange_fee_element_id(self):
+        for rec in self:
+            if rec.fee_element_id and not rec.fee_structure_id:
+                rec.fee_structure_id = rec.fee_element_id.fee_structure_id
+            if rec.fee_element_id and not rec.base_amount:
+                rec.base_amount = rec.fee_element_id.amount
+
+    @api.constrains('fee_structure_id', 'fee_element_id', 'enrollment_id')
+    def _check_fee_links(self):
+        for rec in self:
+            if rec.fee_element_id and rec.fee_structure_id and rec.fee_element_id.fee_structure_id != rec.fee_structure_id:
+                raise ValidationError('Fee element must belong to the selected fee structure.')
+            if rec.enrollment_id and rec.fee_structure_id and rec.enrollment_id.fee_structure_id and rec.enrollment_id.fee_structure_id != rec.fee_structure_id:
+                raise ValidationError('Fee structure must match the enrollment fee structure.')
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        records._initialize_base_amount()
+        records._recompute_amounts()
+        return records
+
+    def write(self, vals):
+        res = super().write(vals)
+        recompute_fields = {
+            'enrollment_id', 'fee_structure_id', 'fee_element_id', 'base_amount', 'late_fee_applied', 'due_date'
+        }
+        if not self.env.context.get('skip_tori_fee_recompute') and recompute_fields.intersection(vals):
+            self._recompute_amounts()
+        return res
+
+    def _initialize_base_amount(self):
+        for rec in self.filtered(lambda slip: not slip.base_amount and not slip.base_amount == 0.0):
+            if rec.fee_element_id:
+                rec.base_amount = rec.fee_element_id.amount
+            else:
+                rec.base_amount = rec.amount or 0.0
+
+    def _recompute_amounts(self):
+        for rec in self:
+            base_amount = rec.base_amount
+            if base_amount is False:
+                base_amount = (rec.amount or 0.0) - (rec.late_fee_applied or 0.0)
+            base_amount = max(base_amount, 0.0)
+            discount = 0.0
+            if rec.enrollment_id:
+                discount = rec.enrollment_id._get_applicable_scholarship_discount(
+                    rec.fee_element_id,
+                    base_amount,
+                    rec.due_date or fields.Date.today(),
+                )
+            net_amount = max(base_amount - discount, 0.0) + (rec.late_fee_applied or 0.0)
+            update_vals = {}
+            if rec.base_amount != base_amount:
+                update_vals['base_amount'] = base_amount
+            if rec.scholarship_discount != discount:
+                update_vals['scholarship_discount'] = discount
+            if rec.amount != net_amount:
+                update_vals['amount'] = net_amount
+            if update_vals:
+                rec.with_context(skip_tori_fee_recompute=True).write(update_vals)
+
+    def _prepare_invoice_line_vals(self):
+        self.ensure_one()
+        element = self.fee_element_id
+        line_vals = {
+            'name': element.name or self.fee_structure_id.name or self.enrollment_id.name,
+            'quantity': 1.0,
+            'price_unit': self.amount,
+        }
+        if element.income_account_id:
+            line_vals['account_id'] = element.income_account_id.id
+        if element.tax_ids:
+            line_vals['tax_ids'] = [(6, 0, element.tax_ids.ids)]
+        return line_vals
+
     def action_send(self):
         self.write({'state': 'sent'})
 
@@ -75,19 +183,29 @@ class ToriFeeSlip(models.Model):
         for rec in self:
             if rec.invoice_id:
                 continue
+            rec._recompute_amounts()
+            if rec.amount <= 0:
+                raise ValidationError('Cannot create an invoice with zero or negative amount.')
             partner = rec.enrollment_id.parent_id or rec.enrollment_id.student_id
-            invoice = self.env['account.move'].create({
+            journal = rec.fee_structure_id.sale_journal_id or self.env['account.journal'].search([
+                ('type', '=', 'sale'),
+                ('company_id', '=', rec.company_id.id),
+            ], limit=1)
+            if not journal:
+                raise ValidationError('Please configure a sales journal for the company or fee structure before invoicing.')
+            invoice_vals = {
                 'move_type': 'out_invoice',
                 'partner_id': partner.id,
                 'invoice_date': fields.Date.today(),
-                'invoice_line_ids': [(0, 0, {
-                    'name': rec.fee_element_id.name or rec.fee_structure_id.name or rec.enrollment_id.name,
-                    'quantity': 1.0,
-                    'price_unit': rec.amount,
-                })],
+                'invoice_line_ids': [(0, 0, rec._prepare_invoice_line_vals())],
+                'journal_id': journal.id,
                 'company_id': rec.company_id.id,
-            })
-            rec.invoice_id = invoice.id
+                'tori_fee_slip_id': rec.id,
+                'invoice_origin': rec.display_name,
+                'ref': 'Fee Slip %s' % rec.display_name,
+            }
+            invoice = self.env['account.move'].with_company(rec.company_id).create(invoice_vals)
+            rec.write({'invoice_id': invoice.id, 'state': 'sent'})
 
     @api.model
     def cron_mark_overdue_and_apply_late_fee(self):
@@ -99,10 +217,7 @@ class ToriFeeSlip(models.Model):
             if slip.due_date and (today - slip.due_date).days > grace_days:
                 values = {'state': 'overdue'}
                 if element and element.late_fee_amount and not slip.late_fee_applied:
-                    values.update({
-                        'late_fee_applied': element.late_fee_amount,
-                        'amount': slip.amount + element.late_fee_amount,
-                    })
+                    values['late_fee_applied'] = element.late_fee_amount
                 slip.write(values)
 
     @api.model
@@ -139,7 +254,7 @@ class ToriFeeSlip(models.Model):
                     'enrollment_id': enrollment.id,
                     'fee_structure_id': enrollment.fee_structure_id.id,
                     'fee_element_id': element.id,
-                    'amount': enrollment._get_prorated_amount(element.amount),
+                    'base_amount': enrollment._get_prorated_amount(element.amount),
                     'due_date': today,
                 })
                 existing_keys.add(key)
@@ -150,6 +265,17 @@ class ToriFeeSlip(models.Model):
 
 class ToriEnrollmentFeeHook(models.Model):
     _inherit = 'tori.enrollment'
+
+    def _get_applicable_scholarship_discount(self, fee_element, base_amount, on_date):
+        self.ensure_one()
+        scholarships = self.scholarship_ids.filtered(
+            lambda scholarship: scholarship.state in ('approved', 'paid') and scholarship._is_active_on(on_date)
+        )
+        discount = 0.0
+        for scholarship in scholarships:
+            if scholarship._applies_to_fee_element(fee_element):
+                discount += scholarship._compute_discount(base_amount)
+        return min(discount, max(base_amount, 0.0))
 
     def _get_prorated_amount(self, amount):
         self.ensure_one()
@@ -167,13 +293,21 @@ class ToriEnrollmentFeeHook(models.Model):
         for rec in self:
             if not rec.fee_structure_id:
                 continue
+            existing_keys = set(
+                slip_model.search([
+                    ('enrollment_id', '=', rec.id),
+                    ('state', 'in', ['draft', 'sent', 'overdue']),
+                ]).mapped('fee_element_id').ids
+            )
             for element in rec.fee_structure_id.fee_element_ids:
+                if element.id in existing_keys:
+                    continue
                 amount = rec._get_prorated_amount(element.amount)
                 slip_model.create({
                     'enrollment_id': rec.id,
                     'fee_structure_id': rec.fee_structure_id.id,
                     'fee_element_id': element.id,
-                    'amount': amount,
+                    'base_amount': amount,
                     'due_date': fields.Date.today(),
                 })
 

@@ -23,6 +23,7 @@
                         <field name="name"/>
                         <field name="class_id"/>
                         <field name="session_id"/>
+                        <field name="sale_journal_id"/>
                         <field name="currency_id" groups="base.group_multi_currency"/>
                     </group>
                     <field name="fee_element_ids">
@@ -30,6 +31,8 @@
                             <field name="name"/>
                             <field name="currency_id" column_invisible="1"/>
                             <field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="income_account_id"/>
+                            <field name="tax_ids" widget="many2many_tags" optional="hide"/>
                             <field name="fee_type"/>
                             <field name="recurring_interval"/>
                             <field name="late_fee_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
@@ -49,6 +52,8 @@
                 <field name="enrollment_id"/>
                 <field name="fee_element_id"/>
                 <field name="currency_id" column_invisible="1"/>
+                <field name="base_amount" widget="monetary" options="{'currency_field': 'currency_id'}" optional="hide"/>
+                <field name="scholarship_discount" widget="monetary" options="{'currency_field': 'currency_id'}" optional="show"/>
                 <field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                 <field name="due_date"/>
                 <field name="late_fee_applied" widget="monetary" options="{'currency_field': 'currency_id'}"/>
@@ -81,7 +86,9 @@
                         <group string="Payment Details">
                             <!-- Admin can edit amount and due_date after generation -->
                             <field name="currency_id" invisible="1"/>
-                            <field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="state not in ('draft','sent')" groups="tori_school_management.group_education_admin"/>
+                            <field name="base_amount" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="state not in ('draft','sent')" groups="tori_school_management.group_education_admin"/>
+                            <field name="scholarship_discount" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                            <field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
                             <field name="due_date" readonly="state not in ('draft','sent')" groups="tori_school_management.group_education_admin"/>
                             <field name="late_fee_applied" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
                             <field name="paid_date" readonly="state != 'sent'"/>
@@ -141,7 +148,7 @@
                 <filter string="Unpaid" name="unpaid" domain="[('state','in',['draft','sent','overdue'])]"/>
                 <filter string="Paid" name="paid" domain="[('state','=','paid')]"/>
                 <separator/>
-                <group>
+                <group name="group_by">
                     <filter string="Status" name="by_state" context="{'group_by': 'state'}"/>
                     <filter string="Due Date" name="by_due_date" context="{'group_by': 'due_date:month'}"/>
                 </group>

@@ -7,6 +7,8 @@
             <list>
                 <field name="enrollment_id"/>
                 <field name="name"/>
+                <field name="discount_type"/>
+                <field name="percent_discount" optional="hide"/>
                 <field name="amount"/>
                 <field name="state"/>
             </list>
@@ -19,16 +21,27 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_approve" type="object" string="Approve" class="btn-primary"/>
-                    <button name="action_mark_paid" type="object" string="Mark Paid"/>
+                    <button name="action_approve" type="object" string="Approve" class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_mark_paid" type="object" string="Mark Paid" invisible="state != 'approved'"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,approved,paid"/>
                 </header>
                 <sheet>
                     <group>
-                        <field name="enrollment_id"/>
-                        <field name="name"/>
-                        <field name="amount"/>
-                        <field name="vendor_bill_id"/>
+                        <group string="Scholarship">
+                            <field name="enrollment_id"/>
+                            <field name="name"/>
+                            <field name="discount_type"/>
+                            <field name="amount" invisible="discount_type != 'fixed'"/>
+                            <field name="percent_discount" invisible="discount_type != 'percent'"/>
+                            <field name="state" readonly="1"/>
+                        </group>
+                        <group string="Applicability">
+                            <field name="apply_scope"/>
+                            <field name="fee_element_ids" widget="many2many_tags" invisible="apply_scope != 'selected'"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="vendor_bill_id" readonly="1"/>
+                        </group>
                     </group>
                 </sheet>
             </form>

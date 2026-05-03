@@ -3,7 +3,7 @@ from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
 
 
-@tagged('standard', 'at_install')
+@tagged('standard', 'at_install', 'tori_finance')
 class TestSchoolManagementSecurityAndFees(TransactionCase):
     @classmethod
     def setUpClass(cls):
@@ -18,6 +18,7 @@ class TestSchoolManagementSecurityAndFees(TransactionCase):
         cls.FeeStructure = cls.env['tori.fee.structure']
         cls.FeeElement = cls.env['tori.fee.element']
         cls.FeeSlip = cls.env['tori.fee.slip']
+        cls.Scholarship = cls.env['tori.scholarship']
         cls.Assignment = cls.env['tori.assignment']
         cls.Term = cls.env['tori.term']
 
@@ -259,3 +260,40 @@ class TestSchoolManagementSecurityAndFees(TransactionCase):
             ('fee_element_id', '=', self.one_time_element.id),
         ])
         self.assertFalse(one_time_slips)
+
+    def test_scholarship_discount_applies_to_generated_slip(self):
+        self.FeeSlip.search([('enrollment_id', '=', self.enrollment_a.id)]).unlink()
+        self.enrollment_a.action_generate_fee_slips()
+
+        slip = self.FeeSlip.search([
+            ('enrollment_id', '=', self.enrollment_a.id),
+            ('fee_element_id', '=', self.one_time_element.id),
+        ], limit=1)
+        self.assertTrue(slip)
+        self.assertEqual(slip.base_amount, 5000.0)
+        self.assertEqual(slip.amount, 5000.0)
+
+        scholarship = self.Scholarship.create({
+            'enrollment_id': self.enrollment_a.id,
+            'name': 'Merit 10%',
+            'discount_type': 'percent',
+            'percent_discount': 10.0,
+            'apply_scope': 'selected',
+            'fee_element_ids': [(6, 0, [self.one_time_element.id])],
+        })
+        scholarship.action_approve()
+        slip.invalidate_recordset(['scholarship_discount', 'amount'])
+
+        self.assertEqual(slip.scholarship_discount, 500.0)
+        self.assertEqual(slip.amount, 4500.0)
+
+    def test_action_generate_fee_slips_does_not_duplicate_open_lines(self):
+        self.FeeSlip.search([('enrollment_id', '=', self.enrollment_a.id)]).unlink()
+
+        self.enrollment_a.action_generate_fee_slips()
+        first_count = self.FeeSlip.search_count([('enrollment_id', '=', self.enrollment_a.id)])
+        self.assertEqual(first_count, 2)
+
+        self.enrollment_a.action_generate_fee_slips()
+        second_count = self.FeeSlip.search_count([('enrollment_id', '=', self.enrollment_a.id)])
+        self.assertEqual(second_count, 2)
